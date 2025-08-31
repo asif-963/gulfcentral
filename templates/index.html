@@ -1,0 +1,1061 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Gulf Central | Dubai Business Setup, PRO & Visa Services</title>
+    
+    <!-- Stylesheets -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/flatpickr.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+<body>
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Main Header-->
+    <header class="main-header header-style-two">
+
+      <!-- Header Top -->
+      <div class="header-top">
+        <div class="auto-container">
+
+          <div class="top-left">
+            <!-- Info List -->
+            <ul class="info-list">
+              <li><i class="fa-solid fa-envelope" style="color: white;"></i> <a href=""><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
+              </li>
+              <li><i class="fa-solid fa-location-dot" style="color: white;"></i> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</li>
+            </ul>
+          </div>
+
+          <div class="top-right">
+            <div class="select-box">
+              
+
+            
+            </div>
+            <ul class="top-social-icon">
+              <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Header Top -->
+
+      <!-- Main box -->
+      <div class="main-box">
+        <div class="logo-box">
+         <div class="logo">
+          <a href="{% url 'index' %}">
+              <img src="{% static 'images/logo.png' %}" alt="Consultez" title="Consultez">
+          </a>
+      </div>
+
+        </div>
+        <!--Nav Box-->
+        <div class="nav-outer">
+          <nav class="nav main-menu">
+            <ul class="navigation">
+              <li class=""><a href="#">Home</a>
+            
+              </li>
+              <li class=""><a href="page-about.html">About</a>
+            
+              </li>
+              <li class="dropdown"><a href="#">Pages</a>
+                <ul>
+                  <li><a href="page-about.html">About</a></li>
+                  <li><a href="page-faq.html">Faq</a></li>
+                  <li><a href="page-pricing.html">Pricing</a></li>
+                  <li class="dropdown"><a href="#">Team</a>
+                    <ul>
+                      <li><a href="page-team.html">Team List</a></li>
+                      <li><a href="page-team-details.html">Team Details</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a href="#">Shop</a>
+                    <ul>
+                      <li><a href="shop-products.html">Products</a></li>
+                      <li><a href="shop-products-sidebar.html">Products with Sidebar</a></li>
+                      <li><a href="shop-product-details.html">Product Details</a></li>
+                      <li><a href="shop-cart.html">Cart</a></li>
+                      <li><a href="shop-checkout.html">Checkout</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="page-testimonial.html">Testimonials</a></li>
+                  <li><a href="page-404.html">404</a></li>
+                </ul>
+              </li>
+              
+               
+            </ul>
+          </nav>
+          <!-- Main Menu End-->
+        </div>
+        <div class="outer-box">
+          <div class="info-box">
+            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Contact Now</a>
+          </div>
+          <div class="mobile-nav-toggler" style="background-color: #D3202A; color: #fff;" ><i class="fa-light fa-bars-staggered" ></i></div>
+          <!-- Mobile Nav toggler -->
+        </div>
+      </div>
+      <div class="auto-container">
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+          <div class="menu-backdrop" ></div>
+          <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+          <nav class="menu-box" style="background-color: aliceblue;">
+            <div class="upper-box">
+              <div class="nav-logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
+            </div>
+
+              <div class="close-btn"><i class="icon fa fa-times" style="color: black;"></i></div>
+            </div>
+            <ul class="navigation clearfix d-block d-lg-none">
+              <!--Keep This Empty / Menu will come through Javascript-->
+            </ul>
+            <div class="content-box d-none d-lg-block">
+              <h4 class="title" style="color: black;">About Us</h4>
+              <p class="text" style="color: black;">
+              Gulf Central is the premier hub for entrepreneurs and businesses, offering expert business setup, PRO, visa, and company formation services across Dubai and the UAE.
+              </p>
+            </div>
+            <ul class="contact-list-one">
+              <li>
+                <!-- Contact Info Box -->
+                <div class="contact-info-box">
+                  <i class="icon lnr-icon-phone-handset" style="color: black;"></i>
+                  <span class="title" style="color: black;">Call Now</span>
+                  <a href="" style="color: black;">+92 (8800) - 98670</a>
+                </div>
+              </li>
+              <li>
+                <!-- Contact Info Box -->
+                <div class="contact-info-box">
+                  <span class="icon lnr-icon-envelope1" style="color: black;"></span>
+                  <span class="title" style="color: black;">Send Email</span>
+                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail="c1a9a4adb181a2aeacb1a0afb8efa2aeac">[email&#160;protected]</span></a>
+                </div>
+              </li>
+              <li>
+                <!-- Contact Info Box -->
+                <div class="contact-info-box" style="color: black;">
+                  <span class="icon lnr-icon-clock" style="color: black;"></span>
+                  <span class="title" style="color: black;">Send Email</span>
+                  Mon - Sat 8:00 - 6:30, Sunday - CLOSED
+                </div>
+              </li>
+            </ul>
+            <ul class="social-links">
+              <li><a href="#"><i class="fab fa-x-twitter" ></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f" ></i></a></li>
+              <li><a href="#"><i class="fab fa-pinterest" ></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram" ></i></a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- End Mobile Menu -->
+        <!-- Header Search -->
+        <div class="search-popup">
+          <span class="search-back-drop"></span>
+          <button class="close-search"><span class="fa fa-times"></span></button>
+          <div class="search-inner">
+            <form method="post" action="index.html">
+              <div class="form-group">
+                <input type="search" name="search-field" value="" placeholder="Search..." required="">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- End Header Search -->
+
+        <!-- Sticky Header  -->
+        <div class="sticky-header">
+          <div class="auto-container">
+            <div class="inner-container">
+              <!--Logo-->
+              <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt=""></a>
+              </div>
+              <!--Right Col-->
+              <div class="nav-outer">
+                <!-- Main Menu -->
+                <nav class="main-menu">
+                  <div class="navbar-collapse show collapse clearfix">
+                    <ul class="navigation clearfix">
+                      <!--Keep This Empty / Menu will come through Javascript-->
+                    </ul>
+                  </div>
+                </nav><!-- Main Menu End-->
+                <!--Mobile Navigation Toggler-->
+                <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Sticky Menu -->
+      </div>
+    </header>
+    <!--End Main Header -->
+    <style>
+     
+      /* Mobile menu link color fix */
+.mobile-menu .navigation li a {
+    color: #000 !important;   /* Black text */
+}
+
+/* Mobile menu dropdown arrow color if any */
+.mobile-menu .navigation li a::after {
+    color: #000 !important;
+}
+    </style>
+<!-- Banner area start here -->
+<section class="banner-section-two paralax__animation" style=" padding: 100px 0; display: flex; align-items: center;">
+<div class="sec-shape">
+    <img data-depth="0.03" src="{% static 'images/banner/banner-two-shape.png' %}" alt="Shape">
+</div>
+
+  <div class="container">
+    <div class="row g-0 align-items-center justify-content-center">
+      <!-- Content Only -->
+      <div class="col-lg-10 content-column text-start">
+        <div class="inner-column">
+          <div class="content-box">
+            <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms"
+                style="background-color:#D3202A; color:#fff; padding:6px 12px; display:inline-block; border-radius:4px;">
+              Expert Business Solutions
+            </h6>
+            <h1 class="title wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1500ms">
+              Business <span style="color:#D3202A;">Consulting</span> & Growth Solutions
+            </h1>
+           <div class="search-bar mt-4" style="max-width: 600px; margin-left: 0;">
+              <form method="get" action="" style="display: flex; background: #f8f8f8; border-radius: 50px; overflow: hidden; border:1px solid #ddd;">
+                  <input type="text" name="q" placeholder="Search..." 
+                        style="flex: 1; padding: 10px 15px; border:none; outline:none; background:transparent;">
+                  <button type="submit" 
+                          style="padding: 0 15px; background:#D3202A; color:white; border:none; cursor:pointer; border-radius: 0; display:flex; align-items:center; justify-content:center;">
+                      <i class="fa fa-search" style="font-size:16px;"></i>
+                  </button>
+              </form>
+          </div>
+
+            <p class="text wow fadeInUp mt-3" data-wow-delay="500ms" data-wow-duration="1500ms">
+              Gulf Central helps entrepreneurs and companies establish and grow their businesses in Dubai and the UAE, offering expert guidance on business setup, PRO services, visa assistance, and company formation.
+            </p>
+            <div class="btn-wrp mt-4">
+              <a class="btn-two-rounded wow fadeInLeft" data-wow-delay="500ms" data-wow-duration="1500ms" 
+                 href="page-about.html" style="background:#D3202A; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; margin-right:10px;">
+                Get Started <i class="fa-regular fa-angle-right"></i>
+              </a>
+              <a class="video-btn playbtnanim wow fadeInLeft" data-wow-delay="700ms" data-wow-duration="1500ms"
+                 href="https://www.youtube.com/watch?v=Lplq8RjQ0zU" data-fancybox="gallery" data-caption=""
+                 style="background:#fff; color:#D3202A; border:2px solid #D3202A; border-radius:50%; padding:12px; display:inline-flex; align-items:center; justify-content:center;">
+                <i class="fa-sharp fa-solid fa-play"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Decorative Stars -->
+<div class="star1" style="position:absolute; top:10%; left:5%;">
+    <img src="{% static 'images/banner/banner-two-star.png' %}" alt="Star">
+</div>
+<div class="star2" style="position:absolute; bottom:15%; right:10%;">
+    <img src="{% static 'images/banner/banner-two-star.png' %}" alt="Star">
+</div>
+</section>
+<!-- Banner area end here -->
+
+<!-- Feature area start here -->
+<section class="feature-section py-5" style="background:#f9f9f9;">
+    <div class="shape">
+        <img src="{% static 'images/shape/feature-shape.png' %}" alt="Feature Shape">
+    </div>
+    <div class="container">
+        <!-- Left-aligned Section Title -->
+<div class="sec-title pb-50 text-start">
+    <!-- Sub-title with background accent -->
+    <h6 class="sub-title wow fadeInUp" 
+        style="background-color:#D3202A; color:#fff; display:inline-block; padding:6px 15px; border-radius:4px;" 
+        data-wow-delay="0ms" data-wow-duration="1500ms">
+        FEATURES
+    </h6>
+
+    <!-- Main title -->
+    <h2 class="title wow splt-txt" data-splitting 
+        style="margin-top:20px; font-weight:700; color:#222;">
+        We provide consulting to strategic growth.
+    </h2>
+
+    <!-- Description paragraph -->
+    <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" 
+       style="color:#555; max-width:600px; margin-top:15px;">
+       Consultez is the destination where early adopters and innovation enthusiasts discover cutting-edge technology.
+    </p>
+</div>
+
+
+        <!-- Feature Items Row -->
+        <div class="row g-4 justify-content-center">
+            <!-- Feature Item 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
+                    <img src="{% static 'images/features/feature1.png' %}" alt="Strategic Investments" class="mb-3" style="width:60px; height:60px;">
+                    <h4 class="title mb-2">Strategic Investments</h4>
+                    <p class="text-secondary mb-3">We help businesses make smart, profitable investment decisions for growth.</p>
+                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
+                </div>
+            </div>
+
+            <!-- Feature Item 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
+                    <img src="{% static 'images/features/feature2.png' %}" alt="Customers First" class="mb-3" style="width:60px; height:60px;">
+                    <h4 class="title mb-2">Putting Customers First</h4>
+                    <p class="text-secondary mb-3">Our focus is on delivering value and satisfaction to every client.</p>
+                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
+                </div>
+            </div>
+
+            <!-- Feature Item 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
+                    <img src="{% static 'images/features/feature3.png' %}" alt="Smarter Decisions" class="mb-3" style="width:60px; height:60px;">
+                    <h4 class="title mb-2">Smarter Business Decisions</h4>
+                    <p class="text-secondary mb-3">We provide data-driven insights to help you make the right choices.</p>
+                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
+                </div>
+            </div>
+             <!-- Feature Item 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
+                    <img src="{% static 'images/features/feature1.png' %}" alt="Strategic Investments" class="mb-3" style="width:60px; height:60px;">
+                    <h4 class="title mb-2">Strategic Investments</h4>
+                    <p class="text-secondary mb-3">We help businesses make smart, profitable investment decisions for growth.</p>
+                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
+                </div>
+            </div>
+
+            <!-- Feature Item 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
+                    <img src="{% static 'images/features/feature2.png' %}" alt="Customers First" class="mb-3" style="width:60px; height:60px;">
+                    <h4 class="title mb-2">Putting Customers First</h4>
+                    <p class="text-secondary mb-3">Our focus is on delivering value and satisfaction to every client.</p>
+                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
+                </div>
+            </div>
+
+            <!-- Feature Item 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
+                    <img src="{% static 'images/features/feature3.png' %}" alt="Smarter Decisions" class="mb-3" style="width:60px; height:60px;">
+                    <h4 class="title mb-2">Smarter Business Decisions</h4>
+                    <p class="text-secondary mb-3">We provide data-driven insights to help you make the right choices.</p>
+                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Feature area end here -->
+
+
+
+
+
+  
+<!-- About area start here -->
+<section class="about-section-two paralax__animation pt-120 pb-120">
+  <div class="container">
+    <div class="row g-5 g-xl-4">
+      
+      <!-- Image Column -->
+      <div class="col-xl-6 image-column">
+        <div class="inner-column">
+          <figure class="image">
+            <img data-tilt data-tilt-max="3" src="{% static 'images/about/about-two-image.jpg' %}" alt="Gulf Central">
+
+            <div class="info2 wow bounceInLeft" style="background-color: #D3202A;" data-wow-delay="200ms" data-wow-duration="1500ms">
+              <h2 class="title" style="color: #fff;"><span>10</span>+</h2>
+              <p class="sub-title" style="color: #fff;">Years Of Experience</p>
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Content Column -->
+      <div class="col-xl-6 content-column">
+        <div class="inner-column">
+          <div class="content-box">
+            <div class="sec-title mb-40">
+              <h6 class="sub-title wow fadeInUp" style="background-color: #D3202A; color: #fff;" data-wow-delay="00ms" data-wow-duration="1500ms">ABOUT US</h6>
+              <h2 class="title wow splt-txt" data-splitting>Driving Innovation Through Expertise and Collaboration</h2>
+              <p class="text wow fadeInDown" data-wow-delay="00ms" data-wow-duration="1500ms">
+                At Gulf Central, we provide end-to-end business solutions, helping entrepreneurs and enterprises achieve sustainable growth. With a focus on innovation, strategy, and seamless execution, we ensure our clients have the competitive edge needed to thrive in the UAE market and beyond.
+              </p>
+            </div>
+
+            <!-- Key Highlights -->
+            <ul class="list-unstyled wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
+              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Innovative & Scalable Business Solutions</li>
+              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Dedicated PRO & Company Setup Services</li>
+   
+              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Customer-Centric Approach for Every Project</li>
+              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Strategic Partnerships & Global Expertise</li>
+            </ul>
+
+            <!-- Call to Action -->
+            <div class="info mt-50 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
+              <a class="btn-two-rounded" href="page-about.html">More About Us <i class="fa-regular fa-angle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- About area end here -->
+
+
+
+    <!-- Funfact area start here -->
+    <section class="funfact-section-two have-after">
+      <div class="sec-shape">
+       <img class="animation__rotateAndScale" src="{% static 'images/shape/funface-dual-circle.png' %}" alt="Image">
+
+      </div>
+      <div class="container">
+        <div class="outer-box">
+          <div class="row g-5 align-items-center">
+
+            <div class="col-xl-4 col-xxl-4">
+              <div class="sec-title">
+                <h6 class="sub-title wow fadeInUp" style="background-color: #fff;" data-wow-delay="00ms" data-wow-duration="1500ms">Insights</h6>
+                <h2 class="title text-white wow splt-txt" data-splitting>Company insights</h2>
+              <ul class="list wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                <li style="color: #fff;">
+                    <i class="fa-regular fa-check" style="color: #fff;"></i> Delivering Innovative Business Solutions
+                </li>
+                <li style="color: #fff;">
+                    <i class="fa-regular fa-check" style="color: #fff;"></i> Expert Team Committed to Excellence
+                </li>
+              
+            </ul>
+
+              </div>
+            </div>
+
+            <div class="col-xl-8 col-xxl-7">
+              <div class="row g-4">
+
+                <div class="col-md-6 col-lg-4 wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+                  <div class="funfact-block-two">
+                    <div class="inner-box" style="background-color: #D3202A; color: #fff;">
+                      
+                      <div class="content-box">
+                        <h3 class="title" style="color: #fff;"><span class="count">150</span>+</h3>
+                        <span class="sub-title" style="color: #fff;">Team member</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 wow fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
+                  <div class="funfact-block-two">
+                    <div class="inner-box" style="background-color: #D3202A; color: #fff;">
+                      
+                      <div class="content-box">
+                        <h3 class="title" style="color: #fff;"><span class="count">17</span>k+</h3>
+                        <span class="sub-title" style="color: #fff;">Complete project</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4 wow fadeInLeft" data-wow-delay="400ms" data-wow-duration="1500ms">
+                  <div class="funfact-block-two">
+                    <div class="inner-box" style="background-color: #D3202A; color: #fff;">
+                     
+                      <div class="content-box">
+                        <h3 class="title" style="color: #fff;"><span class="count">15</span>+</h3>
+                        <span class="sub-title" style="color: #fff;">Winning award</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Testimonial Section Start -->
+<section class="testimonial-section py-5" style="background:#f9f9f9;">
+  <div class="container">
+    
+    <!-- Left-aligned Section Title -->
+    <div class="sec-title pb-50 text-start">
+      <!-- Sub-title with background accent -->
+      <h6 class="sub-title wow fadeInUp" 
+          style="background-color:#D3202A; color:#fff; display:inline-block; padding:6px 15px; border-radius:4px;" 
+          data-wow-delay="0ms" data-wow-duration="1500ms">
+          TESTIMONIALS
+      </h6>
+
+      <!-- Main title -->
+      <h2 class="title wow splt-txt" data-splitting 
+          style="margin-top:20px; font-weight:700; color:#222;">
+          What Our Clients Say
+      </h2>
+
+      <!-- Description paragraph -->
+      <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" 
+         style="color:#555; max-width:600px; margin-top:15px;">
+         Real feedback from our happy customers around the world. Discover how we helped them grow and succeed.
+      </p>
+    </div>
+
+    <!-- Carousel -->
+    <div id="testimonialCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+      <div class="carousel-inner">
+
+        <!-- Testimonial 1 -->
+        <div class="carousel-item active">
+          <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
+            <img src="{% static 'images/testimonials/user1.jpg' %}" alt="John Doe" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
+            <p class="fst-italic text-secondary">"This company provided excellent service and support. Highly recommended!"</p>
+            <h5 class="mt-3 mb-1" style="color:#D3202A;">John Doe</h5>
+            <small class="text-muted">CEO, Example Corp</small>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="carousel-item">
+          <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
+            <img src="{% static 'images/testimonials/user2.jpg' %}" alt="Jane Smith" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
+            <p class="fst-italic text-secondary">"Amazing experience! The team was professional and delivered on time."</p>
+            <h5 class="mt-3 mb-1" style="color:#D3202A;">Jane Smith</h5>
+            <small class="text-muted">Marketing Manager, TechWorld</small>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="carousel-item">
+          <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
+            <img src="{% static 'images/testimonials/user3.jpg' %}" alt="Michael Lee" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
+            <p class="fst-italic text-secondary">"Excellent quality of work and great communication throughout the project."</p>
+            <h5 class="mt-3 mb-1" style="color:#D3202A;">Michael Lee</h5>
+            <small class="text-muted">Founder, Startup Inc.</small>
+          </div>
+        </div>
+
+      </div>
+
+    
+
+    </div>
+  </div>
+</section>
+
+<!-- Growth Section Start -->
+<section class="growth-section-two pt-120 pb-120" style="background-image: url('images/bg/growth-two-bg.png');">
+  <div class="container">
+    <div class="outer-box">
+      <div class="row g-5">
+
+        <!-- Scalable Solutions -->
+        <div class="col-md-6 col-xl-4">
+          <div class="growth-block text-center">
+            <div class="pie-graph">
+              <div class="graph-outer">
+                <input type="text" class="dial" data-fgColor="#D3202A" data-bgColor="#ffffff" data-width="120"
+                  data-height="120" data-linecap="round" value="90">
+                <div class="inner-text count-box">
+                  <span class="count-text" data-stop="90" data-speed="2000">0</span>%
+                </div>
+              </div>
+            </div>
+            <div class="content-box mt-3">
+              <h4 class="title">Scalable Solutions</h4>
+              <p class="text">Driving Business Forward with Trusted Strategies</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Automation Features -->
+        <div class="col-md-6 col-xl-4">
+          <div class="growth-block text-center">
+            <div class="pie-graph">
+              <div class="graph-outer">
+                <input type="text" class="dial" data-fgColor="#D3202A" data-bgColor="#ffffff" data-width="120"
+                  data-height="120" data-linecap="round" value="85">
+                <div class="inner-text count-box">
+                  <span class="count-text" data-stop="85" data-speed="2000">0</span>%
+                </div>
+              </div>
+            </div>
+            <div class="content-box mt-3">
+              <h4 class="title">Automation Features</h4>
+              <p class="text">Always Available, Always On, No Downtime</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 24/7 Support -->
+        <div class="col-md-6 col-xl-4">
+          <div class="growth-block text-center">
+            <div class="pie-graph">
+              <div class="graph-outer">
+                <input type="text" class="dial" data-fgColor="#D3202A" data-bgColor="#ffffff" data-width="120"
+                  data-height="120" data-linecap="round" value="80">
+                <div class="inner-text count-box">
+                  <span class="count-text" data-stop="80" data-speed="2000">0</span>%
+                </div>
+              </div>
+            </div>
+            <div class="content-box mt-3">
+              <h4 class="title">24/7 Support</h4>
+              <p class="text">Stopping Problems in Their Tracks, Anytime, Anywhere</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Growth Section End -->
+
+
+
+
+<!-- FAQ Section Start -->
+<div class="faq-section-two">
+    <div class="container">
+        <div class="row g-5 g-lg-0 align-items-end">
+
+            <!-- Left Image Column -->
+            <div class="col-lg-6 image-column">
+                <div class="inner-column">
+                    <figure class="image">
+                        <img data-tilt data-tilt-max="3" src="{% static 'images/faq/faq-two-image.jpg' %}" alt="FAQ Image">
+                    </figure>
+                  
+                    <div class="shape">
+                        <img class="animation__arryUpDown" src="{% static 'images/faq/faq-two-image-shape.png' %}" alt="Shape Image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content Column -->
+            <div class="col-lg-6 content-column">
+                <div class="inner-column">
+
+                    <!-- Section Title -->
+                    <div class="sec-title pb-30 text-start">
+                        <h6 class="sub-title wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms"
+                            style="background-color:#D3202A; color:#fff; display:inline-block; padding:6px 15px; border-radius:4px;">
+                            FAQ’S
+                        </h6>
+                        <h2 class="title wow splt-txt" data-splitting
+                            style="margin-top:20px; font-weight:700; color:#222;">
+                            Frequently Asked Questions
+                        </h2>
+                        <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms"
+                            style="color:#555; max-width:600px; margin-top:15px;">
+                            Discover answers to the most common questions about starting and running a business in Dubai. 
+                            Learn about licenses, costs, visas, and more.
+                        </p>
+                    </div>
+
+                    <!-- FAQ Accordion -->
+                    <div class="faq-two-accordion">
+                        <div class="accordion" id="accordionFAQ">
+
+                            <!-- FAQ Item 1 -->
+                            <div class="accordion-item wow fadeInDown" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                        <span class="number" style="background-color: #D3202A; color: #f9f9f9;">01</span>
+                                        How long does it take to register a company in Dubai?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#accordionFAQ">
+                                    <div class="accordion-body">
+                                        <p class="text">The registration process typically takes 1–3 weeks depending on the license type and Free Zone or mainland jurisdiction.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 2 -->
+                            <div class="accordion-item wow fadeInDown" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                        <span class="number" style="background-color: #D3202A; color: #f9f9f9;">02</span>
+                                        Can foreigners own 100% of a business in Dubai?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                    <div class="accordion-body">
+                                        <p class="text">Yes, in Free Zones, foreigners can own 100% of their company. Mainland businesses may require a UAE national partner for certain activities.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 3 -->
+                            <div class="accordion-item wow fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                        <span class="number" style="background-color: #D3202A; color: #f9f9f9;">03</span>
+                                        What are the main costs involved in starting a business in Dubai?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                    <div class="accordion-body">
+                                        <p class="text">Costs include license fees, registration, office rental, visas, and insurance. Free Zones often offer package deals for new businesses.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 4 -->
+                            <div class="accordion-item wow fadeInDown" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                        <span class="number" style="background-color: #D3202A; color: #f9f9f9;">04</span>
+                                        Is it necessary to have a physical office in Dubai?
+                                    </button>
+                                </h2>
+                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                    <div class="accordion-body">
+                                        <p class="text">Yes, most licenses require a physical office or flexi-desk in Dubai. Free Zones provide shared office options for startups.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 5 -->
+                            <div class="accordion-item wow fadeInDown" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                        <span class="number" style="background-color: #D3202A; color: #f9f9f9;">05</span>
+                                        What types of visas are available for business owners in Dubai?
+                                    </button>
+                                </h2>
+                                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                    <div class="accordion-body">
+                                        <p class="text">Business owners can obtain investor or partner visas. Free Zone companies often include visas for owners, employees, and dependents.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-start mt-4">
+                        <a href="" class="btn" 
+                           style="background-color:#D3202A; color:#fff; padding:10px 25px; border-radius:50px; font-weight:600; transition:0.3s;">
+                            Contact Us
+                        </a>
+                    </div>
+
+                        </div>
+                    </div>
+                    <!-- End FAQ Accordion -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- FAQ Section End -->
+
+
+
+
+
+    <!-- Blog area start here -->
+    <section class="blog-section-two pt-120 pb-120">
+      <div class="container">
+        <div class="sec-title mb-50">
+          <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-color: #D3202A; color: #fff;">New & Blogs</h6>
+          <div class="flex-content">
+            <h2 class="title wow splt-txt" data-splitting>Read All Our consulting <br> News & Blogs</h2>
+            <a class="btn-one-light wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" style="color: black;" href="page-contact.html">contact us</a>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+            <div class="blog-block-two">
+              <div class="inner-box">
+                <div class="image-box">
+                  <figure class="image">
+                    <img src="images/blog/blog-two-image1.jpg" alt="Image">
+                    <span class="tag">15 December,2025</span>
+                  </figure>
+                </div>
+                <div class="content-box">
+                  <ul class="info">
+                    <li>
+                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M7.10742 7.625C9.38086 7.625 11.2324 9.47656 11.2324 11.75C11.2324 12.1719 10.8809 12.5 10.4824 12.5H1.48242C1.06055 12.5 0.732422 12.1719 0.732422 11.75C0.732422 9.47656 2.56055 7.625 4.85742 7.625H7.10742ZM1.85742 11.375H10.084C9.89648 9.89844 8.63086 8.75 7.10742 8.75H4.85742C3.31055 8.75 2.04492 9.89844 1.85742 11.375ZM5.98242 6.5C4.31836 6.5 2.98242 5.16406 2.98242 3.5C2.98242 1.85938 4.31836 0.5 5.98242 0.5C7.62305 0.5 8.98242 1.85938 8.98242 3.5C8.98242 5.16406 7.62305 6.5 5.98242 6.5ZM5.98242 1.625C4.92773 1.625 4.10742 2.46875 4.10742 3.5C4.10742 4.55469 4.92773 5.375 5.98242 5.375C7.01367 5.375 7.85742 4.55469 7.85742 3.5C7.85742 2.46875 7.01367 1.625 5.98242 1.625Z"
+                          fill="#1A4137" />
+                      </svg>
+                      <a href="#0">By admin</a>
+                    </li>
+                    <li>
+                      <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M5.72852 0.5C8.40039 0.5 10.6035 2.35156 10.6035 4.625C10.6035 6.92188 8.40039 8.75 5.72852 8.75C5.2832 8.75 4.86133 8.70312 4.43945 8.60938C3.73633 9.05469 2.70508 9.5 1.41602 9.5C1.18164 9.5 0.970703 9.38281 0.900391 9.14844C0.806641 8.9375 0.830078 8.70312 0.994141 8.51562C1.01758 8.51562 1.5332 7.95312 1.9082 7.20312C1.25195 6.5 0.853516 5.60938 0.853516 4.625C0.853516 2.35156 3.0332 0.5 5.72852 0.5ZM4.69727 7.50781C5.04883 7.60156 5.37695 7.625 5.72852 7.625C7.79102 7.625 9.47852 6.28906 9.47852 4.625C9.47852 2.98438 7.79102 1.625 5.72852 1.625C3.64258 1.625 1.97852 2.98438 1.97852 4.625C1.97852 5.46875 2.37695 6.07812 2.72852 6.42969L3.29102 7.01562L2.91602 7.74219C2.82227 7.88281 2.72852 8.04688 2.63477 8.21094C3.05664 8.09375 3.45508 7.90625 3.85352 7.64844L4.25195 7.41406L4.69727 7.50781ZM11.1895 3.52344C13.791 3.61719 15.8535 5.42188 15.8535 7.625C15.8535 8.60938 15.4316 9.5 14.7754 10.2031C15.1504 10.9531 15.666 11.5156 15.6895 11.5156C15.8535 11.7031 15.877 11.9375 15.7832 12.1484C15.7129 12.3828 15.502 12.5 15.2676 12.5C13.9785 12.5 12.9473 12.0547 12.2441 11.6094C11.8223 11.7031 11.4004 11.75 10.9785 11.75C9.05664 11.75 7.39258 10.8125 6.5957 9.45312C6.99414 9.40625 7.39258 9.3125 7.74414 9.17188C8.40039 10.0625 9.5957 10.625 10.9785 10.625C11.3066 10.625 11.6348 10.6016 11.9863 10.5078L12.4316 10.4141L12.8301 10.6484C13.2285 10.9062 13.627 11.0938 14.0488 11.2109C13.9551 11.0469 13.8613 10.8828 13.7676 10.7422L13.3926 10.0156L13.9551 9.42969C14.3066 9.07812 14.7285 8.46875 14.7285 7.625C14.7285 6.07812 13.2285 4.8125 11.3301 4.64844L11.3535 4.625C11.3535 4.25 11.2832 3.875 11.1895 3.52344Z"
+                          fill="#1A4137" />
+                      </svg>
+                      <a href="#0">Comments (05)</a>
+                    </li>
+                  </ul>
+                  <h4 class="title"><a href="news-details.html">We focus on the solutions not on the problems</a></h4>
+                  <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" href="news-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
+            <div class="blog-block-two">
+              <div class="inner-box">
+                <div class="image-box">
+                  <figure class="image">
+                    <img src="images/blog/blog-two-image2.jpg" alt="Image">
+                    <span class="tag">20 December,2025</span>
+                  </figure>
+                </div>
+                <div class="content-box">
+                  <ul class="info">
+                    <li>
+                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M7.10742 7.625C9.38086 7.625 11.2324 9.47656 11.2324 11.75C11.2324 12.1719 10.8809 12.5 10.4824 12.5H1.48242C1.06055 12.5 0.732422 12.1719 0.732422 11.75C0.732422 9.47656 2.56055 7.625 4.85742 7.625H7.10742ZM1.85742 11.375H10.084C9.89648 9.89844 8.63086 8.75 7.10742 8.75H4.85742C3.31055 8.75 2.04492 9.89844 1.85742 11.375ZM5.98242 6.5C4.31836 6.5 2.98242 5.16406 2.98242 3.5C2.98242 1.85938 4.31836 0.5 5.98242 0.5C7.62305 0.5 8.98242 1.85938 8.98242 3.5C8.98242 5.16406 7.62305 6.5 5.98242 6.5ZM5.98242 1.625C4.92773 1.625 4.10742 2.46875 4.10742 3.5C4.10742 4.55469 4.92773 5.375 5.98242 5.375C7.01367 5.375 7.85742 4.55469 7.85742 3.5C7.85742 2.46875 7.01367 1.625 5.98242 1.625Z"
+                          fill="#1A4137" />
+                      </svg>
+                      <a href="#0">By admin</a>
+                    </li>
+                    <li>
+                      <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M5.72852 0.5C8.40039 0.5 10.6035 2.35156 10.6035 4.625C10.6035 6.92188 8.40039 8.75 5.72852 8.75C5.2832 8.75 4.86133 8.70312 4.43945 8.60938C3.73633 9.05469 2.70508 9.5 1.41602 9.5C1.18164 9.5 0.970703 9.38281 0.900391 9.14844C0.806641 8.9375 0.830078 8.70312 0.994141 8.51562C1.01758 8.51562 1.5332 7.95312 1.9082 7.20312C1.25195 6.5 0.853516 5.60938 0.853516 4.625C0.853516 2.35156 3.0332 0.5 5.72852 0.5ZM4.69727 7.50781C5.04883 7.60156 5.37695 7.625 5.72852 7.625C7.79102 7.625 9.47852 6.28906 9.47852 4.625C9.47852 2.98438 7.79102 1.625 5.72852 1.625C3.64258 1.625 1.97852 2.98438 1.97852 4.625C1.97852 5.46875 2.37695 6.07812 2.72852 6.42969L3.29102 7.01562L2.91602 7.74219C2.82227 7.88281 2.72852 8.04688 2.63477 8.21094C3.05664 8.09375 3.45508 7.90625 3.85352 7.64844L4.25195 7.41406L4.69727 7.50781ZM11.1895 3.52344C13.791 3.61719 15.8535 5.42188 15.8535 7.625C15.8535 8.60938 15.4316 9.5 14.7754 10.2031C15.1504 10.9531 15.666 11.5156 15.6895 11.5156C15.8535 11.7031 15.877 11.9375 15.7832 12.1484C15.7129 12.3828 15.502 12.5 15.2676 12.5C13.9785 12.5 12.9473 12.0547 12.2441 11.6094C11.8223 11.7031 11.4004 11.75 10.9785 11.75C9.05664 11.75 7.39258 10.8125 6.5957 9.45312C6.99414 9.40625 7.39258 9.3125 7.74414 9.17188C8.40039 10.0625 9.5957 10.625 10.9785 10.625C11.3066 10.625 11.6348 10.6016 11.9863 10.5078L12.4316 10.4141L12.8301 10.6484C13.2285 10.9062 13.627 11.0938 14.0488 11.2109C13.9551 11.0469 13.8613 10.8828 13.7676 10.7422L13.3926 10.0156L13.9551 9.42969C14.3066 9.07812 14.7285 8.46875 14.7285 7.625C14.7285 6.07812 13.2285 4.8125 11.3301 4.64844L11.3535 4.625C11.3535 4.25 11.2832 3.875 11.1895 3.52344Z"
+                          fill="#1A4137" />
+                      </svg>
+                      <a href="#0">Comments (05)</a>
+                    </li>
+                  </ul>
+                  <h4 class="title"><a href="news-details.html">How to Create Viral Content That Drives Sales</a></h4>
+                  <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" style="background-color: #D3202A; color: #fff;" href="news-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="400ms" data-wow-duration="1500ms">
+            <div class="blog-block-two">
+              <div class="inner-box">
+                <div class="image-box">
+                  <figure class="image">
+                    <img src="images/blog/blog-two-image3.jpg" alt="Image">
+                    <span class="tag">31 December,2025</span>
+                  </figure>
+                </div>
+                <div class="content-box">
+                  <ul class="info">
+                    <li>
+                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M7.10742 7.625C9.38086 7.625 11.2324 9.47656 11.2324 11.75C11.2324 12.1719 10.8809 12.5 10.4824 12.5H1.48242C1.06055 12.5 0.732422 12.1719 0.732422 11.75C0.732422 9.47656 2.56055 7.625 4.85742 7.625H7.10742ZM1.85742 11.375H10.084C9.89648 9.89844 8.63086 8.75 7.10742 8.75H4.85742C3.31055 8.75 2.04492 9.89844 1.85742 11.375ZM5.98242 6.5C4.31836 6.5 2.98242 5.16406 2.98242 3.5C2.98242 1.85938 4.31836 0.5 5.98242 0.5C7.62305 0.5 8.98242 1.85938 8.98242 3.5C8.98242 5.16406 7.62305 6.5 5.98242 6.5ZM5.98242 1.625C4.92773 1.625 4.10742 2.46875 4.10742 3.5C4.10742 4.55469 4.92773 5.375 5.98242 5.375C7.01367 5.375 7.85742 4.55469 7.85742 3.5C7.85742 2.46875 7.01367 1.625 5.98242 1.625Z"
+                          fill="#1A4137" />
+                      </svg>
+                      <a href="#0">By admin</a>
+                    </li>
+                    <li>
+                      <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M5.72852 0.5C8.40039 0.5 10.6035 2.35156 10.6035 4.625C10.6035 6.92188 8.40039 8.75 5.72852 8.75C5.2832 8.75 4.86133 8.70312 4.43945 8.60938C3.73633 9.05469 2.70508 9.5 1.41602 9.5C1.18164 9.5 0.970703 9.38281 0.900391 9.14844C0.806641 8.9375 0.830078 8.70312 0.994141 8.51562C1.01758 8.51562 1.5332 7.95312 1.9082 7.20312C1.25195 6.5 0.853516 5.60938 0.853516 4.625C0.853516 2.35156 3.0332 0.5 5.72852 0.5ZM4.69727 7.50781C5.04883 7.60156 5.37695 7.625 5.72852 7.625C7.79102 7.625 9.47852 6.28906 9.47852 4.625C9.47852 2.98438 7.79102 1.625 5.72852 1.625C3.64258 1.625 1.97852 2.98438 1.97852 4.625C1.97852 5.46875 2.37695 6.07812 2.72852 6.42969L3.29102 7.01562L2.91602 7.74219C2.82227 7.88281 2.72852 8.04688 2.63477 8.21094C3.05664 8.09375 3.45508 7.90625 3.85352 7.64844L4.25195 7.41406L4.69727 7.50781ZM11.1895 3.52344C13.791 3.61719 15.8535 5.42188 15.8535 7.625C15.8535 8.60938 15.4316 9.5 14.7754 10.2031C15.1504 10.9531 15.666 11.5156 15.6895 11.5156C15.8535 11.7031 15.877 11.9375 15.7832 12.1484C15.7129 12.3828 15.502 12.5 15.2676 12.5C13.9785 12.5 12.9473 12.0547 12.2441 11.6094C11.8223 11.7031 11.4004 11.75 10.9785 11.75C9.05664 11.75 7.39258 10.8125 6.5957 9.45312C6.99414 9.40625 7.39258 9.3125 7.74414 9.17188C8.40039 10.0625 9.5957 10.625 10.9785 10.625C11.3066 10.625 11.6348 10.6016 11.9863 10.5078L12.4316 10.4141L12.8301 10.6484C13.2285 10.9062 13.627 11.0938 14.0488 11.2109C13.9551 11.0469 13.8613 10.8828 13.7676 10.7422L13.3926 10.0156L13.9551 9.42969C14.3066 9.07812 14.7285 8.46875 14.7285 7.625C14.7285 6.07812 13.2285 4.8125 11.3301 4.64844L11.3535 4.625C11.3535 4.25 11.2832 3.875 11.1895 3.52344Z"
+                          fill="#1A4137" />
+                      </svg>
+                      <a href="#0">Comments (05)</a>
+                    </li>
+                  </ul>
+                  <h4 class="title"><a href="news-details.html">How AI is Changing the Future of Online Shopping</a></h4>
+                  <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" href="news-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Blog area end here -->
+
+    <!-- Footer area start here -->
+    <footer class="main-footer footer-style-two">
+      <div class="container">
+
+        <div class="footer-top">
+          <div class="logo" style="background-color: #D3202A;">
+           <a href="{% url 'index' %}">
+    <img src="{% static 'images/logo12.png' %}" alt="Logo">
+</a>
+          </div>
+          <div class="subscrive-box">
+            <h3 class="title">Subscribe Newsletter</h3>
+            <div class="input-feild">
+              <i class="fa-sharp fa-light fa-envelope"></i>
+              <input type="text" placeholder="Email Address">
+              <a class="btn-one-rounded" style="background-color: #f9f9f9; color: #000;" href="#0">Sign Up <i class="fa-regular fa-angle-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="widgets-section">
+
+          <div class="row g-5 justify-content-between">
+            <div class="col-sm-12 col-lg-5 col-xl-6">
+              <div class="footer-widget about-widget">
+
+                <div class="sec-title mb-40">
+                  <h2 class="title text-white">Ready Discover More? Contact Us Today!</h2>
+                  <p class="text">No credit card requirement it’s full free for all</p>
+                </div>
+
+                <div class="input-feild">
+                  <input type="text" placeholder="Email Address">
+                  <a class="btn-one-rounded"  style="background-color: #f9f9f9; color: #000;" href="#0">Sign up now <i class="fa-regular fa-angle-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3 col-xl-2">
+              <div class="footer-widget links-widget">
+                <h4 class="widget-title">Services</h4>
+                <div class="widget-content">
+                  <ul class="user-links">
+                    <li><a style="color: #fff;" href="#0">Business Plan</a></li>
+                    <li><a style="color: #fff;" href="#0">Growth Strategy</a></li>
+                    <li><a style="color: #fff;"  href="#0">Strategic planning</a></li>
+                    <li><a style="color: #fff;" href="#0">Workflow Automation</a></li>
+                    <li><a style="color: #fff;" href="#0">Lead Generation</a></li>
+                    <li><a style="color: #fff;" href="#0">Financial Planning</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+              <div class="footer-widget contact-widget">
+                <h4 class="widget-title">Locations</h4>
+                <div class="widget-content">
+                  <h5 class="text" style="color: #fff;">Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</h5>
+                </div>
+                <h4 class="widget-title mt-30">Contact</h4>
+                <div class="widget-content">
+                  <a style="color: #fff;" href="/cdn-cgi/l/email-protection#067573767669747246616b676f6a2865696b"><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
+                  <h4 class="nuber"><a href="tel:012345688"> +971 56 804 7000</a></h4>
+                   <h4 class="nuber"><a href="tel:012345688"> +971 4 226 6215</a></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora Pvt Ltd</a> All Rights Reserved</p>
+          <ul class="footer-nav">
+            <li ><a href="#0"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#0"><i class="fa-solid fa-x"></i></a></li>
+            <li><a href="#0"><i class="fa-brands fa-vimeo-v"></i></a></li>
+            <li><a href="#0"><i class="fa-brands fa-pinterest-p"></i></a></li>
+          </ul>
+          <button class="goTop-btn" style="background-color: #f9f9f9;"><i class="fa-solid fa-angles-up"></i> <i class="fa-solid fa-angles-up"></i></button>
+        </div>
+        <style>
+          /* Hover effect */
+          .footer-nav li a:hover {
+            background-color: #fff;  /* White background on hover */
+            color: #000;       /* Icon color on hover */
+            transform: scale(1.1); /* Optional zoom effect */
+          }
+        </style>
+
+      </div>
+
+      <div class="sec-shape">
+        <img class="animation__rotateAndScale"  style="background-color: #D3202A; color: #f9f9f9;" src="images/shape/globe-right.png" alt="Image">
+      </div>
+    </footer>
+    <!-- Footer area end here -->
+
+  </div><!-- End Page Wrapper -->
+
+
+<!-- Cloudflare script stays the same -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+<!-- jQuery script from static folder -->
+<script src="{% static 'js/jquery.js' %}"></script>
+
+ 
+<!-- JavaScript Files -->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/slick-animation.min.js' %}"></script>
+<script src="{% static 'js/jquery.fancybox.js' %}"></script>
+<script src="{% static 'js/wow.js' %}"></script>
+<script src="{% static 'js/appear.js' %}"></script>
+<script src="{% static 'js/mixitup.js' %}"></script>
+<script src="{% static 'js/flatpickr.js' %}"></script>
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/gsap.min.js' %}"></script>
+<script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+<script src="{% static 'js/SplitText.min.js' %}"></script>
+<script src="{% static 'js/nice-select.min.js' %}"></script>
+<script src="{% static 'js/knob.js' %}"></script>
+<script src="{% static 'js/parallax.js' %}"></script>
+<script src="{% static 'js/vanilla-tilt.js' %}"></script>
+<script src="{% static 'js/splitting.js' %}"></script>
+<script src="{% static 'js/splitType.js' %}"></script>
+<script src="{% static 'js/script-gsap.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

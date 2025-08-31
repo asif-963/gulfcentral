@@ -1,0 +1,48 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Menu</h4>
+          <form class="forms-sample" method="POST"> 
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="menuName">Menu Name</label>
+              <input type="text" class="form-control" id="menuName" name="name" placeholder="Enter Menu Name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="menuOrder">Menu Order</label>
+              <input type="number" class="form-control" id="menuOrder" name="order" placeholder="Enter Display Order" min="0" required>
+            </div>
+
+            <div class="form-check form-check-flat form-check-primary">
+              <label class="form-check-label">
+                <!-- Reserved for future options -->
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+            <a href="{% url 'view_menus' %}" class="btn btn-light">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Optional: Add a simple character limit for menu name if needed
+  document.getElementById('menuName').addEventListener('input', function() {
+      var nameInput = this.value;
+      if (nameInput.length > 100) {
+          alert("Menu name cannot exceed 100 characters!");
+          this.value = nameInput.substring(0, 100);
+      }
+  });
+</script>
+{% endblock %}

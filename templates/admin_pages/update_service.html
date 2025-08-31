@@ -1,0 +1,149 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Service</h4>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Service Name -->
+            <div class="form-group">
+              <label for="serviceName">Service Name</label>
+              <input type="text" class="form-control" id="serviceName" name="name" value="{{ service.name }}" required>
+            </div>
+
+            <!-- Slug -->
+            <div class="form-group">
+              <label for="serviceSlug">Slug</label>
+              <input type="text" class="form-control" id="serviceSlug" name="slug" value="{{ service.slug }}" required>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+              <label for="serviceCategory">Category</label>
+              <select class="form-control" id="serviceCategory" name="category" required>
+                {% for category in categories %}
+                  <option value="{{ category.id }}" {% if category.id == service.category.id %}selected{% endif %}>
+                    {{ category.menu.name }} → {{ category.name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+              <label for="serviceDescription">Description</label>
+              <textarea class="form-control" id="serviceDescription" name="description" rows="4">{{ service.description }}</textarea>
+            </div>
+
+            <!-- Current Image -->
+            <div class="form-group">
+              <label>Current Image</label><br>
+              {% if service.image %}
+                <img src="{{ service.image.url }}" style="width: 150px; height: 150px;">
+              {% else %}
+                No Image
+              {% endif %}
+            </div>
+
+            <!-- Upload New Image -->
+            <div class="form-group">
+              <label for="serviceImage">Upload New Image</label>
+              <input type="file" class="form-control-file" id="serviceImage" name="image" accept="image/*">
+            </div>
+
+            <!-- Service Process Steps -->
+            <div class="form-group">
+              <label>Service Process Steps</label>
+              <div id="processStepsContainer">
+                {% for step in service.process_steps.all %}
+                  <div class="border p-2 mt-2">
+                    <label>Step {{ step.step_number }} Title</label>
+                    <input type="text" class="form-control mb-1" name="step_title_{{ step.id }}" value="{{ step.title }}" required>
+                    <label>Step {{ step.step_number }} Description</label>
+                    <textarea class="form-control ckeditor mb-1" name="step_description_{{ step.id }}" rows="2" required>{{ step.description }}</textarea>
+                  </div>
+                {% endfor %}
+              </div>
+              <button type="button" class="btn btn-sm btn-secondary mt-2" onclick="addProcessStep()">Add Step</button>
+            </div>
+
+            <!-- FAQs -->
+            <div class="form-group">
+              <label>Service FAQs</label>
+              <div id="faqsContainer">
+                {% for faq in service.faqs.all %}
+                  <div class="border p-2 mt-2">
+                    <label>Question</label>
+                    <input type="text" class="form-control mb-1" name="faq_question_{{ faq.id }}" value="{{ faq.question }}" required>
+                    <label>Answer</label>
+                    <textarea class="form-control ckeditor mb-1" name="faq_answer_{{ faq.id }}" rows="2" required>{{ faq.answer }}</textarea>
+                  </div>
+                {% endfor %}
+              </div>
+              <button type="button" class="btn btn-sm btn-secondary mt-2" onclick="addFAQ()">Add FAQ</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Update Service</button>
+            <a href="{% url 'view_services' %}" class="btn btn-light mt-3">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CKEditor -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+<script>
+function initCKEditors() {
+    document.querySelectorAll('.ckeditor').forEach((textarea) => {
+        if (!textarea.classList.contains('ckeditor-initialized')) {
+            ClassicEditor.create(textarea).then(editor => {}).catch(error => console.error(error));
+            textarea.classList.add('ckeditor-initialized');
+        }
+    });
+}
+
+let stepCount = {{ service.process_steps.count }};
+let faqCount = {{ service.faqs.count }};
+
+function addProcessStep() {
+    stepCount++;
+    let container = document.getElementById('processStepsContainer');
+    let html = `
+      <div class="border p-2 mt-2">
+        <label>Step ${stepCount} Title</label>
+        <input type="text" class="form-control mb-1" name="new_step_title_${stepCount}" required>
+        <label>Step ${stepCount} Description</label>
+        <textarea class="form-control ckeditor mb-1" name="new_step_description_${stepCount}" rows="2" required></textarea>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+    initCKEditors();
+}
+
+function addFAQ() {
+    faqCount++;
+    let container = document.getElementById('faqsContainer');
+    let html = `
+      <div class="border p-2 mt-2">
+        <label>Question</label>
+        <input type="text" class="form-control mb-1" name="new_faq_question_${faqCount}" required>
+        <label>Answer</label>
+        <textarea class="form-control ckeditor mb-1" name="new_faq_answer_${faqCount}" rows="2" required></textarea>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+    initCKEditors();
+}
+
+// Initialize CKEditors for existing fields
+document.addEventListener('DOMContentLoaded', initCKEditors);
+</script>
+{% endblock %}

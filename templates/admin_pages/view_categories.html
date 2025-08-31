@@ -1,0 +1,50 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-lg-12 stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Categories</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered" style="width: 1400px;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Category Name</th>
+                            <th>Slug</th>
+                            <th>Parent Menu</th>
+                            <th>Order</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>{{ category.slug }}</td>
+                            <td>{{ category.menu.name }}</td>
+                            <td style="text-align:center">{{ category.order }}</td>
+                            <td>
+                                <a href="{% url 'update_category' category.id %}" class="btn btn-warning btn-sm">
+                                    <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Update
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'delete_category' category.id %}" class="btn btn-danger btn-sm">
+                                    <i class="mdi mdi-delete" aria-hidden="true"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center">No categories available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

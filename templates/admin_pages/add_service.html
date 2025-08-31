@@ -1,0 +1,133 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Service</h4>
+
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <!-- Category -->
+            <div class="form-group">
+              {{ form.category.label_tag }}
+              {{ form.category }}
+              {{ form.category.errors }}
+            </div>
+
+            <!-- Name -->
+            <div class="form-group">
+              {{ form.name.label_tag }}
+              {{ form.name }}
+              {{ form.name.errors }}
+            </div>
+
+            <!-- Slug -->
+            <div class="form-group">
+              {{ form.slug.label_tag }}
+              {{ form.slug }}
+              {{ form.slug.errors }}
+            </div>
+
+            <!-- Description (CKEditor) -->
+            <div class="form-group">
+              {{ form.description.label_tag }}
+              {{ form.description }}  <!-- CKEditorWidget renders this -->
+              {{ form.description.errors }}
+            </div>
+
+            <!-- Image -->
+            <div class="form-group">
+              {{ form.image.label_tag }}
+              {{ form.image }}
+              {{ form.image.errors }}
+            </div>
+
+            <!-- Order -->
+            <div class="form-group">
+              {{ form.order.label_tag }}
+              {{ form.order }}
+              {{ form.order.errors }}
+            </div>
+
+            <!-- Service Process Steps -->
+            <div class="form-group">
+              <label>Service Process Steps</label>
+              <div id="processStepsContainer"></div>
+              <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="addProcessStep()">Add Step</button>
+            </div>
+
+            <!-- FAQs -->
+            <div class="form-group">
+              <label>Service FAQs</label>
+              <div id="faqsContainer"></div>
+              <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="addFAQ()">Add FAQ</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CKEditor JS -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+        .create(document.querySelector('#id_description'), {  // use Django form field ID
+            toolbar: [
+                'heading', '|', 'bold', 'italic', 'underline', 'strikethrough', 'link', '|',
+                'bulletedList', 'numberedList', 'blockQuote', '|',
+                'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+            ],
+            ckfinder: { uploadUrl: '{% url "ckeditor_upload" %}' },
+            simpleUpload: {
+                uploadUrl: '{% url "ckeditor_upload" %}',
+                headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+            }
+        })
+        .catch(error => console.error(error));
+});
+
+// Add Process Step
+let processCount = 0;
+function addProcessStep() {
+    processCount++;
+    const container = document.getElementById('processStepsContainer');
+    const div = document.createElement('div');
+    div.classList.add('border', 'p-2', 'mt-2');
+    div.innerHTML = `
+        <label>Step Title</label>
+        <input type="text" class="form-control mb-1" name="new_step_title_${processCount}" required>
+        <label>Step Description</label>
+        <textarea class="form-control mb-1" name="new_step_description_${processCount}" rows="2" required></textarea>
+    `;
+    container.appendChild(div);
+}
+
+// Add FAQ
+let faqCount = 0;
+function addFAQ() {
+    faqCount++;
+    const container = document.getElementById('faqsContainer');
+    const div = document.createElement('div');
+    div.classList.add('border', 'p-2', 'mt-2');
+    div.innerHTML = `
+        <label>Question</label>
+        <input type="text" class="form-control mb-1" name="new_faq_question_${faqCount}" required>
+        <label>Answer</label>
+        <textarea class="form-control mb-1" name="new_faq_answer_${faqCount}" rows="2" required></textarea>
+    `;
+    container.appendChild(div);
+}
+</script>
+{% endblock %}
