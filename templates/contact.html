@@ -355,102 +355,130 @@
     </section>
     <!-- Page Contact area end here -->
 
-    <!-- Footer area start here -->
-    <footer class="main-footer footer-style-two">
-      <div class="container">
-
-        <div class="footer-top">
-          <div class="logo" style="background-color: #D3202A;">
-           <a href="{% url 'index' %}">
-    <img src="{% static 'images/logo12.png' %}" alt="Logo">
-</a>
-          </div>
-          <div class="subscrive-box">
-            <h3 class="title">Subscribe Newsletter</h3>
-            <div class="input-feild">
-              <i class="fa-sharp fa-light fa-envelope"></i>
-              <input type="text" placeholder="Email Address">
-              <a class="btn-one-rounded" style="background-color: #f9f9f9; color: #000;" href="#0">Sign Up <i class="fa-regular fa-angle-right"></i></a>
-            </div>
-          </div>
+    <!-- Main Footer -->
+  <footer class="main-footer footer-style-three pt-100">
+    <div class="container">
+      <div class="footer-cta" style="background-color: #fff;">
+       <div class="sec-title">
+  <h2 class="title wow splt-txt" data-splitting>Need Business Setup & Consultancy in the Gulf?</h2>
+  <p class="text wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
+    Gulf Central offers expert business setup, legal support, and corporate consultancy to help your company start and grow with ease.
+  </p>
+</div>
+        <div class="btn-wrp wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+          <a href="{% url 'contact' %}" style="background-color: #D3202A; color: #fff;" class="cta-btn">Get Started Free <i class="fa-regular fa-arrow-up-right"></i></a>
+         
         </div>
-
-        <div class="widgets-section">
-
-          <div class="row g-5 justify-content-between">
-            <div class="col-sm-12 col-lg-5 col-xl-6">
-              <div class="footer-widget about-widget">
-
-                <div class="sec-title mb-40">
-                  <h2 class="title text-white">Ready Discover More? Contact Us Today!</h2>
-                  <p class="text">No credit card requirement it’s full free for all</p>
-                </div>
-
-                <div class="input-feild">
-                  <input type="text" placeholder="Email Address">
-                  <a class="btn-one-rounded"  style="background-color: #f9f9f9; color: #000;" href="#0">Sign up now <i class="fa-regular fa-angle-right"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 col-xl-2">
-              <div class="footer-widget links-widget">
-                <h4 class="widget-title">Services</h4>
-                <div class="widget-content">
-                  <ul class="user-links">
-                    <li><a style="color: #fff;" href="#0">Business Plan</a></li>
-                    <li><a style="color: #fff;" href="#0">Growth Strategy</a></li>
-                    <li><a style="color: #fff;"  href="#0">Strategic planning</a></li>
-                    <li><a style="color: #fff;" href="#0">Workflow Automation</a></li>
-                    <li><a style="color: #fff;" href="#0">Lead Generation</a></li>
-                    <li><a style="color: #fff;" href="#0">Financial Planning</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 col-xl-3">
-              <div class="footer-widget contact-widget">
-                <h4 class="widget-title">Locations</h4>
-                <div class="widget-content">
-                  <h5 class="text" style="color: #fff;">Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</h5>
-                </div>
-                <h4 class="widget-title mt-30">Contact</h4>
-                <div class="widget-content">
-                  <a style="color: #fff;" href="/cdn-cgi/l/email-protection#067573767669747246616b676f6a2865696b"><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
-                  <h4 class="nuber"><a href="tel:012345688"> +971 56 804 7000</a></h4>
-                   <h4 class="nuber"><a href="tel:012345688"> +971 4 226 6215</a></h4>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="footer-bottom">
-          <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora Pvt Ltd</a> All Rights Reserved</p>
-          <ul class="footer-nav">
-            <li ><a href="#0"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="#0"><i class="fa-solid fa-x"></i></a></li>
-            <li><a href="#0"><i class="fa-brands fa-vimeo-v"></i></a></li>
-            <li><a href="#0"><i class="fa-brands fa-pinterest-p"></i></a></li>
-          </ul>
-          <button class="goTop-btn" style="background-color: #f9f9f9;"><i class="fa-solid fa-angles-up"></i> <i class="fa-solid fa-angles-up"></i></button>
-        </div>
-        <style>
-          /* Hover effect */
-          .footer-nav li a:hover {
-            background-color: #fff;  /* White background on hover */
-            color: #000;       /* Icon color on hover */
-            transform: scale(1.1); /* Optional zoom effect */
-          }
-        </style>
-
+      <div class="bg-shape">
+    <img src="{% static 'images/shape/cta-line.png' %}" alt="Image">
+</div>
+<div class="arry">
+    <img class="animation__arryLeftRight" src="{% static 'images/shape/cta-arry.png' %}" alt="Image">
+</div>
       </div>
+      <div class="widgets-section">
+        <div class="row g-5 g-xl-0">
+          <div class="col-lg-4 footer-column">
+            <div class="footer-widget about-widget">
+              <div class="logo">
+                  <a href="{% url 'index' %}"><img src="{% static 'images/logo12.png' %}" alt="Logo"></a>
+              </div>
+              <div class="widget-content">
+          <p class="text" style="color: #fff;">Gulf Central provides expert business setup, legal support, and consultancy services to help your business thrive in the Gulf region.</p>
 
-      <div class="sec-shape">
-        <img class="animation__rotateAndScale"  style="background-color: #D3202A; color: #f9f9f9;" src="images/shape/globe-right.png" alt="Image">
+              
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="row g-4 g-xl-0">
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Resource</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">Product</a></li>
+                      <li><a href="#0">Services</a></li>
+                      <li><a href="#0">About Us</a></li>
+                      <li><a href="#0">Benefits</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Quick Link</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">Features</a></li>
+                      <li><a href="#0">Pricing Plan</a></li>
+                      <li><a href="#0">Best Program</a></li>
+                      <li><a href="#0">Press Kit</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Company</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">About</a></li>
+                      <li><a href="#0">Team Member</a></li>
+                      <li><a href="#0">Reviews</a></li>
+                      <li><a href="#0">Latest News</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget contact-widget">
+                  <h4 class="widget-title">Contact</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li>
+                        <i class="fa-light fa-location-dot" style="color: white;" ></i>
+                        <a href="#0"> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</a>
+                      </li>
+                      <li>
+                        <i class="fa-light fa-envelope" style="color: white;"></i>
+                        <a href=""><span class="__cf_email__" data-cfemail=""> office@gulfcentral.ae</span></a>
+                      </li>
+                      <li>
+                        <i class="fa-light fa-phone-flip" style="color: white;"></i>
+                        <a href=""> +971 56 804 7000</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
-    <!-- Footer area end here -->
+      <div class="footer-bottom">
+        <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
+        <ul class="footer-nav">
+          <li><a href="#0">Terms & Conditions</a></li>
+          
+          <li><a href="#0">Privacy & Policy</a></li>
+          <li><a href="#0">Contact</a></li>
+        </ul>
+        <button style="background-color: #fff;" class="goTop-btn"><i class="fa-solid fa-angles-up" style="color:#D3202A;"></i> <i class="fa-solid fa-angles-up" style="color:#D3202A;"></i></i></button>
+      </div>
+    </div>
+    <div class="sec-shape">
+        <img class="animation__rotateY"
+       src="{% static 'images/shape/dual-circle420.png' %}"
+       alt="Image">
+    </div>
+    <div class="box-shape">
+      <div class="box1 wow slideInUp" data-wow-delay="200ms" data-wow-duration="1500ms"></div>
+      <div class="box2 wow slideInLeft" data-wow-delay="200ms" data-wow-duration="1500ms"></div>
+    </div>
+  </footer>
+  <!--End Main Footer -->
+
 
   </div><!-- End Page Wrapper -->
 

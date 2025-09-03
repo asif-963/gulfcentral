@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Menu, Category, Service, ContactModel, NearByPlace, ClientReview, ServiceProcessStep, ServiceFAQ
+from .models import Menu, Category, Service, ContactModel, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog
 from ckeditor.widgets import CKEditorWidget  
 
 
@@ -11,10 +11,10 @@ class ContactModelForm(forms.ModelForm):
         model = ContactModel
         fields = '__all__'
 
-# NearByPlaceForm
-class NearByPlaceForm(forms.ModelForm):
+# NewsForm
+class NewsForm(forms.ModelForm):
     class Meta:
-        model = NearByPlace
+        model = News
         fields = '__all__'
 
 # Clien Review
@@ -53,7 +53,7 @@ class CategoryForm(forms.ModelForm):
 
 # Service Form
 class ServiceForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditorWidget())  # Use CKEditor widget
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
 
     class Meta:
         model = Service
@@ -66,23 +66,26 @@ class ServiceForm(forms.ModelForm):
             'order': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Order'}),
         }
 
-# Service Process Step Form
-class ServiceProcessStepForm(forms.ModelForm):
+
+# Blog Category Form
+class BlogCategoryForm(forms.ModelForm):
     class Meta:
-        model = ServiceProcessStep
-        fields = ['step_number', 'title', 'description']
+        model = BlogCategory
+        fields = ['name']
         widgets = {
-            'step_number': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Step Number'}),
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Step Title'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2, 'placeholder': 'Step Description'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Blog Category Name', 'required': True}),
         }
 
-# Service FAQ Form
-class ServiceFAQForm(forms.ModelForm):
+
+# Blog Form
+class BlogForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
+
     class Meta:
-        model = ServiceFAQ
-        fields = ['question', 'answer']
+        model = Blog
+        fields = ['category', 'title', 'description', 'image']
         widgets = {
-            'question': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'FAQ Question'}),
-            'answer': forms.Textarea(attrs={'class': 'form-control', 'rows': 2, 'placeholder': 'FAQ Answer'}),
+            'category': forms.Select(attrs={'class': 'form-control', 'required': True}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Blog Title', 'required': True}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }

@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <div class="col-lg-12 stretch-card">
     <div class="card">
         <div class="card-body">
@@ -21,17 +23,25 @@
                     <tbody>
                         {% for category in categories %}
                         <tr>
-                            <td>{{ category.name }}</td>
-                            <td>{{ category.slug }}</td>
-                            <td>{{ category.menu.name }}</td>
-                            <td style="text-align:center">{{ category.order }}</td>
+                            <td style="width: 200px; word-wrap: break-word; white-space: normal;">
+                                {{ category.name }}
+                            </td>
+                            <td style="width: 200px; word-wrap: break-word; white-space: normal;">
+                                {{ category.slug }}
+                            </td>
+                            <td style="width: 200px; word-wrap: break-word; white-space: normal;">
+                                {{ category.menu.name }}
+                            </td>
+                            <td style="width: 100px; text-align:center;">
+                                {{ category.order }}
+                            </td>
                             <td>
                                 <a href="{% url 'update_category' category.id %}" class="btn btn-warning btn-sm">
                                     <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Update
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'delete_category' category.id %}" class="btn btn-danger btn-sm">
+                                <a href="{% url 'delete_category' category.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?');">
                                     <i class="mdi mdi-delete" aria-hidden="true"></i> Delete
                                 </a>
                             </td>

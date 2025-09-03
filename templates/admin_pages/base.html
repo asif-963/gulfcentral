@@ -6,7 +6,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gulf Central </title>
+  <title>Gulf Central | Dashboard </title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{% static 'admin_static/assets/vendors/feather/feather.css' %}">
   <link rel="stylesheet" href="{% static 'admin_static/assets/vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -22,7 +22,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{% static 'admin_static/assets/css/vertical-layout-light/style.css' %}">
   <!-- endinject -->
-  <link rel="icon" href="{% static 'images/fav.png' %}" type="image/x-icon">
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
   <style>
     * {
   margin:0px;
@@ -89,12 +89,12 @@
         <span class="icon-menu"></span>
       </button>
     </div>
-    <div>
+    <!-- <div>
       <a class="navbar-brand brand-logo" href="{% url 'dashboard' %}">
-        <img src="{% static 'images/logo.png' %}" alt="logo" style="height: 20px; width: 300px;" />
+        <img src="{% static 'images/logo.png' %}" alt="logo" style="height: 50px; width: 300px;" />
       </a>
     
-    </div>
+    </div> -->
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-top">
     <ul class="navbar-nav">
@@ -165,18 +165,34 @@
   
 
 
-    <li class="nav-item nav-category">Add Price</li>
+   <li class="nav-item nav-category">Services</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#blog5" aria-expanded="false" aria-controls="blog">
-        <i class="menu-icon mdi mdi-currency-inr"></i>
-        <span class="menu-title">Add Price</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#servicesMenu" aria-expanded="false" aria-controls="servicesMenu">
+        <i class="menu-icon mdi mdi-briefcase"></i>
+        <span class="menu-title">Services</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="blog5">
+      <div class="collapse" id="servicesMenu">
         <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'add_menu' %}">Add Menu</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'view_menus' %}">View Menus</a>
+          </li>
 
-          <li class="nav-item"> <a class="nav-link" href=""> Add Price</a></li>
-         
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'view_categories' %}">View Categories</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'add_service' %}">Add Service</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'view_services' %}">View Services</a>
+          </li>
         </ul>
       </div>
     </li>
@@ -199,37 +215,41 @@
 
 
    
-    <li class="nav-item nav-category">Gallery</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#contact1" aria-expanded="false" aria-controls="contact">
-        <i class="menu-icon mdi mdi-floor-plan"></i>
-        <span class="menu-title">Gallery</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="contact1">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href=""> Add Folders</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Folders</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> Add Images</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Images</a></li>
-        </ul>
-      </div>
-    </li>
+  <li class="nav-item nav-category">Blogs</li>
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#blogsMenu" aria-expanded="false" aria-controls="blogsMenu">
+    <i class="menu-icon mdi mdi-book-open-page-variant"></i>
+    <span class="menu-title">Blogs</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="blogsMenu">
+    <ul class="nav flex-column sub-menu">
+      <!-- Blog Categories -->
+      <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog_category' %}">Add Blog Category</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'view_blog_categories' %}">View Blog Categories</a></li>
+
+      <!-- Blogs -->
+      <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog' %}">Add Blog</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'view_blogs' %}">View Blogs</a></li>
+    </ul>
+  </div>
+</li>
+
 
 
 
     
-    <li class="nav-item nav-category">Near By Place</li>
+    <li class="nav-item nav-category">News</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#contact123" aria-expanded="false" aria-controls="contact">
         <i class="menu-icon mdi mdi mdi-book-open"></i>
-        <span class="menu-title">Near By Place</span>
+        <span class="menu-title">News</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="contact123">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add_near_by_place' %}"> Add Near By Place</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_near_by_place' %}"> View Near By Place</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_news' %}"> Add News</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_news' %}"> View News</a></li>
         </ul>
       </div>
     </li>

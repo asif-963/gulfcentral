@@ -8,8 +8,17 @@ urlpatterns = [
 
     path('', views.index, name= 'index'),
     path('about/', views.about, name= 'about'),
-    path('service-details/', views.service_details, name= 'service-details'),
+    path('news/', views.news, name= 'news'),
+     path('news-details/', views.news_details, name= 'news_details'),
+    path('blogs/', views.blogs, name= 'blogs'),
+
+
+    path('cost-calculator/', views.cost_calculator, name= 'cost_calculator'),
+    path('service/<slug:slug>/', views.service_details, name='service_details'),
+
     path('contact/', views.contact, name= 'contact'),
+
+     path('ajax/search-services/', views.ajax_search_services, name='ajax_search_services'),
 
           # Admin Login
     path('login',views.user_login,name='user_login'),
@@ -19,10 +28,10 @@ urlpatterns = [
     path('dashboard',views.dashboard,name='dashboard'),
 
        # NEar By Place
-    path('add_near_by_place', views.add_near_by_place, name='add_near_by_place'),
-    path('view_near_by_place',views.view_near_by_place,name='view_near_by_place'),
-    path('update_near_by_place/<int:id>/',views.update_near_by_place,name='update_near_by_place'),
-    path('delete_near_by_place/<int:id>/',views.delete_near_by_place,name='delete_near_by_place'),
+    path('add_news', views.add_news, name='add_news'),
+    path('view_news',views.view_news,name='view_news'),
+    path('update_news/<int:id>/',views.update_news,name='update_news'),
+    path('delete_news/<int:id>/',views.delete_news,name='delete_news'),
 
     path('ckeditor_upload/', views.ckeditor_upload, name='ckeditor_upload'),
 
@@ -53,6 +62,18 @@ urlpatterns = [
     path('services/add/', views.add_service, name='add_service'),
     path('services/update/<int:service_id>/', views.update_service, name='update_service'),
     path('services/delete/<int:service_id>/', views.delete_service, name='delete_service'),
+
+
+    # --- Blog Categories ---
+    path('blog-category/add/', views.add_blog_category, name='add_blog_category'),
+    path('blog-category/view/', views.view_blog_categories, name='view_blog_categories'),
+    path('blog-category/update/<int:pk>/', views.update_blog_category, name='update_blog_category'),
+    path('blog-category/delete/<int:pk>/', views.delete_blog_category, name='delete_blog_category'),
+
+    path('blogs/add/', views.add_blog, name='add_blog'),
+    path('blogs/view/', views.view_blogs, name='view_blogs'),
+    path('blogs/update/<int:pk>/', views.update_blog, name='update_blog'),
+    path('blogs/delete/<int:pk>/', views.delete_blog, name='delete_blog'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # handler404 = 'gulf_central.views.page_404'

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.urls import reverse
 
 
 # Create your models here.
@@ -15,15 +16,43 @@ class ContactModel(models.Model):
         return self.name if self.name else "Unnamed Contact"
     
 
-# Near By Places
-class NearByPlace(models.Model):
-    name = models.CharField(max_length=200,blank=True, null=True)
-    description = models.TextField()
-    image = models.ImageField(upload_to='Place_images/',blank=True, null=True)
-    created_date = models.DateTimeField(default=now,blank=True, null=True)
+# News
+class News(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='news_images/', blank=True, null=True)
+    created_date = models.DateTimeField(default=now, blank=True, null=True)
 
     def __str__(self):
         return self.name
+    
+
+# Blog Category Model
+class BlogCategory(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    created_date = models.DateTimeField(default=now, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Blog Category"
+        verbose_name_plural = "Blog Categories"
+
+    def __str__(self):
+        return self.name
+
+
+# Blog Model
+class Blog(models.Model):
+    category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, related_name="blogs")
+    title = models.CharField(max_length=200)
+    description = RichTextField()  # CKEditor RichTextField
+    image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    created_date = models.DateTimeField(default=now, blank=True, null=True)
+
+    class Meta:
+        ordering = ['-created_date']
+
+    def __str__(self):
+        return self.title
 
 
 # Client Reviews
@@ -61,8 +90,8 @@ class Category(models.Model):
 
     def __str__(self):
         return f"{self.menu.name} → {self.name}"
-
-
+    
+    
 class Service(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="services")
     name = models.CharField(max_length=150)
@@ -77,6 +106,9 @@ class Service(models.Model):
 
     def __str__(self):
         return f"{self.category.menu.name} → {self.category.name} → {self.name}"
+
+    def get_absolute_url(self):
+        return reverse('service_details', args=[self.slug])
 
 
 class ServiceProcessStep(models.Model):
@@ -99,10 +131,3 @@ class ServiceFAQ(models.Model):
 
     def __str__(self):
         return f"FAQ for {self.service.name}: {self.question[:50]}..."
-
-        
-
-
-
-
-

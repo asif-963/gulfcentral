@@ -5,8 +5,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 import random
 
-from .models import Menu, Category, Service, ContactModel, NearByPlace, ClientReview, ServiceProcessStep, ServiceFAQ
-from .forms import ContactModelForm, NearByPlaceForm, MenuForm, CategoryForm, ServiceForm, ClientReviewForm, ServiceProcessStepForm, ServiceFAQForm
+from .models import Menu, Category, Service, ContactModel, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog
+from .forms import ContactModelForm, NewsForm, MenuForm, CategoryForm, ServiceForm, ClientReviewForm, BlogCategoryForm, BlogForm
 
 
 
@@ -15,17 +15,60 @@ from .forms import ContactModelForm, NearByPlaceForm, MenuForm, CategoryForm, Se
 
 
 def index(request):
-    return render(request, 'index.html')
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    categories = list(Category.objects.prefetch_related('services').all())
+    random.shuffle(categories)       # Shuffle all categories
+    categories = categories[:6]   
+    return render(request, 'index.html', {'menus': menus, 'categories': categories})
 
 
 def about(request):
     return render(request, 'about.html')
 
-def service_details(request):
-    return render(request, 'service-details.html')
+def news(request):
+    return render(request, 'news.html')
+
+def blogs(request):
+    return render(request, 'blogs.html')
+
+def news_details(request):
+    return render(request, 'news-details.html')
+
+def cost_calculator(request):
+    return render(request, 'cost-calculator.html')
+
+def service_details(request, slug):
+    # Get the service object
+    service = get_object_or_404(Service, slug=slug)
+    related_services = Service.objects.filter(category=service.category).exclude(id=service.id)
+    process_steps = ServiceProcessStep.objects.filter(service=service).order_by('step_number')
+    faqs = ServiceFAQ.objects.filter(service=service)
+
+    context = {
+        'service': service,
+        'process_steps': process_steps,
+        'faqs': faqs,
+        'related_services': related_services,
+    }
+    return render(request, 'service-details.html', context)
+
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+
+
+from django.http import JsonResponse
+from .models import Service
+
+def ajax_search_services(request):
+    query = request.GET.get('q', '').strip()
+    if query:
+        services = Service.objects.filter(name__icontains=query)[:10]
+        results = [{"name": s.name, "url": s.get_absolute_url()} for s in services]
+        return JsonResponse(results, safe=False)
+    return JsonResponse([], safe=False)
 
 
 
@@ -116,41 +159,41 @@ def delete_client_review(request,id):
 
 # Near by place
 @login_required(login_url='user_login')
-def add_near_by_place(request):
+def add_news(request):
     if request.method == 'POST':
-        form = NearByPlaceForm(request.POST, request.FILES)
+        form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('view_near_by_place') 
+            return redirect('view_news') 
     else:
-        form = NearByPlaceForm()
+        form = NewsForm()
 
-    return render(request, 'admin_pages/add_near_by_place.html', {'form': form})
-
-
-@login_required(login_url='user_login')
-def view_near_by_place(request):
-    places = NearByPlace.objects.all().order_by('-id')
-    return render(request, 'admin_pages/view_near_by_place.html', {'places': places})
+    return render(request, 'admin_pages/add_news.html', {'form': form})
 
 
 @login_required(login_url='user_login')
-def update_near_by_place(request, id):
-    place = get_object_or_404(NearByPlace, id=id)
+def view_news(request):
+    places = News.objects.all().order_by('-id')
+    return render(request, 'admin_pages/view_news.html', {'places': places})
+
+
+@login_required(login_url='user_login')
+def update_news(request, id):
+    place = get_object_or_404(News, id=id)
     if request.method == 'POST':
-        form = NearByPlaceForm(request.POST, request.FILES, instance=place)
+        form = NewsForm(request.POST, request.FILES, instance=place)
         if form.is_valid():
             form.save()
-            return redirect('view_near_by_place')
+            return redirect('view_news')
     else:
-        form = NearByPlaceForm(instance=place)
-    return render(request, 'admin_pages/update_near_by_place.html', {'form': form, 'place': place})
+        form = NewsForm(instance=place)
+    return render(request, 'admin_pages/update_news.html', {'form': form, 'place': place})
 
 @login_required(login_url='user_login')
-def delete_near_by_place(request,id):
-    places = NearByPlace.objects.get(id=id)
+def delete_news(request,id):
+    places = News.objects.get(id=id)
     places.delete()
-    return redirect('view_near_by_place')
+    return redirect('view_news')
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -187,20 +230,23 @@ def ckeditor_upload(request):
 # ----------------------------
 # MENUS
 # ----------------------------
+@login_required(login_url='user_login')
 def view_menus(request):
     menus = Menu.objects.all()
     return render(request, "admin_pages/view_menus.html", {"menus": menus})
 
+@login_required(login_url='user_login')
 def add_menu(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = MenuForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('view_menus')
     else:
         form = MenuForm()
-    return render(request, "admin_pages/add_menus.html", {"form": form})
+    return render(request, 'admin_pages/add_menus.html', {'form': form})
 
+@login_required(login_url='user_login')
 def update_menu(request, pk):
     menu = get_object_or_404(Menu, id=pk)
     if request.method == "POST":
@@ -213,7 +259,7 @@ def update_menu(request, pk):
     # Pass the menu object to template so values show
     return render(request, "admin_pages/update_menu.html", {"menu": menu, "form": form})
 
-
+@login_required(login_url='user_login')
 def delete_menu(request, pk):
     menu = get_object_or_404(Menu, id=pk)
     menu.delete()
@@ -225,6 +271,7 @@ def delete_menu(request, pk):
 # ----------------------------
 
 # Add Category
+@login_required(login_url='user_login')
 def add_category(request):
     menus = Menu.objects.all()
     if request.method == "POST":
@@ -237,11 +284,13 @@ def add_category(request):
     return render(request, "admin_pages/add_category.html", {"form": form, "menus": menus})
 
 # View Categories
+@login_required(login_url='user_login')
 def view_categories(request):
     categories = Category.objects.all().order_by('order')
     return render(request, "admin_pages/view_categories.html", {"categories": categories})
 
 # Update Category
+@login_required(login_url='user_login')
 def update_category(request, pk):
     category = get_object_or_404(Category, id=pk)
     menus = Menu.objects.all()
@@ -255,107 +304,247 @@ def update_category(request, pk):
     return render(request, "admin_pages/update_category.html", {"category": category, "menus": menus, "form": form})
 
 # Delete Category
+@login_required(login_url='user_login')
 def delete_category(request, pk):
     category = get_object_or_404(Category, id=pk)
     category.delete()
     return redirect('view_categories')
 
-
 # View all services
+@login_required(login_url='user_login')
 def view_services(request):
-    services = Service.objects.all().order_by('order')
+    services = Service.objects.all().order_by('-order')
     return render(request, 'admin_pages/view_services.html', {'services': services})
 
+
 # Add service
+@login_required(login_url='user_login')
 def add_service(request):
     categories = Category.objects.all().order_by('menu', 'order')
+
     if request.method == 'POST':
         form = ServiceForm(request.POST, request.FILES)
         if form.is_valid():
             service = form.save()
 
-            # Save new process steps
+            # Save dynamic process steps
             for key in request.POST:
                 if key.startswith('new_step_title_'):
                     step_num = key.split('_')[-1]
                     title = request.POST.get(f'new_step_title_{step_num}')
                     description = request.POST.get(f'new_step_description_{step_num}')
                     if title and description:
-                        ServiceProcessStep.objects.create(service=service, step_number=int(step_num), title=title, description=description)
+                        ServiceProcessStep.objects.create(
+                            service=service,
+                            step_number=int(step_num),
+                            title=title,
+                            description=description
+                        )
 
-            # Save new FAQs
+            # Save dynamic FAQs
             for key in request.POST:
                 if key.startswith('new_faq_question_'):
                     faq_num = key.split('_')[-1]
                     question = request.POST.get(f'new_faq_question_{faq_num}')
                     answer = request.POST.get(f'new_faq_answer_{faq_num}')
                     if question and answer:
-                        ServiceFAQ.objects.create(service=service, question=question, answer=answer)
+                        ServiceFAQ.objects.create(
+                            service=service,
+                            question=question,
+                            answer=answer
+                        )
 
             return redirect('view_services')
     else:
         form = ServiceForm()
-    return render(request, 'admin_pages/add_service.html', {'form': form, 'categories': categories})
+
+    return render(request, 'admin_pages/add_service.html', {
+        'form': form,
+        'categories': categories
+    })
+
 
 # Update service
+@login_required(login_url='user_login')
 def update_service(request, service_id):
     service = get_object_or_404(Service, id=service_id)
     categories = Category.objects.all().order_by('menu', 'order')
 
     if request.method == 'POST':
-        form = ServiceForm(request.POST, request.FILES, instance=service)
-        if form.is_valid():
-            service = form.save()
+        # Update main service info
+        service.name = request.POST.get('name')
+        service.slug = request.POST.get('slug')
+        category_id = request.POST.get('category')
+        if category_id:
+            service.category = get_object_or_404(Category, id=category_id)
+        service.description = request.POST.get('description')
 
-            # Update existing process steps
-            for step in service.process_steps.all():
-                title = request.POST.get(f'step_title_{step.id}')
-                description = request.POST.get(f'step_description_{step.id}')
+        # Update image if uploaded
+        if 'image' in request.FILES:
+            service.image = request.FILES['image']
+
+        service.save()
+
+        # Update existing steps
+        existing_step_ids = [step.id for step in service.process_steps.all()]
+        for step_id in existing_step_ids:
+            step = service.process_steps.get(id=step_id)
+            title = request.POST.get(f'step_title_{step.id}')
+            description = request.POST.get(f'step_description_{step.id}')
+            if title and description:
+                step.title = title
+                step.description = description
+                step.save()
+            else:
+                step.delete()  # Delete if user removed content
+
+        # Add new steps
+        for key in request.POST:
+            if key.startswith('new_step_title_'):
+                step_num = int(key.split('_')[-1])
+                title = request.POST.get(f'new_step_title_{step_num}')
+                description = request.POST.get(f'new_step_description_{step_num}')
                 if title and description:
-                    step.title = title
-                    step.description = description
-                    step.save()
+                    ServiceProcessStep.objects.create(
+                        service=service,
+                        step_number=step_num,
+                        title=title,
+                        description=description
+                    )
 
-            # Add new process steps
-            existing_step_count = service.process_steps.count()
-            step_count = existing_step_count
-            for key in request.POST:
-                if key.startswith('new_step_title_'):
-                    step_count += 1
-                    title = request.POST.get(f'new_step_title_{step_count}')
-                    description = request.POST.get(f'new_step_description_{step_count}')
-                    if title and description:
-                        ServiceProcessStep.objects.create(service=service, step_number=step_count, title=title, description=description)
+        # Update existing FAQs
+        existing_faq_ids = [faq.id for faq in service.faqs.all()]
+        for faq_id in existing_faq_ids:
+            faq = service.faqs.get(id=faq_id)
+            question = request.POST.get(f'faq_question_{faq.id}')
+            answer = request.POST.get(f'faq_answer_{faq.id}')
+            if question and answer:
+                faq.question = question
+                faq.answer = answer
+                faq.save()
+            else:
+                faq.delete()  # Delete if user removed content
 
-            # Update existing FAQs
-            for faq in service.faqs.all():
-                question = request.POST.get(f'faq_question_{faq.id}')
-                answer = request.POST.get(f'faq_answer_{faq.id}')
+        # Add new FAQs
+        for key in request.POST:
+            if key.startswith('new_faq_question_'):
+                faq_num = int(key.split('_')[-1])
+                question = request.POST.get(f'new_faq_question_{faq_num}')
+                answer = request.POST.get(f'new_faq_answer_{faq_num}')
                 if question and answer:
-                    faq.question = question
-                    faq.answer = answer
-                    faq.save()
+                    ServiceFAQ.objects.create(
+                        service=service,
+                        question=question,
+                        answer=answer
+                    )
 
-            # Add new FAQs
-            existing_faq_count = service.faqs.count()
-            faq_count = existing_faq_count
-            for key in request.POST:
-                if key.startswith('new_faq_question_'):
-                    faq_count += 1
-                    question = request.POST.get(f'new_faq_question_{faq_count}')
-                    answer = request.POST.get(f'new_faq_answer_{faq_count}')
-                    if question and answer:
-                        ServiceFAQ.objects.create(service=service, question=question, answer=answer)
+        return redirect('view_services')
 
-            return redirect('view_services')
+    return render(request, 'admin_pages/update_service.html', {
+        'service': service,
+        'categories': categories
+    })
 
-    else:
-        form = ServiceForm(instance=service)
 
-    return render(request, 'admin_pages/update_services.html', {'form': form, 'service': service, 'categories': categories})
 
 # Delete service
+@login_required(login_url='user_login')
 def delete_service(request, service_id):
     service = get_object_or_404(Service, id=service_id)
     service.delete()
     return redirect('view_services')
+
+
+# --- Blog Categories ---
+@login_required(login_url='user_login')
+def add_blog_category(request):
+    if request.method == "POST":
+        form = BlogCategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_blog_categories')
+    else:
+        form = BlogCategoryForm()
+    return render(request, 'admin_pages/add_blog_category.html', {'form': form})
+
+
+@login_required(login_url='user_login')
+def view_blog_categories(request):
+    categories = BlogCategory.objects.all()
+    return render(request, 'admin_pages/view_blog_category.html', {'categories': categories})
+
+
+@login_required(login_url='user_login')
+def update_blog_category(request, pk):
+    category = get_object_or_404(BlogCategory, pk=pk)
+    if request.method == "POST":
+        form = BlogCategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('view_blog_categories')
+    else:
+        form = BlogCategoryForm(instance=category)
+    return render(request, 'admin_pages/update_blog_category.html', {'form': form})
+
+
+@login_required(login_url='user_login')
+def delete_blog_category(request, pk):
+    category = get_object_or_404(BlogCategory, pk=pk)
+    category.delete()
+    return redirect('view_blog_categories')
+
+
+# --- Blogs ---
+@login_required(login_url='user_login')
+def add_blog(request):
+    categories = BlogCategory.objects.all()  # Pass categories to template
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_blogs')
+    else:
+        form = BlogForm()
+    
+    context = {
+        'form': form,
+        'categories': categories
+    }
+    return render(request, 'admin_pages/add_blogs.html', context)
+
+
+@login_required(login_url='user_login')
+def view_blogs(request):
+    blogs = Blog.objects.all()
+    return render(request, 'admin_pages/view_blogs.html', {'blogs': blogs})
+
+
+@login_required(login_url='user_login')
+def update_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    categories = BlogCategory.objects.all()  # For the dropdown
+
+    if request.method == "POST":
+        blog.title = request.POST.get('title')
+        blog.description = request.POST.get('description')
+        category_id = request.POST.get('category')
+        blog.category = BlogCategory.objects.get(pk=category_id)
+
+        # Handle image upload if a new image is selected
+        if request.FILES.get('image'):
+            blog.image = request.FILES['image']
+
+        blog.save()
+        return redirect('view_blogs')
+
+    return render(request, 'admin_pages/update_blogs.html', {
+        'blog': blog,
+        'categories': categories
+    })
+
+
+@login_required(login_url='user_login')
+def delete_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    blog.delete()
+    return redirect('view_blogs')

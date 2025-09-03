@@ -74,42 +74,61 @@
         </div>
         <!--Nav Box-->
         <div class="nav-outer">
-          <nav class="nav main-menu">
-            <ul class="navigation">
-              <li class=""><a href="#">Home</a>
-            
-              </li>
-              <li class=""><a href="page-about.html">About</a>
-            
-              </li>
-              <li class="dropdown"><a href="#">Pages</a>
-                <ul>
-                  <li><a href="page-about.html">About</a></li>
-                  <li><a href="page-faq.html">Faq</a></li>
-                  <li><a href="page-pricing.html">Pricing</a></li>
-                  <li class="dropdown"><a href="#">Team</a>
+        <nav class="nav main-menu">
+    <ul class="navigation">
+        <!-- Home link -->
+        
+        
+        <!-- About page -->
+        
+
+        <!-- Dynamic Menu -->
+        {% for menu in menus %}
+        <li class="dropdown">
+            <a href="#">{{ menu.name }}</a>
+            <ul>
+                {% for category in menu.categories.all %}
+                <li class="dropdown">
+                    <a href="#">{{ category.name }}</a>
                     <ul>
-                      <li><a href="page-team.html">Team List</a></li>
-                      <li><a href="page-team-details.html">Team Details</a></li>
+                        {% for service in category.services.all %}
+                        <li>
+                           {% if service.slug %}
+                              <a href="{% url 'service_details' slug=service.slug %}">{{ service.name }}</a>
+                          {% else %}
+                                <a href="#">{{ service.name }}</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
                     </ul>
-                  </li>
-                  <li class="dropdown"><a href="#">Shop</a>
-                    <ul>
-                      <li><a href="shop-products.html">Products</a></li>
-                      <li><a href="shop-products-sidebar.html">Products with Sidebar</a></li>
-                      <li><a href="shop-product-details.html">Product Details</a></li>
-                      <li><a href="shop-cart.html">Cart</a></li>
-                      <li><a href="shop-checkout.html">Checkout</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="page-testimonial.html">Testimonials</a></li>
-                  <li><a href="page-404.html">404</a></li>
-                </ul>
-              </li>
-              
-               
+                </li>
+                {% endfor %}
             </ul>
-          </nav>
+        </li>
+        {% endfor %}
+        <li class="dropdown">
+           <a href="#">Pages</a>
+            <ul>
+                <li>
+                   <a href="{% url 'about' %}">About</a>
+                </li>
+                <li>
+                    <a href="{% url 'blogs' %}">Blogs</a>
+                </li>
+                 <li>
+                 <a href="{% url 'news' %}">News</a>
+                  </li>
+                   <li>
+                 <a href="{% url 'cost_calculator' %}"> Cost Calculator</a>
+                  </li>
+                                        
+                                       
+                 </ul>
+        </li>
+                                   
+    </ul>
+</nav>
+
           <!-- Main Menu End-->
         </div>
         <div class="outer-box">
@@ -150,7 +169,7 @@
                 <div class="contact-info-box">
                   <i class="icon lnr-icon-phone-handset" style="color: black;"></i>
                   <span class="title" style="color: black;">Call Now</span>
-                  <a href="" style="color: black;">+92 (8800) - 98670</a>
+                  <a href="" style="color: black;">+971 56 804 7000</a>
                 </div>
               </li>
               <li>
@@ -158,7 +177,7 @@
                 <div class="contact-info-box">
                   <span class="icon lnr-icon-envelope1" style="color: black;"></span>
                   <span class="title" style="color: black;">Send Email</span>
-                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail="c1a9a4adb181a2aeacb1a0afb8efa2aeac">[email&#160;protected]</span></a>
+                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail=""> office@gulfcentral.ae</span></a>
                 </div>
               </li>
               <li>
@@ -184,7 +203,7 @@
           <span class="search-back-drop"></span>
           <button class="close-search"><span class="fa fa-times"></span></button>
           <div class="search-inner">
-            <form method="post" action="index.html">
+            <form method="post" action="{% url 'index' %}">
               <div class="form-group">
                 <input type="search" name="search-field" value="" placeholder="Search..." required="">
                 <button type="submit"><i class="fa fa-search"></i></button>
@@ -200,7 +219,9 @@
             <div class="inner-container">
               <!--Logo-->
               <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt=""></a>
+                 <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
               </div>
               <!--Right Col-->
               <div class="nav-outer">
@@ -252,16 +273,42 @@
             <h1 class="title wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1500ms">
               Business <span style="color:#D3202A;">Consulting</span> & Growth Solutions
             </h1>
-           <div class="search-bar mt-4" style="max-width: 600px; margin-left: 0;">
-              <form method="get" action="" style="display: flex; background: #f8f8f8; border-radius: 50px; overflow: hidden; border:1px solid #ddd;">
-                  <input type="text" name="q" placeholder="Search..." 
-                        style="flex: 1; padding: 10px 15px; border:none; outline:none; background:transparent;">
-                  <button type="submit" 
-                          style="padding: 0 15px; background:#D3202A; color:white; border:none; cursor:pointer; border-radius: 0; display:flex; align-items:center; justify-content:center;">
-                      <i class="fa fa-search" style="font-size:16px;"></i>
-                  </button>
-              </form>
-          </div>
+          <div class="search-bar" style="max-width:600px; position:relative;">
+    <form id="serviceSearchForm" style="display:flex; background:#f8f8f8; border-radius:50px; border:1px solid #ddd; overflow:hidden;">
+        <input type="text" id="searchInput" placeholder="Search Services..." style="flex:1; padding:10px 15px; border:none; outline:none;">
+        <button type="submit" style="background:#D3202A; color:white; border:none; padding:0 15px; cursor:pointer;">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+    <div id="searchResults" style="position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ddd; border-radius:5px; max-height:300px; overflow-y:auto; display:none; z-index:1000;"></div>
+</div>
+
+
+<script>
+searchInput.addEventListener('input', function() {
+    const query = this.value.trim();
+    if (!query) {
+        searchResults.style.display = 'none';
+        searchResults.innerHTML = '';
+        return;
+    }
+
+    fetch(`/ajax/search-services/?q=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.length) {
+                searchResults.innerHTML = data.map(item => 
+                    `<a href="${item.url}" style="display:block; padding:8px 12px; text-decoration:none; color:#000; cursor:pointer;" class="result-item">${item.name}</a>`
+                ).join('');
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.innerHTML = '<div style="padding:8px 12px;">No results found</div>';
+                searchResults.style.display = 'block';
+            }
+        });
+});
+
+</script>
 
             <p class="text wow fadeInUp mt-3" data-wow-delay="500ms" data-wow-duration="1500ms">
               Gulf Central helps entrepreneurs and companies establish and grow their businesses in Dubai and the UAE, offering expert guidance on business setup, PRO services, visa assistance, and company formation.
@@ -292,104 +339,44 @@
 </div>
 </section>
 <!-- Banner area end here -->
-
-<!-- Feature area start here -->
 <section class="feature-section py-5" style="background:#f9f9f9;">
-    <div class="shape">
-        <img src="{% static 'images/shape/feature-shape.png' %}" alt="Feature Shape">
-    </div>
     <div class="container">
-        <!-- Left-aligned Section Title -->
-<div class="sec-title pb-50 text-start">
-    <!-- Sub-title with background accent -->
-    <h6 class="sub-title wow fadeInUp" 
-        style="background-color:#D3202A; color:#fff; display:inline-block; padding:6px 15px; border-radius:4px;" 
-        data-wow-delay="0ms" data-wow-duration="1500ms">
-        FEATURES
-    </h6>
+        <!-- Section Title -->
+        <div class="sec-title pb-50 text-start">
+            <h6 class="sub-title" style="background-color:#D3202A; color:#fff; display:inline-block; padding:6px 15px; border-radius:4px;">SERVICES</h6>
+            <h2 class="title" style="margin-top:20px; font-weight:700; color:#222;">Gulf Central Services & Solutions</h2>
+            <p class="text" style="color:#555; max-width:600px; margin-top:15px;">
+                Explore our comprehensive business services and strategic solutions tailored to help your company grow.
+            </p>
+        </div>
 
-    <!-- Main title -->
-    <h2 class="title wow splt-txt" data-splitting 
-        style="margin-top:20px; font-weight:700; color:#222;">
-        We provide consulting to strategic growth.
-    </h2>
-
-    <!-- Description paragraph -->
-    <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" 
-       style="color:#555; max-width:600px; margin-top:15px;">
-       Consultez is the destination where early adopters and innovation enthusiasts discover cutting-edge technology.
-    </p>
-</div>
-
-
-        <!-- Feature Items Row -->
         <div class="row g-4 justify-content-center">
-            <!-- Feature Item 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
-                    <img src="{% static 'images/features/feature1.png' %}" alt="Strategic Investments" class="mb-3" style="width:60px; height:60px;">
-                    <h4 class="title mb-2">Strategic Investments</h4>
-                    <p class="text-secondary mb-3">We help businesses make smart, profitable investment decisions for growth.</p>
-                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
+            {% for category in categories %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-block bg-white shadow-sm rounded p-4 h-100 d-flex flex-column">
+                        <h4 class="category-title mb-3" style="color:#D3202A; font-weight:700; border-bottom: 2px solid #D3202A; padding-bottom:5px;">
+                            {{ category.name }}
+                        </h4>
+                        <ul class="service-list list-unstyled mb-0 mt-2 flex-grow-1">
+                            {% for service in category.services.all %}
+                                <li class="mb-2">
+                                    <a href="{{ service.get_absolute_url }}" class="text-dark" style="text-decoration:none;">
+                                        <i class="far fa-arrow-right me-2"></i>{{ service.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="mt-auto text-center">
+                           
+                        </div>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
 
-            <!-- Feature Item 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
-                    <img src="{% static 'images/features/feature2.png' %}" alt="Customers First" class="mb-3" style="width:60px; height:60px;">
-                    <h4 class="title mb-2">Putting Customers First</h4>
-                    <p class="text-secondary mb-3">Our focus is on delivering value and satisfaction to every client.</p>
-                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
-                </div>
-            </div>
 
-            <!-- Feature Item 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
-                    <img src="{% static 'images/features/feature3.png' %}" alt="Smarter Decisions" class="mb-3" style="width:60px; height:60px;">
-                    <h4 class="title mb-2">Smarter Business Decisions</h4>
-                    <p class="text-secondary mb-3">We provide data-driven insights to help you make the right choices.</p>
-                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
-                </div>
-            </div>
-             <!-- Feature Item 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
-                    <img src="{% static 'images/features/feature1.png' %}" alt="Strategic Investments" class="mb-3" style="width:60px; height:60px;">
-                    <h4 class="title mb-2">Strategic Investments</h4>
-                    <p class="text-secondary mb-3">We help businesses make smart, profitable investment decisions for growth.</p>
-                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
-                </div>
-            </div>
-
-            <!-- Feature Item 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
-                    <img src="{% static 'images/features/feature2.png' %}" alt="Customers First" class="mb-3" style="width:60px; height:60px;">
-                    <h4 class="title mb-2">Putting Customers First</h4>
-                    <p class="text-secondary mb-3">Our focus is on delivering value and satisfaction to every client.</p>
-                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
-                </div>
-            </div>
-
-            <!-- Feature Item 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block text-center bg-white shadow-sm rounded p-4 h-100">
-                    <img src="{% static 'images/features/feature3.png' %}" alt="Smarter Decisions" class="mb-3" style="width:60px; height:60px;">
-                    <h4 class="title mb-2">Smarter Business Decisions</h4>
-                    <p class="text-secondary mb-3">We provide data-driven insights to help you make the right choices.</p>
-                    <a href="" class="btn btn-outline-danger btn-sm">Read More</a>
-                </div>
-            </div>
         </div>
     </div>
 </section>
-<!-- Feature area end here -->
-
-
-
-
 
   
 <!-- About area start here -->
@@ -802,6 +789,128 @@
 </div>
 <!-- FAQ Section End -->
 
+<!-- Team area start here -->
+<section class="team-section-three bg-white pt-120 pb-120">
+  <div class="team-three-text">
+    <img class="wow slideInLeft" data-wow-delay="1s" data-wow-duration="1500ms" >
+         
+  </div>
+  <div class="container">
+    <!-- Section Title -->
+    <div class="sec-title mb-50">
+      <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-color: #D3202A; color: #fff;">Team Members</h6>
+      <div class="flex-content">
+        <h2 class="title wow splt-txt" data-splitting>The Visionaries Driving <br> Our Success</h2>
+        <a class="btn-one-rounded wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms"  style="background-color: #D3202A; color: #fff;" 
+           href="{% url 'contact' %}">Get started <i class="fa-regular fa-angle-right"></i></a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Team Member 1 -->
+      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0s" data-wow-duration="1500ms">
+        <div class="team-block-three">
+          <div class="inner-box">
+            <div class="image-box">
+              <figure class="image">
+                <img src="{% static 'images/team/team-two-image1.jpg' %}" alt="Ronald Richards">
+              </figure>
+              <div class="socials">
+                <ul>
+                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-box">
+              <h4 class="title"><a href="#">Ronald Richards</a></h4>
+              <p class="sub-title">CEO & Founder</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Member 2 -->
+      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1500ms">
+        <div class="team-block-three">
+          <div class="inner-box">
+            <div class="image-box">
+              <figure class="image">
+                <img src="{% static 'images/team/team-two-image2.jpg' %}" alt="Marvin McKinney">
+              </figure>
+              <div class="socials">
+                <ul>
+                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-box">
+              <h4 class="title"><a href="#">Marvin McKinney</a></h4>
+              <p class="sub-title">Senior Manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Member 3 -->
+      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0.4s" data-wow-duration="1500ms">
+        <div class="team-block-three">
+          <div class="inner-box">
+            <div class="image-box">
+              <figure class="image">
+                <img src="{% static 'images/team/team-two-image3.jpg' %}" alt="Kathryn Murphy">
+              </figure>
+              <div class="socials">
+                <ul>
+                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-box">
+              <h4 class="title"><a href="#">Kathryn Murphy</a></h4>
+              <p class="sub-title">Marketing Head</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Member 4 -->
+      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0.6s" data-wow-duration="1500ms">
+        <div class="team-block-three">
+          <div class="inner-box">
+            <div class="image-box">
+              <figure class="image">
+                <img src="{% static 'images/team/team-two-image4.jpg' %}" alt="Jerome Bell">
+              </figure>
+              <div class="socials">
+                <ul>
+                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-box">
+              <h4 class="title"><a href="#">Jerome Bell</a></h4>
+              <p class="sub-title">Lead Developer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Team area end here -->
+
 
 
 
@@ -928,101 +1037,130 @@
     <!-- Blog area end here -->
 
     <!-- Footer area start here -->
-    <footer class="main-footer footer-style-two">
-      <div class="container">
-
-        <div class="footer-top">
-          <div class="logo" style="background-color: #D3202A;">
-           <a href="{% url 'index' %}">
-    <img src="{% static 'images/logo12.png' %}" alt="Logo">
-</a>
-          </div>
-          <div class="subscrive-box">
-            <h3 class="title">Subscribe Newsletter</h3>
-            <div class="input-feild">
-              <i class="fa-sharp fa-light fa-envelope"></i>
-              <input type="text" placeholder="Email Address">
-              <a class="btn-one-rounded" style="background-color: #f9f9f9; color: #000;" href="#0">Sign Up <i class="fa-regular fa-angle-right"></i></a>
-            </div>
-          </div>
+    
+  <!-- Main Footer -->
+  <footer class="main-footer footer-style-three pt-100">
+    <div class="container">
+      <div class="footer-cta" style="background-color: #fff;">
+       <div class="sec-title">
+  <h2 class="title wow splt-txt" data-splitting>Need Business Setup & Consultancy in the Gulf?</h2>
+  <p class="text wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
+    Gulf Central offers expert business setup, legal support, and corporate consultancy to help your company start and grow with ease.
+  </p>
+</div>
+        <div class="btn-wrp wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+          <a href="{% url 'contact' %}" style="background-color: #D3202A; color: #fff;" class="cta-btn">Get Started Free <i class="fa-regular fa-arrow-up-right"></i></a>
+         
         </div>
-
-        <div class="widgets-section">
-
-          <div class="row g-5 justify-content-between">
-            <div class="col-sm-12 col-lg-5 col-xl-6">
-              <div class="footer-widget about-widget">
-
-                <div class="sec-title mb-40">
-                  <h2 class="title text-white">Ready Discover More? Contact Us Today!</h2>
-                  <p class="text">No credit card requirement it’s full free for all</p>
-                </div>
-
-                <div class="input-feild">
-                  <input type="text" placeholder="Email Address">
-                  <a class="btn-one-rounded"  style="background-color: #f9f9f9; color: #000;" href="#0">Sign up now <i class="fa-regular fa-angle-right"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 col-xl-2">
-              <div class="footer-widget links-widget">
-                <h4 class="widget-title">Services</h4>
-                <div class="widget-content">
-                  <ul class="user-links">
-                    <li><a style="color: #fff;" href="#0">Business Plan</a></li>
-                    <li><a style="color: #fff;" href="#0">Growth Strategy</a></li>
-                    <li><a style="color: #fff;"  href="#0">Strategic planning</a></li>
-                    <li><a style="color: #fff;" href="#0">Workflow Automation</a></li>
-                    <li><a style="color: #fff;" href="#0">Lead Generation</a></li>
-                    <li><a style="color: #fff;" href="#0">Financial Planning</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 col-xl-3">
-              <div class="footer-widget contact-widget">
-                <h4 class="widget-title">Locations</h4>
-                <div class="widget-content">
-                  <h5 class="text" style="color: #fff;">Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</h5>
-                </div>
-                <h4 class="widget-title mt-30">Contact</h4>
-                <div class="widget-content">
-                  <a style="color: #fff;" href="/cdn-cgi/l/email-protection#067573767669747246616b676f6a2865696b"><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
-                  <h4 class="nuber"><a href="tel:012345688"> +971 56 804 7000</a></h4>
-                   <h4 class="nuber"><a href="tel:012345688"> +971 4 226 6215</a></h4>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="footer-bottom">
-          <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora Pvt Ltd</a> All Rights Reserved</p>
-          <ul class="footer-nav">
-            <li ><a href="#0"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="#0"><i class="fa-solid fa-x"></i></a></li>
-            <li><a href="#0"><i class="fa-brands fa-vimeo-v"></i></a></li>
-            <li><a href="#0"><i class="fa-brands fa-pinterest-p"></i></a></li>
-          </ul>
-          <button class="goTop-btn" style="background-color: #f9f9f9;"><i class="fa-solid fa-angles-up"></i> <i class="fa-solid fa-angles-up"></i></button>
-        </div>
-        <style>
-          /* Hover effect */
-          .footer-nav li a:hover {
-            background-color: #fff;  /* White background on hover */
-            color: #000;       /* Icon color on hover */
-            transform: scale(1.1); /* Optional zoom effect */
-          }
-        </style>
-
+      <div class="bg-shape">
+    <img src="{% static 'images/shape/cta-line.png' %}" alt="Image">
+</div>
+<div class="arry">
+    <img class="animation__arryLeftRight" src="{% static 'images/shape/cta-arry.png' %}" alt="Image">
+</div>
       </div>
+      <div class="widgets-section">
+        <div class="row g-5 g-xl-0">
+          <div class="col-lg-4 footer-column">
+            <div class="footer-widget about-widget">
+              <div class="logo">
+                  <a href="{% url 'index' %}"><img src="{% static 'images/logo12.png' %}" alt="Logo"></a>
+              </div>
+              <div class="widget-content">
+          <p class="text" style="color: #fff;">Gulf Central provides expert business setup, legal support, and consultancy services to help your business thrive in the Gulf region.</p>
 
-      <div class="sec-shape">
-        <img class="animation__rotateAndScale"  style="background-color: #D3202A; color: #f9f9f9;" src="images/shape/globe-right.png" alt="Image">
+              
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="row g-4 g-xl-0">
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Resource</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">Product</a></li>
+                      <li><a href="#0">Services</a></li>
+                      <li><a href="#0">About Us</a></li>
+                      <li><a href="#0">Benefits</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Quick Link</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">Features</a></li>
+                      <li><a href="#0">Pricing Plan</a></li>
+                      <li><a href="#0">Best Program</a></li>
+                      <li><a href="#0">Press Kit</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Company</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">About</a></li>
+                      <li><a href="#0">Team Member</a></li>
+                      <li><a href="#0">Reviews</a></li>
+                      <li><a href="#0">Latest News</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget contact-widget">
+                  <h4 class="widget-title">Contact</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li>
+                        <i class="fa-light fa-location-dot" style="color: white;" ></i>
+                        <a href="#0"> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</a>
+                      </li>
+                      <li>
+                        <i class="fa-light fa-envelope" style="color: white;"></i>
+                        <a href=""><span class="__cf_email__" data-cfemail=""> office@gulfcentral.ae</span></a>
+                      </li>
+                      <li>
+                        <i class="fa-light fa-phone-flip" style="color: white;"></i>
+                        <a href=""> +971 56 804 7000</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
-    <!-- Footer area end here -->
+      <div class="footer-bottom">
+        <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
+        <ul class="footer-nav">
+          <li><a href="#0">Terms & Conditions</a></li>
+          
+          <li><a href="#0">Privacy & Policy</a></li>
+          <li><a href="#0">Contact</a></li>
+        </ul>
+        <button style="background-color: #fff;" class="goTop-btn"><i class="fa-solid fa-angles-up" style="color:#D3202A;"></i> <i class="fa-solid fa-angles-up" style="color:#D3202A;"></i></i></button>
+      </div>
+    </div>
+    <div class="sec-shape">
+        <img class="animation__rotateY"
+       src="{% static 'images/shape/dual-circle420.png' %}"
+       alt="Image">
+    </div>
+    <div class="box-shape">
+      <div class="box1 wow slideInUp" data-wow-delay="200ms" data-wow-duration="1500ms"></div>
+      <div class="box2 wow slideInLeft" data-wow-delay="200ms" data-wow-duration="1500ms"></div>
+    </div>
+  </footer>
+  <!--End Main Footer -->
 
   </div><!-- End Page Wrapper -->
 
@@ -1056,6 +1194,48 @@
 <script src="{% static 'js/splitType.js' %}"></script>
 <script src="{% static 'js/script-gsap.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
+<script>
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+
+searchInput.addEventListener('input', function() {
+    const query = this.value.trim();
+    if(query.length < 1) {
+        searchResults.style.display = 'none';
+        searchResults.innerHTML = '';
+        return;
+    }
+
+    fetch(`/ajax/search-services/?q=${encodeURIComponent(query)}`)
+    .then(response => response.json())
+    .then(data => {
+        if(data.length > 0) {
+            let html = '';
+            const regex = new RegExp(`(${query})`, 'gi'); // highlight typed text
+            data.forEach(item => {
+                const highlighted = item.name.replace(regex, '<mark>$1</mark>');
+                html += `<div style="padding:8px 12px; cursor:pointer;" 
+                              onclick="window.location.href='${item.url}'">
+                             ${highlighted}
+                         </div>`;
+            });
+            searchResults.innerHTML = html;
+            searchResults.style.display = 'block';
+        } else {
+            searchResults.innerHTML = '<div style="padding:8px 12px;">No results found</div>';
+            searchResults.style.display = 'block';
+        }
+    });
+});
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', function(e) {
+    if(!searchResults.contains(e.target) && e.target !== searchInput){
+        searchResults.style.display = 'none';
+    }
+});
+</script>
+
 </body>
 
 </html>
