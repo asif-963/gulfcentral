@@ -118,9 +118,12 @@
                  <li>
                  <a href="{% url 'news' %}">News</a>
                   </li>
-                   <li>
+                    <li>
                  <a href="{% url 'cost_calculator' %}"> Cost Calculator</a>
                   </li>
+                  <li>
+                 <a href="{% url 'contact' %}"> Contact Us</a>
+                  </li> 
                                         
                                        
                  </ul>
@@ -513,20 +516,15 @@ searchInput.addEventListener('input', function() {
     
     <!-- Left-aligned Section Title -->
     <div class="sec-title pb-50 text-start">
-      <!-- Sub-title with background accent -->
       <h6 class="sub-title wow fadeInUp" 
           style="background-color:#D3202A; color:#fff; display:inline-block; padding:6px 15px; border-radius:4px;" 
           data-wow-delay="0ms" data-wow-duration="1500ms">
           TESTIMONIALS
       </h6>
-
-      <!-- Main title -->
       <h2 class="title wow splt-txt" data-splitting 
           style="margin-top:20px; font-weight:700; color:#222;">
           What Our Clients Say
       </h2>
-
-      <!-- Description paragraph -->
       <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" 
          style="color:#555; max-width:600px; margin-top:15px;">
          Real feedback from our happy customers around the world. Discover how we helped them grow and succeed.
@@ -537,43 +535,37 @@ searchInput.addEventListener('input', function() {
     <div id="testimonialCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
       <div class="carousel-inner">
 
-        <!-- Testimonial 1 -->
-        <div class="carousel-item active">
+        {% for review in client_reviews %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
-            <img src="{% static 'images/testimonials/user1.jpg' %}" alt="John Doe" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
-            <p class="fst-italic text-secondary">"This company provided excellent service and support. Highly recommended!"</p>
-            <h5 class="mt-3 mb-1" style="color:#D3202A;">John Doe</h5>
-            <small class="text-muted">CEO, Example Corp</small>
+            {% if review.client_image %}
+              <img src="{{ review.client_image.url }}" alt="{{ review.client_name }}" class="rounded-circle mb-3" 
+                   width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
+            {% else %}
+              <img src="{% static 'images/testimonials/default-user.jpg' %}" alt="Default User" class="rounded-circle mb-3"
+                   width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
+            {% endif %}
+            
+            <p class="fst-italic text-secondary">"{{ review.review }}"</p>
+            <h5 class="mt-3 mb-1" style="color:#D3202A;">{{ review.client_name }}</h5>
+            <small class="text-muted">{{ review.designation }}</small>
           </div>
         </div>
-
-        <!-- Testimonial 2 -->
-        <div class="carousel-item">
-          <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
-            <img src="{% static 'images/testimonials/user2.jpg' %}" alt="Jane Smith" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
-            <p class="fst-italic text-secondary">"Amazing experience! The team was professional and delivered on time."</p>
-            <h5 class="mt-3 mb-1" style="color:#D3202A;">Jane Smith</h5>
-            <small class="text-muted">Marketing Manager, TechWorld</small>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="carousel-item">
-          <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
-            <img src="{% static 'images/testimonials/user3.jpg' %}" alt="Michael Lee" class="rounded-circle mb-3" width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
-            <p class="fst-italic text-secondary">"Excellent quality of work and great communication throughout the project."</p>
-            <h5 class="mt-3 mb-1" style="color:#D3202A;">Michael Lee</h5>
-            <small class="text-muted">Founder, Startup Inc.</small>
-          </div>
-        </div>
+        {% endfor %}
 
       </div>
 
-    
-
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </section>
+
 
 <!-- Growth Section Start -->
 <section class="growth-section-two pt-120 pb-120" style="background-image: url('images/bg/growth-two-bg.png');">
@@ -914,127 +906,46 @@ searchInput.addEventListener('input', function() {
 
 
 
+<section class="blog-section-two pt-120 pb-120">
+  <div class="container">
+    <div class="sec-title mb-50">
+    <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-color: #D3202A; color: #fff;">Latest News</h6>
+    <div class="flex-content">
+        <h2 class="title wow splt-txt" data-splitting>Read All Our Latest <br> News & Updates</h2>
+        <a class="btn-one-light wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" style="color: black;" href="{% url 'news' %}">View All News</a>
+    </div>
+</div>
 
-    <!-- Blog area start here -->
-    <section class="blog-section-two pt-120 pb-120">
-      <div class="container">
-        <div class="sec-title mb-50">
-          <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-color: #D3202A; color: #fff;">New & Blogs</h6>
-          <div class="flex-content">
-            <h2 class="title wow splt-txt" data-splitting>Read All Our consulting <br> News & Blogs</h2>
-            <a class="btn-one-light wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" style="color: black;" href="page-contact.html">contact us</a>
-          </div>
-        </div>
-
-        <div class="row g-4">
-          <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
-            <div class="blog-block-two">
-              <div class="inner-box">
-                <div class="image-box">
-                  <figure class="image">
-                    <img src="images/blog/blog-two-image1.jpg" alt="Image">
-                    <span class="tag">15 December,2025</span>
-                  </figure>
-                </div>
-                <div class="content-box">
-                  <ul class="info">
-                    <li>
-                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M7.10742 7.625C9.38086 7.625 11.2324 9.47656 11.2324 11.75C11.2324 12.1719 10.8809 12.5 10.4824 12.5H1.48242C1.06055 12.5 0.732422 12.1719 0.732422 11.75C0.732422 9.47656 2.56055 7.625 4.85742 7.625H7.10742ZM1.85742 11.375H10.084C9.89648 9.89844 8.63086 8.75 7.10742 8.75H4.85742C3.31055 8.75 2.04492 9.89844 1.85742 11.375ZM5.98242 6.5C4.31836 6.5 2.98242 5.16406 2.98242 3.5C2.98242 1.85938 4.31836 0.5 5.98242 0.5C7.62305 0.5 8.98242 1.85938 8.98242 3.5C8.98242 5.16406 7.62305 6.5 5.98242 6.5ZM5.98242 1.625C4.92773 1.625 4.10742 2.46875 4.10742 3.5C4.10742 4.55469 4.92773 5.375 5.98242 5.375C7.01367 5.375 7.85742 4.55469 7.85742 3.5C7.85742 2.46875 7.01367 1.625 5.98242 1.625Z"
-                          fill="#1A4137" />
-                      </svg>
-                      <a href="#0">By admin</a>
-                    </li>
-                    <li>
-                      <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M5.72852 0.5C8.40039 0.5 10.6035 2.35156 10.6035 4.625C10.6035 6.92188 8.40039 8.75 5.72852 8.75C5.2832 8.75 4.86133 8.70312 4.43945 8.60938C3.73633 9.05469 2.70508 9.5 1.41602 9.5C1.18164 9.5 0.970703 9.38281 0.900391 9.14844C0.806641 8.9375 0.830078 8.70312 0.994141 8.51562C1.01758 8.51562 1.5332 7.95312 1.9082 7.20312C1.25195 6.5 0.853516 5.60938 0.853516 4.625C0.853516 2.35156 3.0332 0.5 5.72852 0.5ZM4.69727 7.50781C5.04883 7.60156 5.37695 7.625 5.72852 7.625C7.79102 7.625 9.47852 6.28906 9.47852 4.625C9.47852 2.98438 7.79102 1.625 5.72852 1.625C3.64258 1.625 1.97852 2.98438 1.97852 4.625C1.97852 5.46875 2.37695 6.07812 2.72852 6.42969L3.29102 7.01562L2.91602 7.74219C2.82227 7.88281 2.72852 8.04688 2.63477 8.21094C3.05664 8.09375 3.45508 7.90625 3.85352 7.64844L4.25195 7.41406L4.69727 7.50781ZM11.1895 3.52344C13.791 3.61719 15.8535 5.42188 15.8535 7.625C15.8535 8.60938 15.4316 9.5 14.7754 10.2031C15.1504 10.9531 15.666 11.5156 15.6895 11.5156C15.8535 11.7031 15.877 11.9375 15.7832 12.1484C15.7129 12.3828 15.502 12.5 15.2676 12.5C13.9785 12.5 12.9473 12.0547 12.2441 11.6094C11.8223 11.7031 11.4004 11.75 10.9785 11.75C9.05664 11.75 7.39258 10.8125 6.5957 9.45312C6.99414 9.40625 7.39258 9.3125 7.74414 9.17188C8.40039 10.0625 9.5957 10.625 10.9785 10.625C11.3066 10.625 11.6348 10.6016 11.9863 10.5078L12.4316 10.4141L12.8301 10.6484C13.2285 10.9062 13.627 11.0938 14.0488 11.2109C13.9551 11.0469 13.8613 10.8828 13.7676 10.7422L13.3926 10.0156L13.9551 9.42969C14.3066 9.07812 14.7285 8.46875 14.7285 7.625C14.7285 6.07812 13.2285 4.8125 11.3301 4.64844L11.3535 4.625C11.3535 4.25 11.2832 3.875 11.1895 3.52344Z"
-                          fill="#1A4137" />
-                      </svg>
-                      <a href="#0">Comments (05)</a>
-                    </li>
-                  </ul>
-                  <h4 class="title"><a href="news-details.html">We focus on the solutions not on the problems</a></h4>
-                  <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" href="news-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
+    <div class="row g-4">
+      {% for news in latest_news %}
+      <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="{{ forloop.counter0|add:"0" }}00ms" data-wow-duration="1500ms">
+        <div class="blog-block-two">
+          <div class="inner-box">
+            <div class="image-box">
+              <figure class="image">
+                {% if news.image %}
+                  <img src="{{ news.image.url }}" alt="{{ news.name }}">
+                {% else %}
+                  <img src="images/blog/default.jpg" alt="{{ news.name }}">
+                {% endif %}
+                <span class="tag">{{ news.created_date|date:"d M, Y" }}</span>
+              </figure>
             </div>
-          </div>
-
-          <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
-            <div class="blog-block-two">
-              <div class="inner-box">
-                <div class="image-box">
-                  <figure class="image">
-                    <img src="images/blog/blog-two-image2.jpg" alt="Image">
-                    <span class="tag">20 December,2025</span>
-                  </figure>
-                </div>
-                <div class="content-box">
-                  <ul class="info">
-                    <li>
-                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M7.10742 7.625C9.38086 7.625 11.2324 9.47656 11.2324 11.75C11.2324 12.1719 10.8809 12.5 10.4824 12.5H1.48242C1.06055 12.5 0.732422 12.1719 0.732422 11.75C0.732422 9.47656 2.56055 7.625 4.85742 7.625H7.10742ZM1.85742 11.375H10.084C9.89648 9.89844 8.63086 8.75 7.10742 8.75H4.85742C3.31055 8.75 2.04492 9.89844 1.85742 11.375ZM5.98242 6.5C4.31836 6.5 2.98242 5.16406 2.98242 3.5C2.98242 1.85938 4.31836 0.5 5.98242 0.5C7.62305 0.5 8.98242 1.85938 8.98242 3.5C8.98242 5.16406 7.62305 6.5 5.98242 6.5ZM5.98242 1.625C4.92773 1.625 4.10742 2.46875 4.10742 3.5C4.10742 4.55469 4.92773 5.375 5.98242 5.375C7.01367 5.375 7.85742 4.55469 7.85742 3.5C7.85742 2.46875 7.01367 1.625 5.98242 1.625Z"
-                          fill="#1A4137" />
-                      </svg>
-                      <a href="#0">By admin</a>
-                    </li>
-                    <li>
-                      <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M5.72852 0.5C8.40039 0.5 10.6035 2.35156 10.6035 4.625C10.6035 6.92188 8.40039 8.75 5.72852 8.75C5.2832 8.75 4.86133 8.70312 4.43945 8.60938C3.73633 9.05469 2.70508 9.5 1.41602 9.5C1.18164 9.5 0.970703 9.38281 0.900391 9.14844C0.806641 8.9375 0.830078 8.70312 0.994141 8.51562C1.01758 8.51562 1.5332 7.95312 1.9082 7.20312C1.25195 6.5 0.853516 5.60938 0.853516 4.625C0.853516 2.35156 3.0332 0.5 5.72852 0.5ZM4.69727 7.50781C5.04883 7.60156 5.37695 7.625 5.72852 7.625C7.79102 7.625 9.47852 6.28906 9.47852 4.625C9.47852 2.98438 7.79102 1.625 5.72852 1.625C3.64258 1.625 1.97852 2.98438 1.97852 4.625C1.97852 5.46875 2.37695 6.07812 2.72852 6.42969L3.29102 7.01562L2.91602 7.74219C2.82227 7.88281 2.72852 8.04688 2.63477 8.21094C3.05664 8.09375 3.45508 7.90625 3.85352 7.64844L4.25195 7.41406L4.69727 7.50781ZM11.1895 3.52344C13.791 3.61719 15.8535 5.42188 15.8535 7.625C15.8535 8.60938 15.4316 9.5 14.7754 10.2031C15.1504 10.9531 15.666 11.5156 15.6895 11.5156C15.8535 11.7031 15.877 11.9375 15.7832 12.1484C15.7129 12.3828 15.502 12.5 15.2676 12.5C13.9785 12.5 12.9473 12.0547 12.2441 11.6094C11.8223 11.7031 11.4004 11.75 10.9785 11.75C9.05664 11.75 7.39258 10.8125 6.5957 9.45312C6.99414 9.40625 7.39258 9.3125 7.74414 9.17188C8.40039 10.0625 9.5957 10.625 10.9785 10.625C11.3066 10.625 11.6348 10.6016 11.9863 10.5078L12.4316 10.4141L12.8301 10.6484C13.2285 10.9062 13.627 11.0938 14.0488 11.2109C13.9551 11.0469 13.8613 10.8828 13.7676 10.7422L13.3926 10.0156L13.9551 9.42969C14.3066 9.07812 14.7285 8.46875 14.7285 7.625C14.7285 6.07812 13.2285 4.8125 11.3301 4.64844L11.3535 4.625C11.3535 4.25 11.2832 3.875 11.1895 3.52344Z"
-                          fill="#1A4137" />
-                      </svg>
-                      <a href="#0">Comments (05)</a>
-                    </li>
-                  </ul>
-                  <h4 class="title"><a href="news-details.html">How to Create Viral Content That Drives Sales</a></h4>
-                  <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" style="background-color: #D3202A; color: #fff;" href="news-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="400ms" data-wow-duration="1500ms">
-            <div class="blog-block-two">
-              <div class="inner-box">
-                <div class="image-box">
-                  <figure class="image">
-                    <img src="images/blog/blog-two-image3.jpg" alt="Image">
-                    <span class="tag">31 December,2025</span>
-                  </figure>
-                </div>
-                <div class="content-box">
-                  <ul class="info">
-                    <li>
-                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M7.10742 7.625C9.38086 7.625 11.2324 9.47656 11.2324 11.75C11.2324 12.1719 10.8809 12.5 10.4824 12.5H1.48242C1.06055 12.5 0.732422 12.1719 0.732422 11.75C0.732422 9.47656 2.56055 7.625 4.85742 7.625H7.10742ZM1.85742 11.375H10.084C9.89648 9.89844 8.63086 8.75 7.10742 8.75H4.85742C3.31055 8.75 2.04492 9.89844 1.85742 11.375ZM5.98242 6.5C4.31836 6.5 2.98242 5.16406 2.98242 3.5C2.98242 1.85938 4.31836 0.5 5.98242 0.5C7.62305 0.5 8.98242 1.85938 8.98242 3.5C8.98242 5.16406 7.62305 6.5 5.98242 6.5ZM5.98242 1.625C4.92773 1.625 4.10742 2.46875 4.10742 3.5C4.10742 4.55469 4.92773 5.375 5.98242 5.375C7.01367 5.375 7.85742 4.55469 7.85742 3.5C7.85742 2.46875 7.01367 1.625 5.98242 1.625Z"
-                          fill="#1A4137" />
-                      </svg>
-                      <a href="#0">By admin</a>
-                    </li>
-                    <li>
-                      <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M5.72852 0.5C8.40039 0.5 10.6035 2.35156 10.6035 4.625C10.6035 6.92188 8.40039 8.75 5.72852 8.75C5.2832 8.75 4.86133 8.70312 4.43945 8.60938C3.73633 9.05469 2.70508 9.5 1.41602 9.5C1.18164 9.5 0.970703 9.38281 0.900391 9.14844C0.806641 8.9375 0.830078 8.70312 0.994141 8.51562C1.01758 8.51562 1.5332 7.95312 1.9082 7.20312C1.25195 6.5 0.853516 5.60938 0.853516 4.625C0.853516 2.35156 3.0332 0.5 5.72852 0.5ZM4.69727 7.50781C5.04883 7.60156 5.37695 7.625 5.72852 7.625C7.79102 7.625 9.47852 6.28906 9.47852 4.625C9.47852 2.98438 7.79102 1.625 5.72852 1.625C3.64258 1.625 1.97852 2.98438 1.97852 4.625C1.97852 5.46875 2.37695 6.07812 2.72852 6.42969L3.29102 7.01562L2.91602 7.74219C2.82227 7.88281 2.72852 8.04688 2.63477 8.21094C3.05664 8.09375 3.45508 7.90625 3.85352 7.64844L4.25195 7.41406L4.69727 7.50781ZM11.1895 3.52344C13.791 3.61719 15.8535 5.42188 15.8535 7.625C15.8535 8.60938 15.4316 9.5 14.7754 10.2031C15.1504 10.9531 15.666 11.5156 15.6895 11.5156C15.8535 11.7031 15.877 11.9375 15.7832 12.1484C15.7129 12.3828 15.502 12.5 15.2676 12.5C13.9785 12.5 12.9473 12.0547 12.2441 11.6094C11.8223 11.7031 11.4004 11.75 10.9785 11.75C9.05664 11.75 7.39258 10.8125 6.5957 9.45312C6.99414 9.40625 7.39258 9.3125 7.74414 9.17188C8.40039 10.0625 9.5957 10.625 10.9785 10.625C11.3066 10.625 11.6348 10.6016 11.9863 10.5078L12.4316 10.4141L12.8301 10.6484C13.2285 10.9062 13.627 11.0938 14.0488 11.2109C13.9551 11.0469 13.8613 10.8828 13.7676 10.7422L13.3926 10.0156L13.9551 9.42969C14.3066 9.07812 14.7285 8.46875 14.7285 7.625C14.7285 6.07812 13.2285 4.8125 11.3301 4.64844L11.3535 4.625C11.3535 4.25 11.2832 3.875 11.1895 3.52344Z"
-                          fill="#1A4137" />
-                      </svg>
-                      <a href="#0">Comments (05)</a>
-                    </li>
-                  </ul>
-                  <h4 class="title"><a href="news-details.html">How AI is Changing the Future of Online Shopping</a></h4>
-                  <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" href="news-details.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
+            <div class="content-box">
+              <ul class="info">
+               
+              </ul>
+              <h4 class="title"><a href="{% url 'news_detail' news.id %}">{{ news.name }}</a></h4>
+              <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" href="{% url 'news_detail' news.id %}">Read More <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- Blog area end here -->
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 
     <!-- Footer area start here -->
     
@@ -1142,10 +1053,10 @@ searchInput.addEventListener('input', function() {
       <div class="footer-bottom">
         <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
         <ul class="footer-nav">
-          <li><a href="#0">Terms & Conditions</a></li>
+          <li><a href="{% url 'terms-and-conditions' %}">Terms & Conditions</a></li>
           
-          <li><a href="#0">Privacy & Policy</a></li>
-          <li><a href="#0">Contact</a></li>
+          <li><a href="{% url 'privacy-and-policy' %}">Privacy & Policy</a></li>
+          <li><a href="{% url  'contact' %}">Contact</a></li>
         </ul>
         <button style="background-color: #fff;" class="goTop-btn"><i class="fa-solid fa-angles-up" style="color:#D3202A;"></i> <i class="fa-solid fa-angles-up" style="color:#D3202A;"></i></i></button>
       </div>

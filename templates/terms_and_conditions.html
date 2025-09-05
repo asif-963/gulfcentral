@@ -1,0 +1,551 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Gulf Central | Terms and Conditions</title>
+    
+    <!-- Stylesheets -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/flatpickr.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+<body>
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Main Header-->
+    <header class="main-header header-style-two">
+
+      <!-- Header Top -->
+      <div class="header-top">
+        <div class="auto-container">
+
+          <div class="top-left">
+            <!-- Info List -->
+            <ul class="info-list">
+              <li><i class="fa-solid fa-envelope" style="color: white;"></i> <a href=""><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
+              </li>
+              <li><i class="fa-solid fa-location-dot" style="color: white;"></i> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</li>
+            </ul>
+          </div>
+
+          <div class="top-right">
+            <div class="select-box">
+              
+
+            
+            </div>
+            <ul class="top-social-icon">
+              <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Header Top -->
+
+      <!-- Main box -->
+      <div class="main-box">
+        <div class="logo-box">
+         <div class="logo">
+          <a href="{% url 'index' %}">
+              <img src="{% static 'images/logo.png' %}" alt="Consultez" title="Consultez">
+          </a>
+      </div>
+
+        </div>
+        <!--Nav Box-->
+        <div class="nav-outer">
+        <nav class="nav main-menu">
+    <ul class="navigation">
+        <!-- Home link -->
+        
+        
+        <!-- About page -->
+        
+
+        <!-- Dynamic Menu -->
+        {% for menu in menus %}
+        <li class="dropdown">
+            <a href="#">{{ menu.name }}</a>
+            <ul>
+                {% for category in menu.categories.all %}
+                <li class="dropdown">
+                    <a href="#">{{ category.name }}</a>
+                    <ul>
+                        {% for service in category.services.all %}
+                        <li>
+                           {% if service.slug %}
+                              <a href="{% url 'service_details' slug=service.slug %}">{{ service.name }}</a>
+                          {% else %}
+                                <a href="#">{{ service.name }}</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+        <li class="dropdown">
+           <a href="#">Pages</a>
+            <ul>
+                <li>
+                   <a href="{% url 'about' %}">About</a>
+                </li>
+                <li>
+                    <a href="{% url 'blogs' %}">Blogs</a>
+                </li>
+                 <li>
+                 <a href="{% url 'news' %}">News</a>
+                  </li>
+                    <li>
+                 <a href="{% url 'cost_calculator' %}"> Cost Calculator</a>
+                  </li>
+                  <li>
+                 <a href="{% url 'contact' %}"> Contact Us</a>
+                  </li> 
+                  <li>
+                 <a href="{% url 'contact' %}"> Contact Us</a>
+                  </li>                                        
+                                       
+                 </ul>
+        </li>
+                                   
+    </ul>
+</nav>
+
+          <!-- Main Menu End-->
+        </div>
+        <div class="outer-box">
+          <div class="info-box">
+            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Contact Now</a>
+          </div>
+          <div class="mobile-nav-toggler" style="background-color: #D3202A; color: #fff;" ><i class="fa-light fa-bars-staggered" ></i></div>
+          <!-- Mobile Nav toggler -->
+        </div>
+      </div>
+      <div class="auto-container">
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+          <div class="menu-backdrop" ></div>
+          <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+          <nav class="menu-box" style="background-color: aliceblue;">
+            <div class="upper-box">
+              <div class="nav-logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
+            </div>
+
+              <div class="close-btn"><i class="icon fa fa-times" style="color: black;"></i></div>
+            </div>
+            <ul class="navigation clearfix d-block d-lg-none">
+              <!--Keep This Empty / Menu will come through Javascript-->
+            </ul>
+            <div class="content-box d-none d-lg-block">
+              <h4 class="title" style="color: black;">About Us</h4>
+              <p class="text" style="color: black;">
+              Gulf Central is the premier hub for entrepreneurs and businesses, offering expert business setup, PRO, visa, and company formation services across Dubai and the UAE.
+              </p>
+            </div>
+            <ul class="contact-list-one">
+              <li>
+                <!-- Contact Info Box -->
+                <div class="contact-info-box">
+                  <i class="icon lnr-icon-phone-handset" style="color: black;"></i>
+                  <span class="title" style="color: black;">Call Now</span>
+                  <a href="" style="color: black;">+971 56 804 7000</a>
+                </div>
+              </li>
+              <li>
+                <!-- Contact Info Box -->
+                <div class="contact-info-box">
+                  <span class="icon lnr-icon-envelope1" style="color: black;"></span>
+                  <span class="title" style="color: black;">Send Email</span>
+                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail=""> office@gulfcentral.ae</span></a>
+                </div>
+              </li>
+              <li>
+                <!-- Contact Info Box -->
+                <div class="contact-info-box" style="color: black;">
+                  <span class="icon lnr-icon-clock" style="color: black;"></span>
+                  <span class="title" style="color: black;">Send Email</span>
+                  Mon - Sat 8:00 - 6:30, Sunday - CLOSED
+                </div>
+              </li>
+            </ul>
+            <ul class="social-links">
+              <li><a href="#"><i class="fab fa-x-twitter" ></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f" ></i></a></li>
+              <li><a href="#"><i class="fab fa-pinterest" ></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram" ></i></a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- End Mobile Menu -->
+        <!-- Header Search -->
+        <div class="search-popup">
+          <span class="search-back-drop"></span>
+          <button class="close-search"><span class="fa fa-times"></span></button>
+          <div class="search-inner">
+            <form method="post" action="{% url 'index' %}">
+              <div class="form-group">
+                <input type="search" name="search-field" value="" placeholder="Search..." required="">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- End Header Search -->
+
+        <!-- Sticky Header  -->
+        <div class="sticky-header">
+          <div class="auto-container">
+            <div class="inner-container">
+              <!--Logo-->
+              <div class="logo">
+                 <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
+              </div>
+              <!--Right Col-->
+              <div class="nav-outer">
+                <!-- Main Menu -->
+                <nav class="main-menu">
+                  <div class="navbar-collapse show collapse clearfix">
+                    <ul class="navigation clearfix">
+                      <!--Keep This Empty / Menu will come through Javascript-->
+                    </ul>
+                  </div>
+                </nav><!-- Main Menu End-->
+                <!--Mobile Navigation Toggler-->
+                <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Sticky Menu -->
+      </div>
+    </header>
+    <!--End Main Header -->
+    <style>
+     
+      /* Mobile menu link color fix */
+.mobile-menu .navigation li a {
+    color: #000 !important;   /* Black text */
+}
+
+/* Mobile menu dropdown arrow color if any */
+.mobile-menu .navigation li a::after {
+    color: #000 !important;
+}
+    </style>
+<!-- Banner area start here -->
+
+  <!-- Start main-content -->
+<section class="page-title" style="background-image: url({% static 'images/t-a-c.jpg' %});">
+  <div class="auto-container">
+    <div class="title-outer">
+      <ul class="page-breadcrumb">
+        <li><a href="{% url 'index' %}" style="color: aliceblue;">Home</a></li>
+        <li>Terms and Conditions</li>
+      </ul>
+      <h1 class="title">Terms and Conditions</h1>
+    </div>
+  </div>
+</section>
+<!-- end main-content -->
+
+
+
+<section class="blog-details pt-120 pb-120">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 col-lg-7">
+        <div class="blog-details__left">
+
+          <!-- Title -->
+       
+
+          <!-- Disclaimer -->
+          <h4 class="mt-4">Disclaimer</h4>
+          <p class="blog-details__text-2">
+            Our Website and Services are provided on an “as is” and “as available” basis.
+            To the fullest extent permitted by applicable law, Gulf Central disclaims all warranties,
+            express or implied, including but not limited to implied warranties of competence,
+            merchantability, accuracy, and fitness for a particular purpose, as well as any representations
+            or other terms that may otherwise apply to our website or any content.
+          </p>
+          <p class="blog-details__text-2">
+            Gulf Central shall not be responsible or liable for any loss or damage of any kind, including but not limited to:
+          </p>
+          <ul class="blog-details__text-2 ms-4">
+            <li>Use of, or inability to use, our website or any tools integrated with it;</li>
+            <li>Use of or reliance on any content displayed on our website;</li>
+            <li>Use of or reliance on any content of websites linked to our website; or</li>
+            <li>Use of or reliance on any content, tools, or services of external providers that may be linked or integrated with our website.</li>
+          </ul>
+
+          <!-- Business Users -->
+          <h4 class="mt-4">Business Users</h4>
+          <p class="blog-details__text-2">If you are a business user, you acknowledge that Gulf Central shall not be liable for:</p>
+          <ul class="blog-details__text-2 ms-4">
+            <li>Loss of profits, sales, business, or revenue;</li>
+            <li>Business interruption;</li>
+            <li>Loss of anticipated savings;</li>
+            <li>Loss of business opportunity, goodwill, or reputation; or</li>
+            <li>Any indirect or consequential loss or damage.</li>
+          </ul>
+
+          <!-- Definitions -->
+          <h4 class="mt-4">1. Definitions</h4>
+          <ul class="blog-details__text-2 ms-4">
+            <li>“Gulf Central”, “we”, “us”, or “our” refers to Gulf Central Consultancy, its affiliates, and subsidiaries.</li>
+            <li>“You” or “User” refers to any individual, company, or organization that accesses or uses the Website.</li>
+            <li>“Services” refers to the business consultancy, company formation, advisory, and related professional services offered by Gulf Central.</li>
+          </ul>
+
+          <!-- Use of Website -->
+          <h4 class="mt-4">2. Use of the Website</h4>
+          <p class="blog-details__text-2">2.1 You agree to use this Website solely for lawful purposes and in compliance with UAE law.</p>
+          <p class="blog-details__text-2">2.2 Unauthorized use of this Website may give rise to a claim for damages and/or constitute a criminal offense.</p>
+          <p class="blog-details__text-2">2.3 You must not misuse the Website by knowingly introducing viruses, malware, or harmful material.</p>
+
+          <!-- Intellectual Property -->
+          <h4 class="mt-4">3. Intellectual Property Rights</h4>
+          <p class="blog-details__text-2">3.1 All content on this Website is the property of Gulf Central or its licensors and protected under UAE and international laws.</p>
+          <p class="blog-details__text-2">3.2 You may not reproduce, distribute, modify, or use the content for commercial purposes without prior written permission.</p>
+
+          <!-- Disclaimer -->
+          <h4 class="mt-4">4. Disclaimer</h4>
+          <p class="blog-details__text-2">4.1 Content is for general informational purposes only and does not constitute legal, financial, or professional advice.</p>
+          <p class="blog-details__text-2">4.2 No warranty or guarantee is provided for accuracy, completeness, or reliability of the information.</p>
+          <p class="blog-details__text-2">4.3 Users should seek independent professional or legal advice before making decisions.</p>
+
+          <!-- Limitation of Liability -->
+          <h4 class="mt-4">5. Limitation of Liability</h4>
+          <p class="blog-details__text-2">5.1 Gulf Central is not liable for damages arising from the use or inability to use the Website or Services.</p>
+          <p class="blog-details__text-2">5.2 We are not responsible for losses due to reliance on content or disruptions caused by technical issues.</p>
+
+          <!-- Links -->
+          <h4 class="mt-4">6. Links to Third-Party Websites</h4>
+          <p class="blog-details__text-2">6.1 The Website may contain external links. Gulf Central does not endorse or assume responsibility for such content.</p>
+          <p class="blog-details__text-2">6.2 Accessing third-party websites is at your own risk.</p>
+
+          <!-- Service Terms -->
+          <h4 class="mt-4">7. Service Terms</h4>
+          <p class="blog-details__text-2">7.1 Engagement with Gulf Central’s services will be governed by a separate agreement.</p>
+          <p class="blog-details__text-2">7.2 Website content should not be interpreted as an offer, solicitation, or guarantee of outcomes.</p>
+
+          <!-- Privacy -->
+          <h4 class="mt-4">8. Data Protection & Privacy</h4>
+          <p class="blog-details__text-2">8.1 Gulf Central respects your privacy. Data will be processed as per our Privacy Policy.</p>
+          <p class="blog-details__text-2">8.2 By using this Website, you consent to such processing and confirm your data is accurate.</p>
+
+          <!-- Law -->
+          <h4 class="mt-4">9. Governing Law & Jurisdiction</h4>
+          <p class="blog-details__text-2">9.1 These Terms are governed by UAE law.</p>
+          <p class="blog-details__text-2">9.2 Any disputes shall be subject to Dubai courts.</p>
+
+          <!-- Amendments -->
+          <h4 class="mt-4">10. Amendments</h4>
+          <p class="blog-details__text-2">10.1 Gulf Central may update these Terms anytime without prior notice.</p>
+          <p class="blog-details__text-2">10.2 Continued use of the Website constitutes acceptance of updated Terms.</p>
+
+          <!-- Contact -->
+          <h4 class="mt-4">11. Contact Information</h4>
+          <p class="blog-details__text-2">
+            Gulf Central Consultancy LLC <br>
+            Website: <a href="https://gulfcentral.ae" target="_blank">https://gulfcentral.ae</a> <br>
+            Email: <a href="mailto:office@gulfcentral.ae">office@gulfcentral.ae</a> <br>
+            Phone: +971 56 804 7000
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+   
+    <!-- Main Footer -->
+  <footer class="main-footer footer-style-three pt-100">
+    <div class="container">
+      <div class="footer-cta" style="background-color: #fff;">
+       <div class="sec-title">
+  <h2 class="title wow splt-txt" data-splitting>Need Business Setup & Consultancy in the Gulf?</h2>
+  <p class="text wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
+    Gulf Central offers expert business setup, legal support, and corporate consultancy to help your company start and grow with ease.
+  </p>
+</div>
+        <div class="btn-wrp wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+          <a href="{% url 'contact' %}" style="background-color: #D3202A; color: #fff;" class="cta-btn">Get Started Free <i class="fa-regular fa-arrow-up-right"></i></a>
+         
+        </div>
+      <div class="bg-shape">
+    <img src="{% static 'images/shape/cta-line.png' %}" alt="Image">
+</div>
+<div class="arry">
+    <img class="animation__arryLeftRight" src="{% static 'images/shape/cta-arry.png' %}" alt="Image">
+</div>
+      </div>
+      <div class="widgets-section">
+        <div class="row g-5 g-xl-0">
+          <div class="col-lg-4 footer-column">
+            <div class="footer-widget about-widget">
+              <div class="logo">
+                  <a href="{% url 'index' %}"><img src="{% static 'images/logo12.png' %}" alt="Logo"></a>
+              </div>
+              <div class="widget-content">
+          <p class="text" style="color: #fff;">Gulf Central provides expert business setup, legal support, and consultancy services to help your business thrive in the Gulf region.</p>
+
+              
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="row g-4 g-xl-0">
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Resource</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">Product</a></li>
+                      <li><a href="#0">Services</a></li>
+                      <li><a href="#0">About Us</a></li>
+                      <li><a href="#0">Benefits</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Quick Link</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">Features</a></li>
+                      <li><a href="#0">Pricing Plan</a></li>
+                      <li><a href="#0">Best Program</a></li>
+                      <li><a href="#0">Press Kit</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget">
+                  <h4 class="widget-title">Company</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li><a href="#0">About</a></li>
+                      <li><a href="#0">Team Member</a></li>
+                      <li><a href="#0">Reviews</a></li>
+                      <li><a href="#0">Latest News</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 footer-column">
+                <div class="footer-widget links-widget contact-widget">
+                  <h4 class="widget-title">Contact</h4>
+                  <div class="widget-content">
+                    <ul class="user-links">
+                      <li>
+                        <i class="fa-light fa-location-dot" style="color: white;" ></i>
+                        <a href="#0"> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</a>
+                      </li>
+                      <li>
+                        <i class="fa-light fa-envelope" style="color: white;"></i>
+                        <a href=""><span class="__cf_email__" data-cfemail=""> office@gulfcentral.ae</span></a>
+                      </li>
+                      <li>
+                        <i class="fa-light fa-phone-flip" style="color: white;"></i>
+                        <a href=""> +971 56 804 7000</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
+        <ul class="footer-nav">
+          <li><a href="{% url 'terms-and-conditions' %}">Terms & Conditions</a></li>
+          
+          <li><a href="{% url 'privacy-and-policy' %}">Privacy & Policy</a></li>
+          <li><a href="{% url  'contact' %}">Contact</a></li>
+        </ul>
+        <button style="background-color: #fff;" class="goTop-btn"><i class="fa-solid fa-angles-up" style="color:#D3202A;"></i> <i class="fa-solid fa-angles-up" style="color:#D3202A;"></i></i></button>
+      </div>
+    </div>
+    <div class="sec-shape">
+        <img class="animation__rotateY"
+       src="{% static 'images/shape/dual-circle420.png' %}"
+       alt="Image">
+    </div>
+    <div class="box-shape">
+      <div class="box1 wow slideInUp" data-wow-delay="200ms" data-wow-duration="1500ms"></div>
+      <div class="box2 wow slideInLeft" data-wow-delay="200ms" data-wow-duration="1500ms"></div>
+    </div>
+  </footer>
+  <!--End Main Footer -->
+
+
+  </div><!-- End Page Wrapper -->
+
+
+<!-- Cloudflare script stays the same -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+<!-- jQuery script from static folder -->
+<script src="{% static 'js/jquery.js' %}"></script>
+
+ 
+<!-- JavaScript Files -->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/slick-animation.min.js' %}"></script>
+<script src="{% static 'js/jquery.fancybox.js' %}"></script>
+<script src="{% static 'js/wow.js' %}"></script>
+<script src="{% static 'js/appear.js' %}"></script>
+<script src="{% static 'js/mixitup.js' %}"></script>
+<script src="{% static 'js/flatpickr.js' %}"></script>
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/gsap.min.js' %}"></script>
+<script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+<script src="{% static 'js/SplitText.min.js' %}"></script>
+<script src="{% static 'js/nice-select.min.js' %}"></script>
+<script src="{% static 'js/knob.js' %}"></script>
+<script src="{% static 'js/parallax.js' %}"></script>
+<script src="{% static 'js/vanilla-tilt.js' %}"></script>
+<script src="{% static 'js/splitting.js' %}"></script>
+<script src="{% static 'js/splitType.js' %}"></script>
+<script src="{% static 'js/script-gsap.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

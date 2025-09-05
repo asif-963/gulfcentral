@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gulf Central | Blogs</title>
+    <title>Gulf Central | {{ news.name }}</title>
     
     <!-- Stylesheets -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -77,10 +77,10 @@
         <nav class="nav main-menu">
     <ul class="navigation">
         <!-- Home link -->
-        <li><a href="{% url 'index' %}">Home</a></li>
+        
         
         <!-- About page -->
-        <li><a href="{% url 'about' %}">About</a></li>
+        
 
         <!-- Dynamic Menu -->
         {% for menu in menus %}
@@ -106,6 +106,29 @@
             </ul>
         </li>
         {% endfor %}
+        <li class="dropdown">
+           <a href="#">Pages</a>
+            <ul>
+                <li>
+                   <a href="{% url 'about' %}">About</a>
+                </li>
+                <li>
+                    <a href="{% url 'blogs' %}">Blogs</a>
+                </li>
+                 <li>
+                 <a href="{% url 'news' %}">News</a>
+                  </li>
+                    <li>
+                 <a href="{% url 'cost_calculator' %}"> Cost Calculator</a>
+                  </li>
+                  <li>
+                 <a href="{% url 'contact' %}"> Contact Us</a>
+                  </li> 
+                                        
+                                       
+                 </ul>
+        </li>
+                                   
     </ul>
 </nav>
 
@@ -149,7 +172,7 @@
                 <div class="contact-info-box">
                   <i class="icon lnr-icon-phone-handset" style="color: black;"></i>
                   <span class="title" style="color: black;">Call Now</span>
-                  <a href="" style="color: black;">+92 (8800) - 98670</a>
+                  <a href="" style="color: black;">+971 56 804 7000</a>
                 </div>
               </li>
               <li>
@@ -157,7 +180,7 @@
                 <div class="contact-info-box">
                   <span class="icon lnr-icon-envelope1" style="color: black;"></span>
                   <span class="title" style="color: black;">Send Email</span>
-                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail="c1a9a4adb181a2aeacb1a0afb8efa2aeac">[email&#160;protected]</span></a>
+                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail=""> office@gulfcentral.ae</span></a>
                 </div>
               </li>
               <li>
@@ -183,7 +206,7 @@
           <span class="search-back-drop"></span>
           <button class="close-search"><span class="fa fa-times"></span></button>
           <div class="search-inner">
-            <form method="post" action="index.html">
+            <form method="post" action="{% url 'index' %}">
               <div class="form-group">
                 <input type="search" name="search-field" value="" placeholder="Search..." required="">
                 <button type="submit"><i class="fa fa-search"></i></button>
@@ -199,7 +222,9 @@
             <div class="inner-container">
               <!--Logo-->
               <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt=""></a>
+                 <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
               </div>
               <!--Right Col-->
               <div class="nav-outer">
@@ -232,6 +257,7 @@
     color: #000 !important;
 }
     </style>
+<!-- Banner area start here -->
 
 	<!-- Start main-content -->
 	<section class="page-title" style="background-image: url({% static 'images/bg/page-title-bg.png' %});">
@@ -239,108 +265,85 @@
     <div class="title-outer">
       <ul class="page-breadcrumb">
         <li><a href="{% url 'index' %}" style="color: aliceblue;">Home</a></li>
-        <li>News Details</li>
+        <li>{{ news.name }}</li>
       </ul>
-      <h1 class="title">News Details</h1>
+      <h1 class="title">{{ news.name }}</h1>
     </div>
   </div>
 </section>
 <!-- end main-content -->
 
-	<!--Blog Details Start-->
-	<section class="blog-details pt-120 pb-120">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-8 col-lg-7">
-					<div class="blog-details__left">
-						<div class="blog-details__img">
-							<img src="{% static 'images/resource/news-details.jpg' %}" alt="">
+<section class="news-details pt-120 pb-90">
+    <div class="auto-container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="news-detail-content">
 
-							<div class="blog-details__date">
-								<span class="day">28</span>
-								<span class="month">Aug</span>
-							</div>
-						</div>
-						<div class="blog-details__content">
-							<ul class="list-unstyled blog-details__meta">
-								<li><a href="news-details.html"><i class="fas fa-user-circle"></i> Admin</a> </li>
-								<li><a href="news-details.html"><i class="fas fa-comments"></i> 02
-										Comments</a>
-								</li>
-							</ul>
-							<h3 class="blog-details__title">Delivering the best web design agency</h3>
-							<p class="blog-details__text-2">Mauris non dignissim purus, ac commodo diam. Donec sit
-								amet lacinia nulla. Aliquam quis purus in justo pulvinar tempor. Aliquam tellus
-								nulla, sollicitudin at euismod nec, feugiat at nisi. Quisque vitae odio nec lacus
-								interdum tempus. Phasellus a rhoncus erat. Vivamus vel eros vitae est aliquet
-								pellentesque vitae et nunc. Sed vitae leo vitae nisl pellentesque semper.
-							</p>
-							<p class="blog-details__text-2">Mauris non dignissim purus, ac commodo diam. Donec sit
-								amet lacinia nulla. Aliquam quis purus in justo pulvinar tempor. Aliquam tellus
-								nulla, sollicitudin at euismod nec, feugiat at nisi. Quisque vitae odio nec lacus
-								interdum tempus. Phasellus a rhoncus erat. Vivamus vel eros vitae est aliquet
-								pellentesque vitae et nunc. Sed vitae leo vitae nisl pellentesque semper.
-							</p>
-							<p class="blog-details__text-2">Mauris non dignissim purus, ac commodo diam. Donec sit
-								amet lacinia nulla. Aliquam quis purus in justo pulvinar tempor. Aliquam tellus
-								nulla, sollicitudin at euismod nec, feugiat at nisi. Quisque vitae odio nec lacus
-								interdum tempus. Phasellus a rhoncus erat. Vivamus vel eros vitae est aliquet
-								pellentesque vitae et nunc. Sed vitae leo vitae nisl pellentesque semper.
-							</p>
-						</div>
-						</div>
-				</div>
-				<div class="col-xl-4 col-lg-5">
-					<div class="sidebar">
-						<div class="sidebar__single sidebar__search">
-							<form action="#" class="sidebar__search-form">
-								<input type="search" placeholder="Search here">
-								<button type="submit"><i class="far fa-search"></i></button>
-							</form>
-						</div>
-						<div class="sidebar__single sidebar__post"  style="background-color: #fff;">
-							<h3 class="sidebar__title">Latest Posts</h3>
-							<ul class="sidebar__post-list list-unstyled">
-								<li>
-									<div class="sidebar__post-image"> <img src="images/resource/blog1-1.jpg" alt=""> </div>
-									<div class="sidebar__post-content">
-										<h3> <span class="sidebar__post-content-meta"><i class="fas fa-user-circle"></i>Admin</span> <a href="news-details.html">How Scale Your Business Without Losing Quality</a>
-										</h3>
-									</div>
-								</li>
-								<li>
-									<div class="sidebar__post-image"> <img src="images/resource/blog1-2.jpg" alt=""> </div>
-									<div class="sidebar__post-content">
-										<h3> <span class="sidebar__post-content-meta"><i class="fas fa-user-circle"></i>Admin</span> <a href="news-details.html">Why Networking is Crucial for Business Growth</a> </h3>
-									</div>
-								</li>
-								<li>
-									<div class="sidebar__post-image"> <img src="images/resource/blog1-3.jpg" alt=""> </div>
-									<div class="sidebar__post-content">
-										<h3> <span class="sidebar__post-content-meta"><i class="fas fa-user-circle"></i>Admin</span> <a href="news-details.html">10 Proven Strategies to Scale</a> </h3>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div class="sidebar__single sidebar__category"  style="background-color: #fff;">
-							<h3 class="sidebar__title">Categories</h3>
-							<ul class="sidebar__category-list list-unstyled">
-								<li><a href="news-details.html">Customer Engagement<span class="icon-right-arrow"></span></a> </li>
-								<li class="active"><a href="news-details.html">Entrepreneurship<span class="icon-right-arrow"></span></a></li>
-								<li><a href="news-details.html">Finance<span class="icon-right-arrow"></span></a> </li>
-								<li><a href="news-details.html">Investment<span class="icon-right-arrow"></span></a> </li>
-								<li><a href="news-details.html">Management<span class="icon-right-arrow"></span></a> </li>
-							</ul>
-						</div>
-						
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--Blog Details End-->
+                    <!-- News Image -->
+                    {% if news.image %}
+                    <div class="image-box mb-30">
+                        <img src="{{ news.image.url }}" alt="{{ news.name }}" class="img-fluid rounded">
+                    </div>
+                    {% endif %}
+
+                    <!-- News Info -->
+                    <ul class="info mb-15 d-flex gap-3 list-unstyled text-muted">
+                        <li><i class="fas fa-user-circle me-1"></i>By Admin</li>
+                        <li><i class="fas fa-calendar-alt me-1"></i>{{ news.created_date|date:"d M, Y" }}</li>
+                    </ul>
+
+                    <!-- News Title -->
+                    <h2 class="title mb-20">{{ news.name }}</h2>
+
+                    <!-- News Description -->
+                    <div class="description mb-30">
+    <p>{{ news.description|safe }}</p>
+</div>
+
+                    <!-- Back Button -->
+                    <div class="back-button mb-30">
+                        <a href="{% url 'news' %}" class="btn-one-rounded" style="background-color: #D3202A; color: #fff;">
+                            Back to News
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Sidebar: Latest News -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <div class="sidebar__single sidebar__post" style="background-color: #fff; padding: 20px; border-radius: 8px;">
+                        <h3 class="sidebar__title mb-20">Latest News</h3>
+                        <ul class="sidebar__post-list list-unstyled">
+                            {% for item in latest_news %}
+                            <li class="d-flex mb-15">
+                                <div class="sidebar__post-image me-3">
+                                    {% if item.image %}
+                                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="rounded" style="width: 70px; height: 70px; object-fit: cover;">
+                                    {% else %}
+                                    <img src="images/resource/default.jpg" alt="{{ item.name }}" class="rounded" style="width: 70px; height: 70px; object-fit: cover;">
+                                    {% endif %}
+                                </div>
+                                <div class="sidebar__post-content">
+                                    <h5 class="mb-0">
+                                        <a href="{% url 'news_detail' item.id %}" style="color: #000;">{{ item.name|truncatechars:50 }}</a>
+                                    </h5>
+                                    <span class="text-muted" style="font-size: 12px;">{{ item.created_date|date:"d M, Y" }}</span>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sidebar -->
+
+        </div>
+    </div>
+</section>
+
 
   <!-- Main Footer -->
   <footer class="main-footer footer-style-three pt-100">
@@ -446,10 +449,10 @@
       <div class="footer-bottom">
         <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
         <ul class="footer-nav">
-          <li><a href="#0">Terms & Conditions</a></li>
+          <li><a href="{% url 'terms-and-conditions' %}">Terms & Conditions</a></li>
           
-          <li><a href="#0">Privacy & Policy</a></li>
-          <li><a href="#0">Contact</a></li>
+          <li><a href="{% url 'privacy-and-policy' %}">Privacy & Policy</a></li>
+          <li><a href="{% url  'contact' %}">Contact</a></li>
         </ul>
         <button style="background-color: #fff;" class="goTop-btn"><i class="fa-solid fa-angles-up" style="color:#D3202A;"></i> <i class="fa-solid fa-angles-up" style="color:#D3202A;"></i></i></button>
       </div>

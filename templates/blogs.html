@@ -29,7 +29,7 @@
     <!-- Preloader -->
     <div class="preloader"></div>
 
-    <!-- Main Header-->
+     <!-- Main Header-->
     <header class="main-header header-style-two">
 
       <!-- Header Top -->
@@ -77,10 +77,10 @@
         <nav class="nav main-menu">
     <ul class="navigation">
         <!-- Home link -->
-        <li><a href="{% url 'index' %}">Home</a></li>
+        
         
         <!-- About page -->
-        <li><a href="{% url 'about' %}">About</a></li>
+        
 
         <!-- Dynamic Menu -->
         {% for menu in menus %}
@@ -106,6 +106,29 @@
             </ul>
         </li>
         {% endfor %}
+        <li class="dropdown">
+           <a href="#">Pages</a>
+            <ul>
+                <li>
+                   <a href="{% url 'about' %}">About</a>
+                </li>
+                <li>
+                    <a href="{% url 'blogs' %}">Blogs</a>
+                </li>
+                 <li>
+                 <a href="{% url 'news' %}">News</a>
+                  </li>
+                    <li>
+                 <a href="{% url 'cost_calculator' %}"> Cost Calculator</a>
+                  </li>
+                  <li>
+                 <a href="{% url 'contact' %}"> Contact Us</a>
+                  </li> 
+                                        
+                                       
+                 </ul>
+        </li>
+                                   
     </ul>
 </nav>
 
@@ -149,7 +172,7 @@
                 <div class="contact-info-box">
                   <i class="icon lnr-icon-phone-handset" style="color: black;"></i>
                   <span class="title" style="color: black;">Call Now</span>
-                  <a href="" style="color: black;">+92 (8800) - 98670</a>
+                  <a href="" style="color: black;">+971 56 804 7000</a>
                 </div>
               </li>
               <li>
@@ -157,7 +180,7 @@
                 <div class="contact-info-box">
                   <span class="icon lnr-icon-envelope1" style="color: black;"></span>
                   <span class="title" style="color: black;">Send Email</span>
-                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail="c1a9a4adb181a2aeacb1a0afb8efa2aeac">[email&#160;protected]</span></a>
+                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail=""> office@gulfcentral.ae</span></a>
                 </div>
               </li>
               <li>
@@ -183,7 +206,7 @@
           <span class="search-back-drop"></span>
           <button class="close-search"><span class="fa fa-times"></span></button>
           <div class="search-inner">
-            <form method="post" action="index.html">
+            <form method="post" action="{% url 'index' %}">
               <div class="form-group">
                 <input type="search" name="search-field" value="" placeholder="Search..." required="">
                 <button type="submit"><i class="fa fa-search"></i></button>
@@ -199,7 +222,9 @@
             <div class="inner-container">
               <!--Logo-->
               <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt=""></a>
+                 <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
               </div>
               <!--Right Col-->
               <div class="nav-outer">
@@ -232,7 +257,7 @@
     color: #000 !important;
 }
     </style>
-
+<!-- Banner area start here -->
   <!-- Start main-content -->
 <section class="page-title" style="background-image: url({% static 'images/bg/page-title-bg.png' %});">
   <div class="auto-container">
@@ -252,19 +277,20 @@
 <section class="blog-section pt-120 pb-120">
     <div class="container">
 
-       
-
         <!-- Tabs Nav -->
         <ul class="nav nav-pills justify-content-center mb-50" id="newsTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All</button>
+                <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">
+                    All
+                </button>
             </li>
+            {% for category in categories %}
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="uae-tab" data-bs-toggle="tab" data-bs-target="#uae" type="button" role="tab" aria-controls="uae" aria-selected="false">UAE</button>
+                <button class="nav-link" id="tab-{{ category.id }}" data-bs-toggle="tab" data-bs-target="#cat-{{ category.id }}" type="button" role="tab" aria-controls="cat-{{ category.id }}" aria-selected="false">
+                    {{ category.name }}
+                </button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="india-tab" data-bs-toggle="tab" data-bs-target="#india" type="button" role="tab" aria-controls="india" aria-selected="false">India</button>
-            </li>
+            {% endfor %}
         </ul>
 
         <!-- Tabs Content -->
@@ -273,113 +299,64 @@
             <!-- All News Tab -->
             <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                 <div class="row g-4">
-
-                    <!-- Card 1 -->
+                    {% for blog in blogs %}
                     <div class="col-md-6 col-xl-4">
                         <div class="blog-card">
                             <div class="image-box">
-                                <img src="https://via.placeholder.com/400x250" alt="News 1">
-                                <span class="tag">UAE | 03 Sep, 2025</span>
+                                {% if blog.image %}
+                                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                                {% else %}
+                                    <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog">
+                                {% endif %}
+                                <span class="tag">{{ blog.category.name }} | {{ blog.created_date|date:"d M, Y" }}</span>
                             </div>
                             <div class="content-box">
-                                <h5 class="title">UAE News Headline 1</h5>
-                                <p>Short description of UAE news 1. Lorem ipsum dolor sit amet.</p>
-                                <a class="btn-read" href="#">Read More →</a>
+                                <h5 class="title">{{ blog.title }}</h5>
+                                <p>{{ blog.description|truncatechars:100|safe }}</p>
+                          
+                                <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" href="{% url 'blog_detail' blog.id %}">
+                                Read More <i class="fa-solid fa-arrow-right"></i>
+                            </a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Card 2 -->
-                    <div class="col-md-6 col-xl-4">
-                        <div class="blog-card">
-                            <div class="image-box">
-                                <img src="https://via.placeholder.com/400x250" alt="News 2">
-                                <span class="tag">India | 02 Sep, 2025</span>
-                            </div>
-                            <div class="content-box">
-                                <h5 class="title">India News Headline 1</h5>
-                                <p>Short description of India news 1. Lorem ipsum dolor sit amet.</p>
-                                <a class="btn-read" href="#">Read More →</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="col-md-6 col-xl-4">
-                        <div class="blog-card">
-                            <div class="image-box">
-                                <img src="https://via.placeholder.com/400x250" alt="News 3">
-                                <span class="tag">UAE | 01 Sep, 2025</span>
-                            </div>
-                            <div class="content-box">
-                                <h5 class="title">UAE News Headline 2</h5>
-                                <p>Short description of UAE news 2. Lorem ipsum dolor sit amet.</p>
-                                <a class="btn-read" href="#">Read More →</a>
-                            </div>
-                        </div>
-                    </div>
-
+                    {% endfor %}
                 </div>
             </div>
 
-            <!-- UAE News Tab -->
-            <div class="tab-pane fade" id="uae" role="tabpanel" aria-labelledby="uae-tab">
+            <!-- Category Specific Tabs -->
+            {% for category in categories %}
+            <div class="tab-pane fade" id="cat-{{ category.id }}" role="tabpanel" aria-labelledby="tab-{{ category.id }}">
                 <div class="row g-4">
-                    <!-- UAE Card 1 -->
+                    {% for blog in category.blogs.all %}
                     <div class="col-md-6 col-xl-4">
                         <div class="blog-card">
                             <div class="image-box">
-                                <img src="https://via.placeholder.com/400x250" alt="UAE News 1">
-                                <span class="tag">03 Sep, 2025</span>
+                                {% if blog.image %}
+                                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                                {% else %}
+                                    <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog">
+                                {% endif %}
+                                <span class="tag">{{ blog.created_date|date:"d M, Y" }}</span>
                             </div>
                             <div class="content-box">
-                                <h5 class="title">UAE News Headline 1</h5>
-                                <p>Short description of UAE news 1.</p>
-                                <a class="btn-read" href="#">Read More →</a>
+                                <h5 class="title">{{ blog.title }}</h5>
+                                <p>{{ blog.description|truncatechars:100|safe }}</p>
+                                <a class="btn-read" href="{% url 'blog_detail' blog.id %}">Read More →</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- UAE Card 2 -->
-                    <div class="col-md-6 col-xl-4">
-                        <div class="blog-card">
-                            <div class="image-box">
-                                <img src="https://via.placeholder.com/400x250" alt="UAE News 2">
-                                <span class="tag">01 Sep, 2025</span>
-                            </div>
-                            <div class="content-box">
-                                <h5 class="title">UAE News Headline 2</h5>
-                                <p>Short description of UAE news 2.</p>
-                                <a class="btn-read" href="#">Read More →</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% empty %}
+                        <p class="text-center">No blogs available in this category.</p>
+                    {% endfor %}
                 </div>
             </div>
-
-            <!-- India News Tab -->
-            <div class="tab-pane fade" id="india" role="tabpanel" aria-labelledby="india-tab">
-                <div class="row g-4">
-                    <!-- India Card 1 -->
-                    <div class="col-md-6 col-xl-4">
-                        <div class="blog-card">
-                            <div class="image-box">
-                                <img src="https://via.placeholder.com/400x250" alt="India News 1">
-                                <span class="tag">02 Sep, 2025</span>
-                            </div>
-                            <div class="content-box">
-                                <h5 class="title">India News Headline 1</h5>
-                                <p>Short description of India news 1.</p>
-                                <a class="btn-read" href="#">Read More →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
     </div>
 </section>
+
 
 <!-- Custom Styles -->
 <style>
@@ -547,10 +524,10 @@
       <div class="footer-bottom">
         <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
         <ul class="footer-nav">
-          <li><a href="#0">Terms & Conditions</a></li>
+          <li><a href="{% url 'terms-and-conditions' %}">Terms & Conditions</a></li>
           
-          <li><a href="#0">Privacy & Policy</a></li>
-          <li><a href="#0">Contact</a></li>
+          <li><a href="{% url 'privacy-and-policy' %}">Privacy & Policy</a></li>
+          <li><a href="{% url  'contact' %}">Contact</a></li>
         </ul>
         <button style="background-color: #fff;" class="goTop-btn"><i class="fa-solid fa-angles-up" style="color:#D3202A;"></i> <i class="fa-solid fa-angles-up" style="color:#D3202A;"></i></i></button>
       </div>

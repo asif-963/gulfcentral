@@ -8,15 +8,20 @@ urlpatterns = [
 
     path('', views.index, name= 'index'),
     path('about/', views.about, name= 'about'),
-    path('news/', views.news, name= 'news'),
-     path('news-details/', views.news_details, name= 'news_details'),
+    path('news/', views.news, name='news'),
+    path('news/<int:pk>/', views.news_detail, name='news_detail'),
+
     path('blogs/', views.blogs, name= 'blogs'),
+    path('blogs/<int:pk>/', views.blog_detail, name='blog_detail'), 
 
 
     path('cost-calculator/', views.cost_calculator, name= 'cost_calculator'),
     path('service/<slug:slug>/', views.service_details, name='service_details'),
 
     path('contact/', views.contact, name= 'contact'),
+
+    path('terms-and-conditions/', views.terms_and_conditions, name= 'terms-and-conditions'),
+    path('privacy-and-policy/', views.privacy_and_policy, name= 'privacy-and-policy'),
 
      path('ajax/search-services/', views.ajax_search_services, name='ajax_search_services'),
 

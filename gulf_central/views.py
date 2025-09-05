@@ -16,28 +16,81 @@ from .forms import ContactModelForm, NewsForm, MenuForm, CategoryForm, ServiceFo
 
 def index(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
+    client_reviews = ClientReview.objects.all()
+    latest_news = News.objects.order_by('-created_date')[:3]  
     categories = list(Category.objects.prefetch_related('services').all())
     random.shuffle(categories)       # Shuffle all categories
     categories = categories[:6]   
-    return render(request, 'index.html', {'menus': menus, 'categories': categories})
+    return render(request, 'index.html', {'menus': menus, 'client_reviews':client_reviews, 'latest_news':latest_news, 'categories': categories})
 
 
 def about(request):
-    return render(request, 'about.html')
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    client_reviews = ClientReview.objects.all()
+    return render(request, 'about.html',{'menus': menus, 'client_reviews':client_reviews})
 
+
+# News listing page
 def news(request):
-    return render(request, 'news.html')
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    news_items = News.objects.order_by('-created_date')  # Latest news first
+    context = {'menus': menus, 'news_items': news_items}
+    return render(request, 'news.html', context)
+
+# News details page
+def news_detail(request, pk):
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    news_item = get_object_or_404(News, pk=pk)
+    latest_news = News.objects.exclude(pk=pk).order_by('-created_date')[:5]
+    context = {'news': news_item, 'menus': menus, 'latest_news':latest_news}
+    return render(request, 'news-details.html', context)
+
 
 def blogs(request):
-    return render(request, 'blogs.html')
+    menus = Menu.objects.prefetch_related('categories__services').all()
 
-def news_details(request):
-    return render(request, 'news-details.html')
+    query = request.GET.get("q")
+    category_id = request.GET.get("category")
+
+    blogs = Blog.objects.all().order_by("-created_date")
+
+    # Search filter
+    if query:
+        blogs = blogs.filter(title__icontains=query)
+
+    # Category filter
+    if category_id:
+        blogs = blogs.filter(category_id=category_id)
+
+    categories = BlogCategory.objects.all()
+
+    return render(request, "blogs.html", {
+        "menus": menus,
+        "blogs": blogs,
+        "categories": categories,
+        "query": query,
+    })
+def blog_detail(request, pk):
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    blog = get_object_or_404(Blog, pk=pk)
+    latest_blogs = Blog.objects.exclude(pk=pk)[:3]  # 3 latest posts excluding current
+    categories = BlogCategory.objects.all()
+    
+    return render(request, "blog-details.html", {
+        "menus": menus,
+        "blog": blog,
+        "latest_blogs": latest_blogs,
+        "categories": categories,
+    })
+
+
 
 def cost_calculator(request):
-    return render(request, 'cost-calculator.html')
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    return render(request, 'cost-calculator.html',{'menus': menus})
 
 def service_details(request, slug):
+    menus = Menu.objects.prefetch_related('categories__services').all()
     # Get the service object
     service = get_object_or_404(Service, slug=slug)
     related_services = Service.objects.filter(category=service.category).exclude(id=service.id)
@@ -49,12 +102,22 @@ def service_details(request, slug):
         'process_steps': process_steps,
         'faqs': faqs,
         'related_services': related_services,
+        'menus': menus,
     }
     return render(request, 'service-details.html', context)
 
+def terms_and_conditions(request):
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    return render(request, 'terms_and_conditions.html',{'menus': menus})
+
+def privacy_and_policy(request):
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    return render(request, 'privacy_and_policy.html',{'menus': menus})
+
 
 def contact(request):
-    return render(request, 'contact.html')
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    return render(request, 'contact.html',{'menus': menus})
 
 
 
