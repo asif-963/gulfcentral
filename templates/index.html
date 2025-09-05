@@ -276,15 +276,45 @@
             <h1 class="title wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1500ms">
               Business <span style="color:#D3202A;">Consulting</span> & Growth Solutions
             </h1>
-          <div class="search-bar" style="max-width:600px; position:relative;">
-    <form id="serviceSearchForm" style="display:flex; background:#f8f8f8; border-radius:50px; border:1px solid #ddd; overflow:hidden;">
-        <input type="text" id="searchInput" placeholder="Search Services..." style="flex:1; padding:10px 15px; border:none; outline:none;">
-        <button type="submit" style="background:#D3202A; color:white; border:none; padding:0 15px; cursor:pointer;">
+          <div class="search-bar" style="max-width:600px; width:100%; position:relative; margin:auto;">
+    <form id="serviceSearchForm" style="display:flex; background:#f8f8f8; border-radius:50px; border:1px solid #ddd; overflow:hidden; width:100%;">
+        <input type="text" id="searchInput" placeholder="Search Services..." style="flex:1; padding:10px 15px; border:none; outline:none; min-width:0; font-size:16px;">
+        <button type="submit" style="background:#D3202A; color:white; border:none; padding:0 15px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
             <i class="fa fa-search"></i>
         </button>
     </form>
     <div id="searchResults" style="position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ddd; border-radius:5px; max-height:300px; overflow-y:auto; display:none; z-index:1000;"></div>
 </div>
+
+<style>
+@media screen and (max-width: 360px) {
+    #serviceSearchForm {
+        flex-direction: column;
+        border-radius: 15px;
+    }
+
+    #searchInput {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 15px 15px 0 0;
+        margin-bottom: 5px;
+    }
+
+    #serviceSearchForm button {
+        width: 100%;
+        border-radius: 0 0 15px 15px;
+        padding: 10px 0;
+    }
+
+    #searchResults {
+        top: calc(100% + 5px);
+        left: 0;
+        right: 0;
+        border-radius: 10px;
+    }
+}
+</style>
+
 
 
 <script>
