@@ -318,7 +318,7 @@ searchInput.addEventListener('input', function() {
             </p>
             <div class="btn-wrp mt-4">
               <a class="btn-two-rounded wow fadeInLeft" data-wow-delay="500ms" data-wow-duration="1500ms" 
-                 href="page-about.html" style="background:#D3202A; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; margin-right:10px;">
+                 href="{% url 'about' %}" style="background:#D3202A; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; margin-right:10px;">
                 Get Started <i class="fa-regular fa-angle-right"></i>
               </a>
               <a class="video-btn playbtnanim wow fadeInLeft" data-wow-delay="700ms" data-wow-duration="1500ms"
@@ -424,7 +424,7 @@ searchInput.addEventListener('input', function() {
 
             <!-- Call to Action -->
             <div class="info mt-50 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-              <a class="btn-two-rounded" href="page-about.html">More About Us <i class="fa-regular fa-angle-right"></i></a>
+              <a class="btn-two-rounded" href="{% url 'about' %}">More About Us <i class="fa-regular fa-angle-right"></i></a>
             </div>
           </div>
         </div>
@@ -763,7 +763,7 @@ searchInput.addEventListener('input', function() {
                             </div>
 
                             <div class="text-start mt-4">
-                        <a href="" class="btn" 
+                        <a href="{% url 'contact' %}" class="btn" 
                            style="background-color:#D3202A; color:#fff; padding:10px 25px; border-radius:50px; font-weight:600; transition:0.3s;">
                             Contact Us
                         </a>
