@@ -358,7 +358,8 @@
                   <h2 class="title wow splt-txt" data-splitting>Fill Up The Form</h2>
                   <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">Your email address will not be published. Required fields are marked *</p>
                 </div>
-                <form id="contact_form" name="contact_form" action="includes/sendmail.php" method="post">
+                <form id="" name="contact_form" action="{% url 'contact' %}" method="post">
+                  {% csrf_token %}
                   <div class="type-feild">
                     <i class="fa-light fa-user"></i>
                     <input name="form_name" class="required" type="text" placeholder="Your Name*">
@@ -371,7 +372,7 @@
                     <i class="fa-light fa-pen-to-square"></i>
                     <textarea name="form_message" class="required" placeholder="Enter Your Messege here"></textarea>
                   </div>
-                  <button class="btn-two"><i class="fa-light fa-paper-plane"></i> Get In Touch</button>
+                  <button type="submit" class="btn-two"><i class="fa-light fa-paper-plane"></i> Get In Touch</button>
                 </form>
               </div>
             </div>
