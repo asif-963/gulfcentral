@@ -10,6 +10,9 @@ urlpatterns = [
     path('about/', views.about, name= 'about'),
     path('news/', views.news, name='news'),
     path('news/<int:pk>/', views.news_detail, name='news_detail'),
+    path('mainland-details/', views.mainland, name= 'mainland'),
+    path('freezone-details/', views.freezone, name= 'freezone'),
+    path('offshore-details/', views.offshore, name= 'offshore'),
 
     path('blogs/', views.blogs, name= 'blogs'),
     path('blogs/<int:pk>/', views.blog_detail, name='blog_detail'), 

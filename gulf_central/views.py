@@ -17,11 +17,12 @@ from .forms import ContactModelForm, NewsForm, MenuForm, CategoryForm, ServiceFo
 def index(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     client_reviews = ClientReview.objects.all()
-    latest_news = News.objects.order_by('-created_date')[:3]  
+    latest_news = News.objects.order_by('-created_date')[:3]
+    services = Service.objects.values_list('name', flat=True)  
     categories = list(Category.objects.prefetch_related('services').all())
     random.shuffle(categories)       # Shuffle all categories
     categories = categories[:6]   
-    return render(request, 'index.html', {'menus': menus, 'client_reviews':client_reviews, 'latest_news':latest_news, 'categories': categories})
+    return render(request, 'index.html', {'menus': menus, 'client_reviews':client_reviews, 'latest_news':latest_news, 'categories': categories,'services':list(services)})
 
 
 def about(request):
@@ -88,6 +89,18 @@ def blog_detail(request, pk):
 def cost_calculator(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     return render(request, 'cost-calculator.html',{'menus': menus})
+
+def mainland(request):
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    return render(request, 'mainland-details.html',{'menus': menus})
+
+def freezone(request):
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    return render(request, 'freezone-details.html',{'menus': menus})
+
+def offshore(request):
+    menus = Menu.objects.prefetch_related('categories__services').all()
+    return render(request, 'offshore-details.html',{'menus': menus})
 
 def service_details(request, slug):
     menus = Menu.objects.prefetch_related('categories__services').all()

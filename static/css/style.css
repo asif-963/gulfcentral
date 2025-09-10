@@ -9959,7 +9959,7 @@ Section Title
   color: var(--theme-color-white);
   margin-bottom: 0;
 }
-.case-block .inner-box::after {
+/* .case-block .inner-box::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -9973,7 +9973,7 @@ Section Title
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 19.36%, #163839 71.26%, #163839 100%);
   z-index: 0;
   content: "";
-}
+} */
 .case-block .inner-box .arry-btn {
   display: block;
   width: 90px;

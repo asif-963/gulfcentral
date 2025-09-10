@@ -42,7 +42,12 @@
             <ul class="info-list">
               <li><i class="fa-solid fa-envelope" style="color: white;"></i> <a href=""><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
               </li>
-              <li><i class="fa-solid fa-location-dot" style="color: white;"></i> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</li>
+              <li>
+              <a href="{% url 'cost_calculator' %}" style="text-decoration:none; color:white; display:flex; align-items:center;">
+                <i class="fa-solid fa-calculator"  style="margin-right:8px; color: #fff;"></i>
+                Business Cost Calculator
+              </a>
+            </li>
             </ul>
           </div>
 
@@ -137,7 +142,7 @@
         </div>
         <div class="outer-box">
           <div class="info-box">
-            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Contact Now</a>
+            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Consult an Expert</a>
           </div>
           <div class="mobile-nav-toggler" style="background-color: #D3202A; color: #fff;" ><i class="fa-light fa-bars-staggered" ></i></div>
           <!-- Mobile Nav toggler -->

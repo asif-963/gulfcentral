@@ -41,7 +41,12 @@
             <ul class="info-list">
               <li><i class="fa-solid fa-envelope" style="color: white;"></i> <a href=""><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
               </li>
-              <li><i class="fa-solid fa-location-dot" style="color: white;"></i> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</li>
+              <li>
+              <a href="{% url 'cost_calculator' %}" style="text-decoration:none; color:white; display:flex; align-items:center;">
+                <i class="fa-solid fa-calculator"  style="margin-right:8px; color: #fff;"></i>
+                Business Cost Calculator
+              </a>
+            </li>
             </ul>
           </div>
 
@@ -136,7 +141,7 @@
         </div>
         <div class="outer-box">
           <div class="info-box">
-            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Contact Now</a>
+            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Consult an Expert</a>
           </div>
           <div class="mobile-nav-toggler" style="background-color: #D3202A; color: #fff;" ><i class="fa-light fa-bars-staggered" ></i></div>
           <!-- Mobile Nav toggler -->
@@ -594,7 +599,6 @@
 </section>
 <!-- Growth area end here -->
 
-
 <!-- Testimonial Section Start -->
 <section class="testimonial-section py-5" style="background:#f9f9f9;">
   <div class="container">
@@ -624,12 +628,17 @@
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
             {% if review.client_image %}
-              <img src="{{ review.client_image.url }}" alt="{{ review.client_name }}" class="rounded-circle mb-3" 
-                   width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
-            {% else %}
-              <img src="{% static 'images/testimonials/default-user.jpg' %}" alt="Default User" class="rounded-circle mb-3"
-                   width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
-            {% endif %}
+  <img src="{{ review.client_image.url }}" 
+       alt="{{ review.client_name }}" 
+       class="rounded-circle mb-3"
+       style="width:80px; height:80px; object-fit:cover; object-position:center; border:3px solid #D3202A;">
+{% else %}
+  <img src="{% static 'images/testimonials/default-user.jpg' %}" 
+       alt="Default User" 
+       class="rounded-circle mb-3"
+       style="width:80px; height:80px; object-fit:cover; object-position:center; border:3px solid #D3202A;">
+{% endif %}
+
             
             <p class="fst-italic text-secondary">"{{ review.review }}"</p>
             <h5 class="mt-3 mb-1" style="color:#D3202A;">{{ review.client_name }}</h5>
@@ -650,6 +659,7 @@
     </div>
   </div>
 </section>
+
 
 
 <!-- Team area start here -->

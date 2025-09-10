@@ -41,7 +41,12 @@
             <ul class="info-list">
               <li><i class="fa-solid fa-envelope" style="color: white;"></i> <a href=""><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
               </li>
-              <li><i class="fa-solid fa-location-dot" style="color: white;"></i> Ground floor, The Iridium - Kiosk 2B - Al Barsha 1 - Dubai</li>
+              <li>
+              <a href="{% url 'cost_calculator' %}" style="text-decoration:none; color:white; display:flex; align-items:center;">
+                <i class="fa-solid fa-calculator"  style="margin-right:8px; color: #fff;"></i>
+                Business Cost Calculator
+              </a>
+            </li>
             </ul>
           </div>
 
@@ -136,7 +141,7 @@
         </div>
         <div class="outer-box">
           <div class="info-box">
-            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Contact Now</a>
+            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Consult an Expert</a>
           </div>
           <div class="mobile-nav-toggler" style="background-color: #D3202A; color: #fff;" ><i class="fa-light fa-bars-staggered" ></i></div>
           <!-- Mobile Nav toggler -->
@@ -273,18 +278,37 @@
                 style="background-color:#D3202A; color:#fff; padding:6px 12px; display:inline-block; border-radius:4px;">
               Expert Business Solutions
             </h6>
+         <!-- Start Google Reviews Section -->
+          <a href="https://share.google/nmkmZA2amHUiX8S5Z" target="_blank" style="text-decoration:none;">
+            <div style="display:flex; align-items:left; gap:10px; justify-content:left; margin-top:10px; cursor:pointer;">
+                <!-- Google Review Image -->
+                <img src="{% static 'images/icon/g-r.svg' %}" alt="Google Reviews" style="height:40px;">
+
+                <!-- 5-Star Rating Text -->
+                <h6 style="margin:0; font-weight:600; font-size:18px; color:#000;">
+                  <span style="color:#FFD700;">★★★★★</span>  5/5 (2K+ Reviews)
+                </h6>
+            </div>
+          </a>
+
+
+
+
+          
+
             <h1 class="title wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1500ms">
               Business <span style="color:#D3202A;">Consulting</span> & Growth Solutions
             </h1>
-          <div class="search-bar" style="max-width:600px; width:100%; position:relative; margin:auto;">
+        <div class="search-bar" style="max-width:600px; width:100%; position:relative; margin-left:0;">
     <form id="serviceSearchForm" style="display:flex; background:#f8f8f8; border-radius:50px; border:1px solid #ddd; overflow:hidden; width:100%;">
-        <input type="text" id="searchInput" placeholder="Search Services..." style="flex:1; padding:10px 15px; border:none; outline:none; min-width:0; font-size:16px;">
+        <input type="text" id="searchInput" style="flex:1; padding:10px 15px; border:none; outline:none; min-width:0; font-size:16px;">
         <button type="submit" style="background:#D3202A; color:white; border:none; padding:0 15px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
             <i class="fa fa-search"></i>
         </button>
     </form>
     <div id="searchResults" style="position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ddd; border-radius:5px; max-height:300px; overflow-y:auto; display:none; z-index:1000;"></div>
 </div>
+
 
 <style>
 @media screen and (max-width: 360px) {
@@ -314,10 +338,11 @@
     }
 }
 </style>
-
-
-
 <script>
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+
+// ---------- Live Search ----------
 searchInput.addEventListener('input', function() {
     const query = this.value.trim();
     if (!query) {
@@ -341,7 +366,42 @@ searchInput.addEventListener('input', function() {
         });
 });
 
+// ---------- Dynamic Typing Placeholder ----------
+const services = {{ services|safe }};  // Django injects service names
+let index = 0;        // current service index
+let charIndex = 0;    // current character position
+let typingSpeed = 120; // ms between letters
+let holdTime = 1500;   // wait after finishing a word
+let typingActive = true;
+
+function typePlaceholder() {
+    if (!typingActive) return; // stop typing if user interacts
+
+    const currentService = services[index];
+    if (charIndex < currentService.length) {
+        // type next letter
+        searchInput.placeholder = "Try ( " + currentService.slice(0, charIndex + 1) + " )";
+        charIndex++;
+        setTimeout(typePlaceholder, typingSpeed);
+    } else {
+        // hold the full word for a while, then go to next
+        setTimeout(() => {
+            if (!typingActive) return;
+            index = (index + 1) % services.length;
+            charIndex = 0;
+            typePlaceholder();
+        }, holdTime);
+    }
+}
+
+// Stop typing effect if user focuses or types
+searchInput.addEventListener('focus', () => typingActive = false);
+searchInput.addEventListener('input', () => typingActive = false);
+
+// Start the typing effect on page load
+typePlaceholder();
 </script>
+
 
             <p class="text wow fadeInUp mt-3" data-wow-delay="500ms" data-wow-duration="1500ms">
               Gulf Central helps entrepreneurs and companies establish and grow their businesses in Dubai and the UAE, offering expert guidance on business setup, PRO services, visa assistance, and company formation.
@@ -351,11 +411,7 @@ searchInput.addEventListener('input', function() {
                  href="{% url 'about' %}" style="background:#D3202A; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; margin-right:10px;">
                 Get Started <i class="fa-regular fa-angle-right"></i>
               </a>
-              <a class="video-btn playbtnanim wow fadeInLeft" data-wow-delay="700ms" data-wow-duration="1500ms"
-                 href="https://www.youtube.com/watch?v=Lplq8RjQ0zU" data-fancybox="gallery" data-caption=""
-                 style="background:#fff; color:#D3202A; border:2px solid #D3202A; border-radius:50%; padding:12px; display:inline-flex; align-items:center; justify-content:center;">
-                <i class="fa-sharp fa-solid fa-play"></i>
-              </a>
+            
             </div>
           </div>
         </div>
@@ -411,58 +467,123 @@ searchInput.addEventListener('input', function() {
     </div>
 </section>
 
-  
-<!-- About area start here -->
-<section class="about-section-two paralax__animation pt-120 pb-120">
+<!-- Case Section -->
+<section class="case-section pt-120 pb-120">
   <div class="container">
-    <div class="row g-5 g-xl-4">
+    <div class="outer-box">
       
-      <!-- Image Column -->
-      <div class="col-xl-6 image-column">
-        <div class="inner-column">
-          <figure class="image">
-            <img data-tilt data-tilt-max="3" src="{% static 'images/about/about-two-image.jpg' %}" alt="Gulf Central">
-
-            <div class="info2 wow bounceInLeft" style="background-color: #D3202A;" data-wow-delay="200ms" data-wow-duration="1500ms">
-              <h2 class="title" style="color: #fff;"><span>10</span>+</h2>
-              <p class="sub-title" style="color: #fff;">Years Of Experience</p>
-            </div>
-          </figure>
-        </div>
+      <!-- Section Title -->
+      <div class="sec-title pb-50 text-start">
+        <h6 class="sub-title" style="background-color:#D3202A; color:#fff; display:inline-block; padding:6px 15px; border-radius:4px;">
+          Jurisdiction
+        </h6>
+        <h2 class="title" style="margin-top:20px; font-weight:700; color:#222;">
+          Choose Your Jurisdiction
+        </h2>
+        <p class="text" style="color:#555; max-width:600px; margin-top:15px;">
+          Explore our comprehensive business services and strategic solutions tailored to help your company grow.
+        </p>
       </div>
 
-      <!-- Content Column -->
-      <div class="col-xl-6 content-column">
-        <div class="inner-column">
-          <div class="content-box">
-            <div class="sec-title mb-40">
-              <h6 class="sub-title wow fadeInUp" style="background-color: #D3202A; color: #fff;" data-wow-delay="00ms" data-wow-duration="1500ms">ABOUT US</h6>
-              <h2 class="title wow splt-txt" data-splitting>Driving Innovation Through Expertise and Collaboration</h2>
-              <p class="text wow fadeInDown" data-wow-delay="00ms" data-wow-duration="1500ms">
-                At Gulf Central, we provide end-to-end business solutions, helping entrepreneurs and enterprises achieve sustainable growth. With a focus on innovation, strategy, and seamless execution, we ensure our clients have the competitive edge needed to thrive in the UAE market and beyond.
-              </p>
+      <!-- Cards -->
+      <div class="case-list" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px;">
+        
+        <!-- Mainland -->
+        <div class="case-block">
+          <a href="{% url 'mainland' %}" class="inner-box">
+            <figure class="image">
+              <img src="{% static 'images/about/mainland.jpg' %}" alt="Mainland">
+            </figure>
+            <div class="content-box">
+              <span class="sub-title">Mainland</span>
+              <h4 class="title">Mainland Company Setup</h4>
             </div>
-
-            <!-- Key Highlights -->
-            <ul class="list-unstyled wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
-              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Innovative & Scalable Business Solutions</li>
-              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Dedicated PRO & Company Setup Services</li>
-   
-              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Customer-Centric Approach for Every Project</li>
-              <li><i class="fa-solid fa-check" style="color:#D3202A;"></i> Strategic Partnerships & Global Expertise</li>
-            </ul>
-
-            <!-- Call to Action -->
-            <div class="info mt-50 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-              <a class="btn-two-rounded" href="{% url 'about' %}">More About Us <i class="fa-regular fa-angle-right"></i></a>
-            </div>
-          </div>
+          </a>
         </div>
+
+        <!-- Freezone -->
+        <div class="case-block">
+          <a href="{% url 'freezone' %}" class="inner-box">
+            <figure class="image">
+              <img src="{% static 'images/about/freezone.jpg' %}" alt="Freezone">
+            </figure>
+            <div class="content-box">
+              <span class="sub-title">Freezone</span>
+              <h4 class="title">Freezone Company Setup</h4>
+            </div>
+          </a>
+        </div>
+
+        <!-- Offshore -->
+        <div class="case-block">
+          <a href="{% url 'offshore' %}" class="inner-box">
+            <figure class="image">
+              <img src="{% static 'images/about/offshore.jpg' %}" alt="Offshore">
+            </figure>
+            <div class="content-box">
+              <span class="sub-title">Offshore</span>
+              <h4 class="title">Offshore Company Setup</h4>
+            </div>
+          </a>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
-<!-- About area end here -->
+<!-- End Case Section -->
+
+<style>
+.case-block .inner-box {
+  display: block;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+
+.case-block .image img {
+  width: 100%;
+  height: 350px; /* increased image height */
+  object-fit: cover;
+  display: block;
+}
+
+.case-block .content-box {
+  padding: 20px;
+  text-align: left;
+}
+
+.case-block .sub-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
+  display: block;
+}
+
+.case-block .title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.4;
+}
+
+/* Hover effect */
+.case-block .inner-box:hover {
+  background: #D3202A;
+  transform: translateY(-5px);
+}
+
+.case-block .inner-box:hover .title,
+.case-block .inner-box:hover .sub-title {
+  color: #fff;
+}
+</style>
+
 
 
 
@@ -540,6 +661,8 @@ searchInput.addEventListener('input', function() {
       </div>
     </section>
 
+    
+
 <!-- Testimonial Section Start -->
 <section class="testimonial-section py-5" style="background:#f9f9f9;">
   <div class="container">
@@ -569,12 +692,17 @@ searchInput.addEventListener('input', function() {
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="card mx-auto shadow-lg border-0" style="max-width:900px; border-radius:16px; padding:30px; background:#fff;">
             {% if review.client_image %}
-              <img src="{{ review.client_image.url }}" alt="{{ review.client_name }}" class="rounded-circle mb-3" 
-                   width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
-            {% else %}
-              <img src="{% static 'images/testimonials/default-user.jpg' %}" alt="Default User" class="rounded-circle mb-3"
-                   width="100" height="100" style="object-fit:cover; border:3px solid #D3202A;">
-            {% endif %}
+  <img src="{{ review.client_image.url }}" 
+       alt="{{ review.client_name }}" 
+       class="rounded-circle mb-3"
+       style="width:80px; height:80px; object-fit:cover; object-position:center; border:3px solid #D3202A;">
+{% else %}
+  <img src="{% static 'images/testimonials/default-user.jpg' %}" 
+       alt="Default User" 
+       class="rounded-circle mb-3"
+       style="width:80px; height:80px; object-fit:cover; object-position:center; border:3px solid #D3202A;">
+{% endif %}
+
             
             <p class="fst-italic text-secondary">"{{ review.review }}"</p>
             <h5 class="mt-3 mb-1" style="color:#D3202A;">{{ review.client_name }}</h5>
@@ -595,6 +723,10 @@ searchInput.addEventListener('input', function() {
     </div>
   </div>
 </section>
+
+
+
+
 
 
 <!-- Growth Section Start -->
@@ -810,6 +942,273 @@ searchInput.addEventListener('input', function() {
     </div>
 </div>
 <!-- FAQ Section End -->
+
+<!-- Pricing area start here -->
+  <section class="pricing-section have-after pt-120 pb-120">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+          <div class="pricing-block">
+
+            <div class="inner-box">
+              <div class="head">
+                <div class="icon">
+                  <svg width="55" height="49" viewBox="0 0 55 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.80043 1.91176C9.92321 -0.233244 12.9935 -0.233242 14.1162 1.91176L21.9931 16.9601C23.0387 18.9576 21.5898 21.3514 19.3352 21.3514H3.58144C1.32689 21.3514 -0.122003 18.9576 0.923544 16.9601L8.80043 1.91176Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M40.8838 1.91176C42.0065 -0.233244 45.0768 -0.233242 46.1996 1.91176L54.0765 16.9601C55.122 18.9576 53.6731 21.3514 51.4186 21.3514H35.6648C33.4102 21.3514 31.9613 18.9576 33.0069 16.9601L40.8838 1.91176Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M35.3769 48.1673C37.6314 48.1673 39.0803 45.7735 38.0348 43.776L30.1579 28.7277C29.0351 26.5827 25.9649 26.5827 24.8421 28.7277L16.9652 43.776C15.9197 45.7735 17.3685 48.1673 19.6231 48.1673H35.3769Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M8.80043 43.0895C9.92321 45.2345 12.9935 45.2345 14.1162 43.0895L21.9931 28.0411C23.0387 26.0437 21.5898 23.6499 19.3352 23.6499H3.58144C1.32689 23.6499 -0.122003 26.0437 0.923544 28.0411L8.80043 43.0895Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M51.4186 23.6499C53.6731 23.6499 55.122 26.0437 54.0765 28.0411L46.1996 43.0895C45.0768 45.2345 42.0065 45.2345 40.8838 43.0895L33.0069 28.0411C31.9613 26.0437 33.4102 23.6499 35.6648 23.6499H51.4186Z"
+                      fill="#1A4137" />
+                  </svg>
+                </div>
+                <h4 class="title">Personal Plan</h4>
+                <p class="sub-title">Customized anything in anytime</p>
+              </div>
+
+              <ul class="list">
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Unlimited features
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Multi language content
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  30 Days free trial features
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Data backup and recovery
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Updates via dashboard & slack
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Synced to cloud database
+                </li>
+              </ul>
+
+              <div class="text-center mt-40">
+                <a class="btn-one-rounded" style="color: #fff;" href="{% url 'contact' %}">Contact Now</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
+          <div class="pricing-block ">
+
+            <div class="inner-box">
+             
+              <div class="head">
+                <div class="icon">
+                  <svg width="55" height="49" viewBox="0 0 55 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.80043 1.91176C9.92321 -0.233244 12.9935 -0.233242 14.1162 1.91176L21.9931 16.9601C23.0387 18.9576 21.5898 21.3514 19.3352 21.3514H3.58144C1.32689 21.3514 -0.122003 18.9576 0.923544 16.9601L8.80043 1.91176Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M40.8838 1.91176C42.0065 -0.233244 45.0768 -0.233242 46.1996 1.91176L54.0765 16.9601C55.122 18.9576 53.6731 21.3514 51.4186 21.3514H35.6648C33.4102 21.3514 31.9613 18.9576 33.0069 16.9601L40.8838 1.91176Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M35.3769 48.1673C37.6314 48.1673 39.0803 45.7735 38.0348 43.776L30.1579 28.7277C29.0351 26.5827 25.9649 26.5827 24.8421 28.7277L16.9652 43.776C15.9197 45.7735 17.3685 48.1673 19.6231 48.1673H35.3769Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M8.80043 43.0895C9.92321 45.2345 12.9935 45.2345 14.1162 43.0895L21.9931 28.0411C23.0387 26.0437 21.5898 23.6499 19.3352 23.6499H3.58144C1.32689 23.6499 -0.122003 26.0437 0.923544 28.0411L8.80043 43.0895Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M51.4186 23.6499C53.6731 23.6499 55.122 26.0437 54.0765 28.0411L46.1996 43.0895C45.0768 45.2345 42.0065 45.2345 40.8838 43.0895L33.0069 28.0411C31.9613 26.0437 33.4102 23.6499 35.6648 23.6499H51.4186Z"
+                      fill="#1A4137" />
+                  </svg>
+                </div>
+                <h4 class="title">Premium Plan</h4>
+                <p class="sub-title">Customized anything in anytime</p>
+              </div>
+
+              <ul class="list">
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Unlimited features
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Multi language content
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  30 Days free trial features
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Data backup and recovery
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Updates via dashboard & slack
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Synced to cloud database
+                </li>
+              </ul>
+
+              <div class="text-center mt-40" >
+                <a class="btn-one-rounded" style="color: #fff;" href="#0">Contact Now</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4 wow fadeInLeft" data-wow-delay="400ms" data-wow-duration="1500ms">
+          <div class="pricing-block">
+
+            <div class="inner-box">
+              <div class="head">
+                <div class="icon">
+                  <svg width="55" height="49" viewBox="0 0 55 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.80043 1.91176C9.92321 -0.233244 12.9935 -0.233242 14.1162 1.91176L21.9931 16.9601C23.0387 18.9576 21.5898 21.3514 19.3352 21.3514H3.58144C1.32689 21.3514 -0.122003 18.9576 0.923544 16.9601L8.80043 1.91176Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M40.8838 1.91176C42.0065 -0.233244 45.0768 -0.233242 46.1996 1.91176L54.0765 16.9601C55.122 18.9576 53.6731 21.3514 51.4186 21.3514H35.6648C33.4102 21.3514 31.9613 18.9576 33.0069 16.9601L40.8838 1.91176Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M35.3769 48.1673C37.6314 48.1673 39.0803 45.7735 38.0348 43.776L30.1579 28.7277C29.0351 26.5827 25.9649 26.5827 24.8421 28.7277L16.9652 43.776C15.9197 45.7735 17.3685 48.1673 19.6231 48.1673H35.3769Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M8.80043 43.0895C9.92321 45.2345 12.9935 45.2345 14.1162 43.0895L21.9931 28.0411C23.0387 26.0437 21.5898 23.6499 19.3352 23.6499H3.58144C1.32689 23.6499 -0.122003 26.0437 0.923544 28.0411L8.80043 43.0895Z"
+                      fill="#1A4137" />
+                    <path
+                      d="M51.4186 23.6499C53.6731 23.6499 55.122 26.0437 54.0765 28.0411L46.1996 43.0895C45.0768 45.2345 42.0065 45.2345 40.8838 43.0895L33.0069 28.0411C31.9613 26.0437 33.4102 23.6499 35.6648 23.6499H51.4186Z"
+                      fill="#1A4137" />
+                  </svg>
+                </div>
+                <h4 class="title">Standard Plan</h4>
+                <p class="sub-title">Customized anything in anytime</p>
+              </div>
+
+              <ul class="list">
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Unlimited features
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Multi language content
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  30 Days free trial features
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Data backup and recovery
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Updates via dashboard & slack
+                </li>
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.00078 0.394531C6.49641 0.394531 5.02582 0.84063 3.77498 1.67642C2.52414 2.5122 1.54922 3.70013 0.973526 5.08999C0.397827 6.47985 0.247198 8.00922 0.540687 9.48468C0.834175 10.9602 1.5586 12.3155 2.62235 13.3792C3.68611 14.443 5.04141 15.1674 6.51688 15.4609C7.99234 15.7544 9.52171 15.6037 10.9116 15.028C12.3014 14.4523 13.4894 13.4774 14.3251 12.2266C15.1609 10.9757 15.607 9.50515 15.607 8.00078C15.6045 5.98424 14.8024 4.051 13.3765 2.62509C11.9506 1.19918 10.0173 0.397012 8.00078 0.394531ZM11.6539 5.01016L8.17266 10.3539C8.00974 10.6511 7.78994 10.9134 7.52578 11.1258C7.33752 11.2523 7.11976 11.328 6.89362 11.3455C6.66748 11.363 6.44066 11.3218 6.23516 11.2258C5.94097 11.0597 5.68198 10.8378 5.47266 10.5727L4.42891 9.41328C4.16641 9.12265 4.20391 8.61328 4.67891 8.58203C4.90101 8.58843 5.11713 8.65543 5.30391 8.77578L6.29453 9.29453C6.4204 9.37766 6.56874 9.4202 6.71953 9.4164C6.87634 9.37681 7.01579 9.28678 7.11641 9.16015L11.3695 4.79766C11.3972 4.76972 11.4275 4.74459 11.4602 4.72266C11.5383 4.66953 11.6289 4.64141 11.6945 4.70078C11.7602 4.76016 11.7164 4.91328 11.6539 5.01016Z"
+                      fill="#1A4137" />
+                  </svg>
+                  Synced to cloud database
+                </li>
+              </ul>
+
+              <div class="text-center mt-40">
+                <a class="btn-one-rounded" style="color: #fff;" href="{% url 'contact' %}">Contact Now</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Pricing area end here -->
 
 <!-- Team area start here -->
 <section class="team-section-three bg-white pt-120 pb-120">
