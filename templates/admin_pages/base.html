@@ -163,6 +163,36 @@
     </li>
 
   
+    <li class="nav-item nav-category">Team</li>
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#teamMenu" aria-expanded="false" aria-controls="teamMenu">
+    <i class="menu-icon mdi mdi-account-multiple"></i>
+    <span class="menu-title">Team</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="teamMenu">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"> <a class="nav-link" href="{% url 'add_team' %}"> Add Team</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'view_teams' %}"> View Team</a></li>
+    </ul>
+  </div>
+</li>
+
+<li class="nav-item nav-category">Client Logo</li>
+<li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#clientLogoMenu" aria-expanded="false" aria-controls="clientLogoMenu">
+    <i class="menu-icon mdi mdi-image"></i>
+    <span class="menu-title">Client Logo</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="clientLogoMenu">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_logo' %}"> Add Client Logo</a></li>
+      <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_logos' %}"> View Client Logos</a></li>
+    </ul>
+  </div>
+</li>
+
 
 
    <li class="nav-item nav-category">Services</li>

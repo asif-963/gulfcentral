@@ -1,0 +1,47 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+.scrollable-form {
+  height: 80vh;            
+  overflow-y: auto;         
+  -ms-overflow-style: none; 
+  scrollbar-width: none;    
+}
+.scrollable-form::-webkit-scrollbar {
+  display: none;            
+}
+.card-form {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+</style>
+
+<div class="container scrollable-form">
+  <h3 class="mb-4">Update Client Logo</h3>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card-form">
+      <div class="form-group mb-3">
+        <label>Company Name</label>
+        <input type="text" name="name" class="form-control" value="{{ form.instance.name }}" required>
+      </div>
+      <div class="form-group mb-3">
+        <label>Current Logo</label><br>
+        {% if form.instance.logo %}
+          <img src="{{ form.instance.logo.url }}" style="height:80px; object-fit:contain;" alt="Current Logo">
+        {% endif %}
+      </div>
+      <div class="form-group mb-3">
+        <label>Update Logo</label>
+        <input type="file" name="logo" class="form-control" accept="image/*">
+      </div>
+      <button type="submit" class="btn btn-primary">Update Client Logo</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

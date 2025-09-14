@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature, Contact, ServiceEnquiry
+from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature, Contact, ServiceEnquiry, Team, ClientLogo
 from ckeditor.widgets import CKEditorWidget  
 
 
@@ -103,3 +103,21 @@ class ServiceEnquiryForm(forms.ModelForm):
     class Meta:
         model = ServiceEnquiry
         fields = ['name', 'email', 'phone', 'service_name', 'message']
+
+
+
+# Team 
+class TeamForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = ['name', 'designation', 'image']
+
+# Cleint Logo
+class ClientLogoForm(forms.ModelForm):
+    class Meta:
+        model = ClientLogo
+        fields = ['name', 'logo']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Company Name'}),
+            'logo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }

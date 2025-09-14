@@ -7,8 +7,8 @@ import random
 
 from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature
 from .forms import NewsForm, MenuForm, CategoryForm, ServiceForm, ClientReviewForm, BlogCategoryForm, BlogForm
-from .forms import ContactForm, ServiceEnquiryForm
-from .models import Contact, ServiceEnquiry
+from .forms import ContactForm, ServiceEnquiryForm, TeamForm, ClientLogoForm
+from .models import Contact, ServiceEnquiry, Team, ClientLogo
 
 
 
@@ -24,6 +24,8 @@ from .models import Contact, ServiceEnquiry
 def index(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     client_reviews = ClientReview.objects.all()
+    teams = Team.objects.all() 
+    clients = ClientLogo.objects.all() 
     section = PricingSection.objects.prefetch_related("plans__features").first()
     latest_news = News.objects.order_by('-created_date')[:3]
     services = Service.objects.values_list('name', flat=True) 
@@ -32,15 +34,17 @@ def index(request):
     categories = list(Category.objects.prefetch_related('services').all())
     random.shuffle(categories)       # Shuffle all categories
     categories = categories[:6]   
-    return render(request, 'index.html', {'menus': menus, 'client_reviews':client_reviews, 'latest_news':latest_news, 'categories': categories,'service_footer':random_services,'services':list(services), 'section':section})
+    return render(request, 'index.html', {'menus': menus, 'client_reviews':client_reviews, 'teams':teams, 'clients': clients, 'latest_news':latest_news, 'categories': categories,'service_footer':random_services,'services':list(services), 'section':section})
 
 
 def about(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     client_reviews = ClientReview.objects.all()
+    teams = Team.objects.all()  
+    clients = ClientLogo.objects.all() 
     service_footer = list(Service.objects.values('name', 'slug'))
     random_services = random.sample(service_footer, min(4, len(service_footer)))
-    return render(request, 'about.html',{'menus': menus, 'client_reviews':client_reviews,'service_footer':random_services})
+    return render(request, 'about.html',{'menus': menus, 'client_reviews':client_reviews, 'clients': clients, 'teams':teams, 'service_footer':random_services})
 
 
 # News listing page
@@ -434,7 +438,7 @@ def add_menu(request):
         form = MenuForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('view_menus')
+            return redirect('add_category')
     else:
         form = MenuForm()
     return render(request, 'admin_pages/add_menus.html', {'form': form})
@@ -446,7 +450,7 @@ def update_menu(request, pk):
         form = MenuForm(request.POST, instance=menu)
         if form.is_valid():
             form.save()
-            return redirect('view_menus')
+            return redirect('add_category')
     else:
         form = MenuForm(instance=menu)
     # Pass the menu object to template so values show
@@ -471,7 +475,7 @@ def add_category(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('view_categories')
+            return redirect('add_service')
     else:
         form = CategoryForm()
     return render(request, "admin_pages/add_category.html", {"form": form, "menus": menus})
@@ -491,7 +495,7 @@ def update_category(request, pk):
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
-            return redirect('view_categories')
+            return redirect('add_service')
     else:
         form = CategoryForm(instance=category)
     return render(request, "admin_pages/update_category.html", {"category": category, "menus": menus, "form": form})
@@ -655,7 +659,7 @@ def add_blog_category(request):
         form = BlogCategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('view_blog_categories')
+            return redirect('add_blog')
     else:
         form = BlogCategoryForm()
     return render(request, 'admin_pages/add_blog_category.html', {'form': form})
@@ -674,7 +678,7 @@ def update_blog_category(request, pk):
         form = BlogCategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
-            return redirect('view_blog_categories')
+            return redirect('add_blog')
     else:
         form = BlogCategoryForm(instance=category)
     return render(request, 'admin_pages/update_blog_category.html', {'form': form})
@@ -879,3 +883,71 @@ def delete_service_enquiry(request, id):
     enquiry.delete()
     messages.success(request, "Service enquiry deleted successfully.")
     return redirect('view_service_enquiries')
+
+
+def view_teams(request):
+    teams = Team.objects.all()
+    return render(request, 'admin_pages/view_teams.html', {'teams': teams})
+
+def add_team(request):
+    if request.method == 'POST':
+        form = TeamForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_teams')
+    else:
+        form = TeamForm()
+    return render(request, 'admin_pages/add_team.html', {'form': form})
+
+def update_team(request, pk):
+    team = get_object_or_404(Team, pk=pk)
+    if request.method == 'POST':
+        form = TeamForm(request.POST, request.FILES, instance=team)
+        if form.is_valid():
+            form.save()
+            return redirect('view_teams')
+    else:
+        form = TeamForm(instance=team)
+    return render(request, 'admin_pages/update_team.html', {'form': form, 'team': team})
+
+# Delete team member
+def delete_team(request, pk):
+    member = get_object_or_404(Team, pk=pk)
+    member.delete()
+    return redirect('view_teams')
+
+
+# Client Logo
+# Add Client Logo
+def add_client_logo(request):
+    if request.method == 'POST':
+        form = ClientLogoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_client_logos')
+    else:
+        form = ClientLogoForm()
+    return render(request, 'admin_pages/add_client_logo.html', {'form': form})
+
+# View All Client Logos
+def view_client_logos(request):
+    clients = ClientLogo.objects.all()
+    return render(request, 'admin_pages/view_client_logos.html', {'clients': clients})
+
+# Update Client Logo
+def update_client_logo(request, pk):
+    client = get_object_or_404(ClientLogo, pk=pk)
+    if request.method == 'POST':
+        form = ClientLogoForm(request.POST, request.FILES, instance=client)
+        if form.is_valid():
+            form.save()
+            return redirect('view_client_logos')
+    else:
+        form = ClientLogoForm(instance=client)
+    return render(request, 'admin_pages/update_client_logo.html', {'form': form})
+
+# Delete Client Logo
+def delete_client_logo(request, pk):
+    client = get_object_or_404(ClientLogo, pk=pk)
+    client.delete()
+    return redirect('view_client_logos')

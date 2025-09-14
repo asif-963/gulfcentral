@@ -100,6 +100,18 @@ urlpatterns = [
     path('view-service-enquiries/', views.view_service_enquiries, name='view_service_enquiries'),
     path('service-enquiries/delete/<int:id>/', views.delete_service_enquiry, name='delete_service_enquiry'),
 
+    path('teams/', views.view_teams, name='view_teams'),
+    path('teams/add/', views.add_team, name='add_team'),
+    path('teams/update/<int:pk>/', views.update_team, name='update_team'),
+     path('teams/delete/<int:pk>/', views.delete_team, name='delete_team'),
+
+    path('add-client-logo/', views.add_client_logo, name='add_client_logo'),
+    path('view-client-logos/', views.view_client_logos, name='view_client_logos'),
+    path('update-client-logo/<int:pk>/', views.update_client_logo, name='update_client_logo'),
+    path('delete-client-logo/<int:pk>/', views.delete_client_logo, name='delete_client_logo'),
+
+
+
 
    
 

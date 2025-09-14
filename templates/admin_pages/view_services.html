@@ -17,6 +17,7 @@
         <table class="table table-bordered table-hover" style="width: 1500px;">
           <thead class="thead-light">
             <tr>
+              <th>Order</th>
               <th>Name</th>
               <th>Category</th>
               <th>Image</th>
@@ -29,7 +30,7 @@
           </thead>
           <tbody>
             {% for service in services %}
-            <tr>
+            <tr><td style="width: 150px;">{{ service.order }}</td>
               <td style="width: 150px;">{{ service.name }}</td>
               <td style="width: 150px;">{{ service.category.menu.name }} → {{ service.category.name }}</td>
               <td style="width: 100px;">

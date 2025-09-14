@@ -1,0 +1,36 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Team Member</h4>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group mb-3">
+              <label>Name</label>
+              <input type="text" class="form-control" name="name" placeholder="Enter Name" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label>Designation</label>
+              <input type="text" class="form-control" name="designation" placeholder="Enter Designation" required>
+            </div>
+
+            <div class="form-group mb-3">
+              <label>Image</label>
+              <input type="file" class="form-control-file" name="image" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-success" style="background-color: rgb(23, 23, 105);">Save Team Member</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -216,3 +216,22 @@ class ServiceEnquiry(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.service_name}"
+
+
+
+# Team
+class Team(models.Model):
+    name = models.CharField(max_length=200)
+    designation = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='team_images/')
+
+    def __str__(self):
+        return self.name
+    
+# client Logo
+class ClientLogo(models.Model):
+    name = models.CharField(max_length=255)
+    logo = models.ImageField(upload_to='client_logos/')
+
+    def __str__(self):
+        return self.name

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gulf Central | Blogs</title>
-    
+    <title>Business Setup Tips & Insights | Gulf Central Blog</title>
+    <meta name="description" content="Stay updated with Gulf Central’s blog: guides on company formation, licensing, tax compliance, and visa services in Dubai & UAE.">
     <!-- Stylesheets -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/flatpickr.min.css' %}" rel="stylesheet">
@@ -334,9 +334,9 @@
                         <div class="blog-card">
                             <div class="image-box">
                                 {% if blog.image %}
-                                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="width: 100%; height: 300px; object-fit: cover;">
                                 {% else %}
-                                    <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog">
+                                    <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog" style="width: 100%; height: 300px; object-fit: cover;">
                                 {% endif %}
                                 <span class="tag">{{ blog.category.name }} | {{ blog.created_date|date:"d M, Y" }}</span>
                             </div>
@@ -363,9 +363,9 @@
                         <div class="blog-card">
                             <div class="image-box">
                                 {% if blog.image %}
-                                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="width: 100%; height: 300px; object-fit: cover;">
                                 {% else %}
-                                    <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog">
+                                    <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog" style="width: 100%; height: 300px; object-fit: cover;">
                                 {% endif %}
                                 <span class="tag">{{ blog.created_date|date:"d M, Y" }}</span>
                             </div>

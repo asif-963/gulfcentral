@@ -92,7 +92,23 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 <script>
 let editor;
-ClassicEditor.create(document.querySelector('#serviceDescription'))
+ClassicEditor
+ 
+  .create(document.querySelector('#serviceDescription'), {
+      toolbar: [
+        'heading', '|',
+        'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+        'bulletedList', 'numberedList', 'blockQuote', '|',
+        'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+      ],
+      ckfinder: {
+        uploadUrl: '{% url "ckeditor_upload" %}'
+      },
+      simpleUpload: {
+        uploadUrl: '{% url "ckeditor_upload" %}',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+      }
+    })
   .then(e => editor = e)
   .catch(error => console.error(error));
 
@@ -101,6 +117,7 @@ document.getElementById('serviceForm').addEventListener('submit', function() {
     document.querySelector('#serviceDescription').value = editor.getData();
 });
 </script>
+
 
 <!-- Dynamic Steps & FAQ -->
 <script>

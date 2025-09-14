@@ -4,7 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gulf Central | About Us</title>
+    <title>About Gulf Central – Business Experts in Dubai & UAE</title>
+    <meta name="description" content="Learn about Gulf Central – a trusted partner for entrepreneurs in the UAE. Experienced consultants in company formation, visas, licensing, and more.">
+    
+    <!-- Stylesheets -->
     
     <!-- Stylesheets -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -687,129 +690,70 @@
 </section>
 
 
-
 <!-- Team area start here -->
 <section class="team-section-three bg-white pt-120 pb-120">
   <div class="team-three-text">
-    <img class="wow slideInLeft" data-wow-delay="1s" data-wow-duration="1500ms" >
-         
+    <img class="wow slideInLeft" data-wow-delay="1s" data-wow-duration="1500ms">
   </div>
+
   <div class="container">
     <!-- Section Title -->
     <div class="sec-title mb-50">
       <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-color: #D3202A; color: #fff;">Team Members</h6>
       <div class="flex-content">
         <h2 class="title wow splt-txt" data-splitting>The Visionaries Driving <br> Our Success</h2>
-        <a class="btn-one-rounded wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms"  style="background-color: #D3202A; color: #fff;" 
-           href="{% url 'contact' %}">Get started <i class="fa-regular fa-angle-right"></i></a>
+        <a class="btn-one-rounded wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms" style="background-color: #D3202A; color: #fff;" href="{% url 'contact' %}">Get started <i class="fa-regular fa-angle-right"></i></a>
       </div>
     </div>
 
     <div class="row g-4">
-      <!-- Team Member 1 -->
-      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0s" data-wow-duration="1500ms">
+      {% for member in teams %}
+      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="{{ forloop.counter0|add:'0.2' }}s" data-wow-duration="1500ms">
         <div class="team-block-three">
           <div class="inner-box">
             <div class="image-box">
               <figure class="image">
-                <img src="{% static 'images/team/team-two-image1.jpg' %}" alt="Ronald Richards">
+                <img src="{{ member.image.url }}" alt="{{ member.name }}" style="height: 450px; object-fit: cover;">
               </figure>
-              <div class="socials">
-                <ul>
-                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                </ul>
-              </div>
             </div>
             <div class="content-box">
-              <h4 class="title"><a href="#">Ronald Richards</a></h4>
-              <p class="sub-title">CEO & Founder</p>
+              <h4 class="title"><a href="#">{{ member.name }}</a></h4>
+              <p class="sub-title">{{ member.designation }}</p>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Team Member 2 -->
-      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1500ms">
-        <div class="team-block-three">
-          <div class="inner-box">
-            <div class="image-box">
-              <figure class="image">
-                <img src="{% static 'images/team/team-two-image2.jpg' %}" alt="Marvin McKinney">
-              </figure>
-              <div class="socials">
-                <ul>
-                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="content-box">
-              <h4 class="title"><a href="#">Marvin McKinney</a></h4>
-              <p class="sub-title">Senior Manager</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Team Member 3 -->
-      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0.4s" data-wow-duration="1500ms">
-        <div class="team-block-three">
-          <div class="inner-box">
-            <div class="image-box">
-              <figure class="image">
-                <img src="{% static 'images/team/team-two-image3.jpg' %}" alt="Kathryn Murphy">
-              </figure>
-              <div class="socials">
-                <ul>
-                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="content-box">
-              <h4 class="title"><a href="#">Kathryn Murphy</a></h4>
-              <p class="sub-title">Marketing Head</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Team Member 4 -->
-      <div class="col-sm-6 col-xl-3 wow bounceInUp" data-wow-delay="0.6s" data-wow-duration="1500ms">
-        <div class="team-block-three">
-          <div class="inner-box">
-            <div class="image-box">
-              <figure class="image">
-                <img src="{% static 'images/team/team-two-image4.jpg' %}" alt="Jerome Bell">
-              </figure>
-              <div class="socials">
-                <ul>
-                  <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                  <li><a href="#"><i class="fa-sharp fa-solid fa-x"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                  <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="content-box">
-              <h4 class="title"><a href="#">Jerome Bell</a></h4>
-              <p class="sub-title">Lead Developer</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% empty %}
+      <p class="text-center">No team members found. <a href="{% url 'add_team' %}">Add a team member</a>.</p>
+      {% endfor %}
     </div>
   </div>
 </section>
 <!-- Team area end here -->
 
+<!-- Client Logo Section Start -->
+<section class="client-logo-section bg-white pt-120 pb-120">
+  <div class="container">
+    <!-- Section Title -->
+    <div class="sec-title mb-50">
+      <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-color: #D3202A; color: #fff;">Our Clients</h6>
+      <h2 class="title wow splt-txt" data-splitting>Trusted Companies <br> We Work With</h2>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      {% for client in clients %}
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2 wow bounceInUp" data-wow-delay="{{ forloop.counter0|add:'0.1' }}s" data-wow-duration="1500ms">
+        <div class="client-logo-box d-flex align-items-center justify-content-center p-3 border rounded shadow-sm" style="background-color:#fff; height:120px;">
+          <img src="{{ client.logo.url }}" alt="{{ client.name }}" class="img-fluid" style="max-height: 80px; object-fit: contain;">
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center">No client logos found. <a href="{% url 'add_client_logo' %}">Add a client logo</a>.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- Client Logo Section End -->
 
 
    

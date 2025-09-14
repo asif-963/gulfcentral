@@ -346,9 +346,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="row align-items-lg-center">
       <div class="col-lg-6">
         <div class="sec-title mb-40">
-          <h6 class="sub-title wow fadeInUp bg-transparent ps-0" data-wow-delay="00ms" data-wow-duration="1500ms">
-            {{ service.name }}
-          </h6>
+          
+          <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" style="background-color: #D3202A; color: #fff;" data-wow-duration="1500ms">{{ service.name }}</h6>
           <h2 class="title mb-30 wow splt-txt" data-splitting>
            {{ service.name }} 
           </h2>
@@ -372,13 +371,16 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
 
-      <!--Start Services Details Content-->
-      <div class="col-xl-8 col-lg-8">
-        <div class="services-details__content">
-       
-          <p class="mb-30">{{ service.description|safe }}</p>
+     <!--Start Services Details Content-->
+<div class="col-xl-8 col-lg-8">
+  <div class="services-details__content">
 
-           <!-- Service Process Steps -->
+    <!-- CKEditor content -->
+    <div class="editor-output mb-30">
+      {{ service.description|safe }}
+    </div>
+
+    <!-- Service Process Steps -->
     {% if process_steps %}
     <div class="service-nr-list">
       <h3 class="mb-5">Service Process</h3>
@@ -417,6 +419,81 @@ document.addEventListener("DOMContentLoaded", function () {
       </ul>
     </div>
     {% endif %}
+ 
+<style>
+  /* CKEditor output styles */
+.services-details__content .editor-output h1,
+.services-details__content .editor-output h2,
+.services-details__content .editor-output h3,
+.services-details__content .editor-output h4,
+.services-details__content .editor-output h5,
+.services-details__content .editor-output h6 {
+  font-weight: 600;
+  margin: 1.5rem 0 1rem;
+  line-height: 1.3;
+  color: #222;
+}
+
+.services-details__content .editor-output p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* ✅ Bold Text */
+.services-details__content .editor-output strong,
+.services-details__content .editor-output b {
+  font-weight: 700;
+    /* highlight bold with your theme color */
+}
+
+/* Lists */
+.services-details__content .editor-output ul,
+.services-details__content .editor-output ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.services-details__content .editor-output li {
+  margin-bottom: 0.5rem;
+}
+
+/* Blockquotes */
+.services-details__content .editor-output blockquote {
+  border-left: 4px solid #D3202A;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: #555;
+  background: #f9f9f9;
+}
+
+/* Tables */
+.services-details__content .editor-output table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.services-details__content .editor-output table th,
+.services-details__content .editor-output table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.services-details__content .editor-output table th {
+  background: #f4f4f4;
+  font-weight: 600;
+}
+
+/* Images */
+.services-details__content .editor-output img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+</style>
 
 
           <div class="service-nr-list">
@@ -449,9 +526,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <ul>
                     {% for s in related_services %}
                         <li>
-                            <a href="{% url 'service_details' slug=s.slug %}">
-                                <i class="far fa-arrow-right"></i>
+                            <a href="{% url 'service_details' slug=s.slug %}"> 
+                               
                                 <span>{{ s.name }}</span>
+                                
                             </a>
                         </li>
                     {% empty %}

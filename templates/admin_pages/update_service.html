@@ -108,13 +108,30 @@
 <!-- CKEditor -->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 <script>
-let mainEditor;
-ClassicEditor.create(document.querySelector('#serviceDescription'))
-  .then(editor => mainEditor = editor)
+let editor;
+ClassicEditor
+ 
+  .create(document.querySelector('#serviceDescription'), {
+      toolbar: [
+        'heading', '|',
+        'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+        'bulletedList', 'numberedList', 'blockQuote', '|',
+        'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+      ],
+      ckfinder: {
+        uploadUrl: '{% url "ckeditor_upload" %}'
+      },
+      simpleUpload: {
+        uploadUrl: '{% url "ckeditor_upload" %}',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+      }
+    })
+  .then(e => editor = e)
   .catch(error => console.error(error));
 
-document.getElementById('updateServiceForm').addEventListener('submit', function() {
-    document.querySelector('#serviceDescription').value = mainEditor.getData();
+// Sync CKEditor data before submit
+document.getElementById('serviceForm').addEventListener('submit', function() {
+    document.querySelector('#serviceDescription').value = editor.getData();
 });
 </script>
 
