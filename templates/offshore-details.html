@@ -29,7 +29,6 @@
     <!-- Preloader -->
     <div class="preloader"></div>
 
-    <!-- Main Header-->
     <header class="main-header header-style-two">
 
       <!-- Header Top -->
@@ -42,10 +41,35 @@
               <li><i class="fa-solid fa-envelope" style="color: white;"></i> <a href=""><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
               </li>
               <li>
-              <a href="{% url 'cost_calculator' %}" style="text-decoration:none; color:white; display:flex; align-items:center;">
-                <i class="fa-solid fa-calculator"  style="margin-right:8px; color: #fff;"></i>
-                Business Cost Calculator
-              </a>
+             <a href="{% url 'cost_calculator' %}" class="btn-cost-calculator">
+
+  <span style="color: #D3202A;">Business Cost Calculator</span>
+  
+</a>
+
+<style>
+.btn-cost-calculator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* space between icon and text */
+    padding: 3px 15px; /* button size */
+    background-color: #fff; /* button color */
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cost-calculator i {
+    font-size: 18px; /* icon size */
+}
+
+
+</style>
+
             </li>
             </ul>
           </div>
@@ -129,9 +153,7 @@
                   <li>
                  <a href="{% url 'contact' %}"> Contact Us</a>
                   </li> 
-                  <li>
-                 <a href="{% url 'contact' %}"> Contact Us</a>
-                  </li>                                        
+                                        
                                        
                  </ul>
         </li>
@@ -154,22 +176,22 @@
         <div class="mobile-menu">
           <div class="menu-backdrop" ></div>
           <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-          <nav class="menu-box" style="background-color: aliceblue;">
+          <nav class="menu-box" style="background-color: #D3202A;">
             <div class="upper-box">
               <div class="nav-logo">
                 <a href="{% url 'index' %}">
-                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                    <img src="{% static 'images/logo12.png' %}" alt="Logo">
                 </a>
             </div>
 
-              <div class="close-btn"><i class="icon fa fa-times" style="color: black;"></i></div>
+              <div class="close-btn"><i class="icon fa fa-times"></i></div>
             </div>
             <ul class="navigation clearfix d-block d-lg-none">
               <!--Keep This Empty / Menu will come through Javascript-->
             </ul>
             <div class="content-box d-none d-lg-block">
-              <h4 class="title" style="color: black;">About Us</h4>
-              <p class="text" style="color: black;">
+              <h4 class="title">About Us</h4>
+              <p class="text" style="color: #f8f5f2;">
               Gulf Central is the premier hub for entrepreneurs and businesses, offering expert business setup, PRO, visa, and company formation services across Dubai and the UAE.
               </p>
             </div>
@@ -177,24 +199,24 @@
               <li>
                 <!-- Contact Info Box -->
                 <div class="contact-info-box">
-                  <i class="icon lnr-icon-phone-handset" style="color: black;"></i>
-                  <span class="title" style="color: black;">Call Now</span>
-                  <a href="" style="color: black;">+971 56 804 7000</a>
+                  <i class="icon lnr-icon-phone-handset" ></i>
+                  <span class="title" style="color: #f8f5f2;">Call Now</span>
+                  <a href="" >+971 56 804 7000</a>
                 </div>
               </li>
               <li>
                 <!-- Contact Info Box -->
                 <div class="contact-info-box">
-                  <span class="icon lnr-icon-envelope1" style="color: black;"></span>
-                  <span class="title" style="color: black;">Send Email</span>
-                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail=""> office@gulfcentral.ae</span></a>
+                  <span class="icon lnr-icon-envelope1"></span>
+                  <span class="title" style="color: #f8f5f2;">Send Email</span>
+                  <a href="" ><span class="__cf_email__"  data-cfemail=""> office@gulfcentral.ae</span></a>
                 </div>
               </li>
               <li>
                 <!-- Contact Info Box -->
-                <div class="contact-info-box" style="color: black;">
-                  <span class="icon lnr-icon-clock" style="color: black;"></span>
-                  <span class="title" style="color: black;">Send Email</span>
+                <div class="contact-info-box" >
+                  <span class="icon lnr-icon-clock" ></span>
+                  <span class="title" style="color: #f8f5f2;">Send Email</span>
                   Mon - Sat 8:00 - 6:30, Sunday - CLOSED
                 </div>
               </li>
@@ -208,6 +230,7 @@
           </nav>
         </div>
         <!-- End Mobile Menu -->
+    
         <!-- Header Search -->
         <div class="search-popup">
           <span class="search-back-drop"></span>
@@ -256,107 +279,413 @@
      
       /* Mobile menu link color fix */
 .mobile-menu .navigation li a {
-    color: #000 !important;   /* Black text */
+    color: #fff !important;   /* Black text */
 }
 
 /* Mobile menu dropdown arrow color if any */
 .mobile-menu .navigation li a::after {
-    color: #000 !important;
+    color: #fff !important;
 }
     </style>
 <!-- Banner area start here -->
 
   <!-- Start main-content -->
-<section class="page-title" style="background-image: url({% static 'images/about/mainland.jpg' %});">
-  <div class="auto-container">
-    <div class="title-outer">
-      <ul class="page-breadcrumb">
-        <li><a href="{% url 'index' %}" style="color: aliceblue;">Home</a></li>
-        <li>Offshore Company Setup</li>
-      </ul>
-      <h1 class="title">Offshore Company Setup</h1>
+
+
+  <section class="banner-section-two paralax__animation" style="padding: 100px 0; display: flex; align-items: center; position:relative; overflow:hidden;">
+  <div class="sec-shape">
+      <img data-depth="0.03" src="{% static 'images/banner/banner-two-shape.png' %}" alt="Shape">
+  </div>
+
+  <div class="container">
+    <div class="row g-0 align-items-center justify-content-center">
+      <!-- Content Only -->
+      <div class="col-lg-10 content-column text-start">
+        <div class="inner-column">
+          <div class="content-box">
+
+            <!-- Sub Title -->
+            <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms"
+                style="background-color:#D3202A; color:#fff; padding:6px 15px; display:inline-block; border-radius:4px;">
+              Offshore Company Setup
+            </h6>
+
+            <!-- Google Reviews -->
+            <a href="https://share.google/nmkmZA2amHUiX8S5Z" target="_blank" style="text-decoration:none;">
+              <div style="display:flex; align-items:center; gap:10px; margin-top:12px; cursor:pointer;">
+                  <img src="{% static 'images/icon/g-r.svg' %}" alt="Google Reviews" style="height:40px;">
+                  <h6 style="margin:0; font-weight:600; font-size:18px; color:#000;">
+                    <span style="color:#FFD700;">★★★★★</span>  5/5 (2K+ Reviews)
+                  </h6>
+              </div>
+            </a>
+
+            <!-- Title -->
+            <h1 class="title wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1500ms">
+              <span style="color:#D3202A;">Offshore</span> Company Setup
+            </h1>
+
+            <!-- Description -->
+            <p class="text wow fadeInUp mt-3" data-wow-delay="500ms" data-wow-duration="1500ms" style="max-width:800px;">
+              Gulf Central provides comprehensive Offshore company formation services in Dubai and across the UAE. 
+              Enjoy complete privacy, zero taxation, global business opportunities, and hassle-free setup without 
+              the need for a physical office. We ensure your Offshore business is established quickly and compliantly.
+            </p>
+
+            <!-- Buttons -->
+            <div class="btn-wrp mt-4">
+              <a class="btn-two-rounded wow fadeInLeft" data-wow-delay="500ms" data-wow-duration="1500ms" 
+                 href="{% url 'about' %}" 
+                 style="background:#D3202A; color:#fff; padding:12px 28px; border-radius:30px; text-decoration:none; font-weight:600; text-transform:uppercase;">
+                Start Offshore Setup
+                <i class="fa-regular fa-angle-right" style="margin-left:6px;"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Stars -->
+  <div class="star1" style="position:absolute; top:10%; left:5%;">
+      <img src="{% static 'images/banner/banner-two-star.png' %}" alt="Star">
+  </div>
+  <div class="star2" style="position:absolute; bottom:15%; right:10%;">
+      <img src="{% static 'images/banner/banner-two-star.png' %}" alt="Star">
+  </div>
+</section>
+
+
+
+
+  <section class="about-section-three pt-120 pb-120">
+  <div class="container">
+    <div class="row g-5 g-xxl-0">
+      <!-- Image Column -->
+      <div class="col-xl-6 image-column">
+        <div class="inner-column">
+          <div class="shape"></div>
+          <figure class="image">
+            <img src="{% static 'images/about/offshore.jpg' %}" alt="Offshore Company Setup">
+          </figure>
+          <p class="text mt-30 wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+            Gulf Central specializes in seamless Offshore company setups in Dubai and across the UAE. 
+            We simplify the entire process—ensuring privacy, global trading opportunities, and complete tax exemptions. 
+            With us, establishing your Offshore entity becomes cost-effective and stress-free.
+          </p>
+
+          <div class="info mt-50 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
+            <a class="btn-one-rounded" style="background-color: #D3202A; color: #fff;" href="{% url 'contact' %}">
+              Start Offshore Setup <i class="fa-regular fa-arrow-up-right"></i>
+            </a>
+            <div class="user">
+              <ul>
+                <li><img src="{% static 'images/about/about-two-user1.png' %}" alt="Image"></li>
+                <li><img src="{% static 'images/about/about-two-user2.png' %}" alt="Image"></li>
+                <li><img src="{% static 'images/about/about-two-user3.png' %}" alt="Image"></li>
+                <li><img src="{% static 'images/about/about-two-user4.png' %}" alt="Image"></li>
+              </ul>
+              <h6 class="title">Trusted by Global Businesses 
+                <img src="{% static 'images/about/about-two-line.png' %}" alt="Line">
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Column -->
+      <div class="col-xl-6 content-column">
+        <div class="inner-column">
+          <div class="sec-title">
+            <h6 class="sub-title wow fadeInUp" style="background-color: #D3202A; color: #fff;" 
+                data-wow-delay="00ms" data-wow-duration="1500ms">
+              Offshore Company Setup
+            </h6>
+            <h2 class="title mb-30 wow splt-txt" data-splitting>
+              Gulf Central – Your Reliable Partner for Offshore Business Formation in UAE
+            </h2>
+            <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+              Planning to establish an Offshore company in the UAE? 
+              Gulf Central provides end-to-end Offshore formation solutions, including registration, 
+              documentation, bank account opening, and compliance management. 
+              Enjoy 100% foreign ownership, zero corporate taxes, and the freedom to trade globally 
+              without the need for a physical office in the UAE.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-<!-- end main-content -->
+<!-- Offshore area end here -->
 
-<!--Project Details Start-->
-<section class="project-details pt-120 pb-70">
-  <div class="container custom-container">
+
+
+<!-- Offshore Company Setup Section Start -->
+<section class="offshore-company-section pt-120 pb-120 bg-light">
+  <div class="container">
     <div class="row justify-content-center">
-      <div class="col-xl-11 col-lg-11 mb-5 mb-lg-0">
-        
+      <div class="col-lg-10">
+
         <!-- Section Title -->
-        <div class="sec-title mb-40">
-          <h2 class="title mb-30 wow splt-txt" data-splitting>
-            Set Up Your Offshore Company In Dubai With Gulf Central
+        <div class="text-center mb-60">
+          <h2 class="title wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
+            Offshore Company <span style="color:#D3202A;">Setup in Dubai</span> with Gulf Central
           </h2>
-          <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-            Business setup in dubai, Businesssetup services, Business setup services in dubai, 
-            Company formation services, company formation services in dubai <br>
-            If you're looking to establish an offshore company in the UAE, your first step is to check 
-            the rules and regulations of offshore business setup in Dubai. By having a good knowledge 
-            of the requirements and laws, you can rest assured that you're moving on the right path. 
-            But for those with a busy schedule, this can be a daunting and tedious task. 
-            This is where <strong>Gulf Central</strong> offers you the best assistance in company formation 
-            in Dubai and across the UAE. Thanks to our strong partnerships and government connections, 
-            we help our clients establish offshore businesses promptly and efficiently.
+          <p class="text wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1500ms">
+            Establishing an <strong>offshore company in Dubai</strong> can be complex. 
+            <strong>Gulf Central</strong> simplifies the process with expert guidance, 
+            government support, and seamless business setup solutions tailored to your needs.
           </p>
         </div>
 
-        <!-- Required Documents -->
-        <div class="sec-title mb-30">
-          <h3 class="subtitle">What Are The Important Documents Required For Offshore Company Setup In UAE?</h3>
+        <!-- Documents Required -->
+        <div class="mb-60">
+          <h3 class="subtitle mb-4 text-center">Documents Required</h3>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-file-signature fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Application Form</h6>
+                <p class="small text-muted">Submitted in the required format.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-id-card fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Passport Copies</h6>
+                <p class="small text-muted">Owner and shareholder passports.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-house fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Proof of Address</h6>
+                <p class="small text-muted">Valid residential address document.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-book fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">MOA (Memorandum)</h6>
+                <p class="small text-muted">Notarized Memorandum of Association.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-briefcase fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Business Plan</h6>
+                <p class="small text-muted">Clear and structured business model.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-user-tie fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Owner CV</h6>
+                <p class="small text-muted">Professional background of the owner.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul class="list-unstyled documents-list mb-50">
-          <li>● Application, mainly in requisite format</li>
-          <li>● Proof of valid address</li>
-          <li>● Passport copy of owner as well as shareholders</li>
-          <li>● Notarized MOA (Memorandum of Association)</li>
-          <li>● Business plan</li>
-          <li>● Professional data about the owner in curriculum vitae (CV)</li>
-          <li>● Designated manager's passport copy</li>
-        </ul>
 
-        <!-- Why Offshore -->
-        <div class="sec-title mb-30">
-          <h3 class="subtitle">Why You Should Consider Offshore Business Setup In Dubai/UAE?</h3>
+        <!-- Offshore Benefits -->
+        <div class="mb-60">
+          <h3 class="subtitle mb-4 text-center">Benefits of Offshore Setup</h3>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-globe fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Global Trade Access</h6>
+                <p class="small text-muted">Facilitates smooth international trade.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-hand-holding-usd fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Funding Opportunities</h6>
+                <p class="small text-muted">Easier access to international funding.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-user-check fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Single Shareholder</h6>
+                <p class="small text-muted">Only one shareholder required to register.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-building-slash fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">No Office Needed</h6>
+                <p class="small text-muted">Physical office not mandatory.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-percent fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Tax Free</h6>
+                <p class="small text-muted">100% exemption on corporate & personal tax.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-exchange-alt fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">No Currency Limits</h6>
+                <p class="small text-muted">Free currency movement across borders.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul class="list-unstyled why-us-list mb-40">
-          <li>● Hassle-free rules and regulations</li>
-          <li>● Facilitates easy international trade</li>
-          <li>● Helps in garnering international funding</li>
-          <li>● Only one shareholder is required for offshore company formation</li>
-          <li>● No currency restrictions</li>
-          <li>● Physical office is not mandatory</li>
-          <li>● 100% tax exemption (personal, corporate, and income tax)</li>
-        </ul>
 
         <!-- Why Gulf Central -->
-        <div class="sec-title mb-30">
-          <h3 class="subtitle">Why Choose Gulf Central For Offshore Business Setup In Dubai?</h3>
+        <div class="mb-60">
+          <h3 class="subtitle mb-4 text-center">Why Choose Gulf Central?</h3>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-people-arrows fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Trusted Sponsorship</h6>
+                <p class="small text-muted">Guidance in finding the right sponsor.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-user-shield fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Professional Handling</h6>
+                <p class="small text-muted">Complete transparency & compliance.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-headset fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Expert Consultants</h6>
+                <p class="small text-muted">Dedicated team guiding step by step.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm border-0 text-center p-4">
+                <i class="fa-solid fa-credit-card fa-2x mb-3 text-danger"></i>
+                <h6 class="fw-bold">Banking Support</h6>
+                <p class="small text-muted">Assistance with offshore bank accounts.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul class="list-unstyled why-us-list mb-40">
-          <li>● We help you find the right sponsor without any inconvenience</li>
-          <li>● Everything is handled with complete professionalism and knowledge</li>
-          <li>● Our dedicated consultants offer expert advice from beginning to end</li>
-          <li>● Assistance with offshore bank account opening and related services</li>
-        </ul>
 
-        <!-- Closing Note -->
-        <p class="closing-text wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
-          Overall, <strong>Gulf Central</strong> leaves no stone unturned when it comes to delivering 
-          the best assistance to our clients. Our consultants are exceptionally talented in guiding 
-          you through offshore company setup and ensuring compliance at every stage. 
-          <strong>Contact our team today</strong> to complete your offshore company formation in Dubai with ease.
-        </p>
+        
 
       </div>
     </div>
   </div>
 </section>
+<!-- Offshore Company Setup Section End -->
 
 
+<!-- Page Contact area start here -->
+    <section class="contact-details pt-120 pb-120">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-md-6 col-lg-4 wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+           
+        </div>
+        <div class="mt-100">
+          <div class="row g-5">
+            <div class="col-lg-6 content-column">
+              <div class="inner-column">
+                <div class="sec-title mb-30">
+                  <h2 class="title wow splt-txt" data-splitting>Get in touch</h2>
+                  <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">Lorem ipsum dolor sit
+                    amet consectetur adipiscing elit mattis
+                    faucibus <br> odio feugiat arc dolor.</p>
+                </div>
+                <div class="google-map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60838472.930255905!2d54.913433238070375!3d21.45730366517529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3663f18a24cbe857%3A0xa9416bfcd3a0f459!2sAsia!5e0!3m2!1sen!2sbd!4v1746550690065!5m2!1sen!2sbd" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+              </div>
+            </div>
+
+           
+
+            <div class="col-lg-6 content-column">
+  <div class="inner-column right-column">
+    <div class="sec-title mb-30">
+      <h2 class="title wow splt-txt" data-splitting>Fill Up The Form</h2>
+      <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+        Your email address will not be published. Required fields are marked *
+      </p>
+    </div>
+
+    <!-- 🚀 Toast Container (Top Right, above form) -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="toast align-items-center text-white 
+                      {% if message.tags == 'success' %} bg-success 
+                      {% elif message.tags == 'error' %} bg-danger 
+                      {% else %} bg-secondary {% endif %}
+                      border-0 mb-2 shadow" 
+               role="alert" aria-live="assertive" aria-atomic="true"
+               data-bs-autohide="true" data-bs-delay="4000">
+            <div class="d-flex">
+              <div class="toast-body">
+                {{ message }}
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" 
+                      data-bs-dismiss="toast"></button>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- 🚀 Contact Form -->
+    <form method="post" action="{% url 'offshore' %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="type-feild">
+        <i class="fa-light fa-user"></i>
+        {{ form.name }}
+      </div>
+
+      <div class="type-feild">
+        <i class="fa-light fa-phone"></i>
+        {{ form.phone }}
+      </div>
+
+      <div class="type-feild">
+        <i class="fa-light fa-envelope"></i>
+        {{ form.email }}
+      </div>
+
+      <div class="type-feild">
+        <i class="fa-light fa-pen-to-square"></i>
+        {{ form.message }}
+      </div>
+
+      <button type="submit" class="btn-two">
+        <i class="fa-light fa-paper-plane"></i> Get In Touch
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- 🚀 Script to auto-show toasts -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    toastElList.map(function (toastEl) {
+      return new bootstrap.Toast(toastEl).show()
+    });
+  });
+</script>
+
+        </div>
+      </div>
+    </section>
+    <!-- Page Contact area end here -->
 
 
 <!-- Custom CSS -->
@@ -406,41 +735,33 @@
           </div>
           <div class="col-lg-8">
             <div class="row g-4 g-xl-0">
-              <div class="col-sm-6 col-xl-3 footer-column">
-                <div class="footer-widget links-widget">
-                  <h4 class="widget-title">Resource</h4>
-                  <div class="widget-content">
-                    <ul class="user-links">
-                      <li><a href="#0">Product</a></li>
-                      <li><a href="#0">Services</a></li>
-                      <li><a href="#0">About Us</a></li>
-                      <li><a href="#0">Benefits</a></li>
-                    </ul>
-                  </div>
+              <div class="col-sm-6 col-xl-4 footer-column">
+              <div class="footer-widget links-widget">
+                <h4 class="widget-title">Resource</h4>
+                <div class="widget-content">
+                  <ul class="user-links">
+                  {% for service_footers in service_footer %}
+                    <li>
+                      <a href="{% url 'service_details' service_footers.slug %}">{{ service_footers.name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
                 </div>
               </div>
-              <div class="col-sm-6 col-xl-3 footer-column">
+            </div>
+             <div class="col-sm-6 col-xl-4 footer-column">
                 <div class="footer-widget links-widget">
-                  <h4 class="widget-title">Quick Link</h4>
+                  <h4 class="widget-title">Quick Links </h4>
                   <div class="widget-content">
                     <ul class="user-links">
-                      <li><a href="#0">Features</a></li>
-                      <li><a href="#0">Pricing Plan</a></li>
-                      <li><a href="#0">Best Program</a></li>
-                      <li><a href="#0">Press Kit</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-3 footer-column">
-                <div class="footer-widget links-widget">
-                  <h4 class="widget-title">Company</h4>
-                  <div class="widget-content">
-                    <ul class="user-links">
-                      <li><a href="#0">About</a></li>
-                      <li><a href="#0">Team Member</a></li>
-                      <li><a href="#0">Reviews</a></li>
-                      <li><a href="#0">Latest News</a></li>
+                      <!-- Quick Links -->
+                      <li><a href="{% url 'about' %}">About</a></li>
+                      <li><a href="{% url 'blogs'%}">Blogs</a></li>
+                      <li><a href="{% url 'news'%}">News</a></li>
+                      <li><a href="{% url 'cost_calculator'%}">Cost Calculator</a></li>
+                      
+                      <!-- Company Links -->
+                    
                     </ul>
                   </div>
                 </div>
@@ -471,7 +792,9 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
+     <p class="copyright-text">
+  Copyright ©2025, <a href="https://vynzora.com" target="_blank">Vynzora</a> All Rights Reserved
+</p>
         <ul class="footer-nav">
           <li><a href="{% url 'terms-and-conditions' %}">Terms & Conditions</a></li>
           

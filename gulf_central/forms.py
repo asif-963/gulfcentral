@@ -1,15 +1,10 @@
 from django import forms
 
-from .models import Menu, Category, Service, ContactModel, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog
+from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature, Contact, ServiceEnquiry
 from ckeditor.widgets import CKEditorWidget  
 
 
 
-# Contact us
-class ContactModelForm(forms.ModelForm):
-    class Meta:
-        model = ContactModel
-        fields = '__all__'
 
 # NewsForm
 class NewsForm(forms.ModelForm):
@@ -88,4 +83,23 @@ class BlogForm(forms.ModelForm):
             'category': forms.Select(attrs={'class': 'form-control', 'required': True}),
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Blog Title', 'required': True}),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            
         }
+
+# Contact Form
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'phone', 'email', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Your Name*'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Your Phone Number*'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Email Address*'}),
+            'message': forms.Textarea(attrs={'placeholder': 'Enter Your Message Here'}),
+        }
+
+#service enquiry
+class ServiceEnquiryForm(forms.ModelForm):
+    class Meta:
+        model = ServiceEnquiry
+        fields = ['name', 'email', 'phone', 'service_name', 'message']

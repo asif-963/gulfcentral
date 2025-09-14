@@ -1,0 +1,72 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .table-responsive-custom {
+    max-height: 70vh;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .table-responsive-custom thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: #fff;
+    z-index: 10;
+  }
+  .table td, .table th {
+    vertical-align: middle;
+  }
+  @media (max-width: 768px) {
+    .table td, .table th {
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<div class="container mt-4">
+  <h3>Contact Enquiries</h3> <br>
+
+  <div class="table-responsive-custom">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Full Name</th>
+          <th>Phone Number</th>
+          <th>Email Address</th>
+          <th>Message</th>
+          <th>Submitted On</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for contact in contacts %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.phone }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.message }}</td>
+       <td>{{ contact.created_at|date:"d M Y" }}</td>
+          <td>
+            <a href="{% url 'delete_contact' contact.id %}" 
+               class="btn btn-danger btn-sm"
+               >
+              Delete
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="text-center">No enquiries found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .table-responsive-custom {
+    max-height: 70vh;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .table-responsive-custom thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: #fff;
+    z-index: 10;
+  }
+  .table td, .table th {
+    vertical-align: middle;
+  }
+  @media (max-width: 768px) {
+    .table td, .table th {
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<div class="container mt-4">
+  <h3>Cost Calculator Enquiries</h3> <br>
+
+  <div class="table-responsive-custom">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>What is your Business Activity?</th>
+          <th>Preferred Jurisdiction</th>
+          <th>Do you require Sponsorship?</th>
+          <th>Number of Owners</th>
+          <th>Do you need Visas?</th>
+          <th>Is Office Space Required?</th>
+          <th>Proposed Company Name</th>
+          <th>Full Name</th>
+          <th>Email Address</th>
+          <th>Phone Number</th>
+          <th>Nationality</th>
+          <th>Additional Message</th>
+          <th>Submitted On</th>
+          <th>Delete</th> <!-- ✅ New column -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for enquiry in enquiries %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ enquiry.business_activity }}</td>
+          <td>{{ enquiry.jurisdiction }}</td>
+          <td>{{ enquiry.sponsorship|default:"-" }}</td>
+          <td>{{ enquiry.owners }}</td>
+          <td>{{ enquiry.visas }}</td>
+          <td>{{ enquiry.office_required }}</td>
+          <td>{{ enquiry.company_name|default:"-" }}</td>
+          <td>{{ enquiry.name }}</td>
+          <td>{{ enquiry.email }}</td>
+          <td>{{ enquiry.phone }}</td>
+          <td>{{ enquiry.nationality }}</td>
+          <td>{{ enquiry.message }}</td>
+          <td>{{ enquiry.created_at|date:"d M Y" }}</td>
+          <td>
+            <a href="{% url 'delete_enquiry' enquiry.id %}" 
+               class="btn btn-danger btn-sm"
+               >
+              Delete
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="15" class="text-center">No enquiries found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

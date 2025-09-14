@@ -1,0 +1,72 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .table-responsive-custom {
+    max-height: 70vh;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .table-responsive-custom thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: #fff;
+    z-index: 10;
+  }
+  .table td, .table th {
+    vertical-align: middle;
+  }
+  @media (max-width: 768px) {
+    .table td, .table th {
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<div class="container mt-4">
+  <h3>Service Enquiries</h3> <br>
+
+  <div class="table-responsive-custom">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Service</th>
+          <th>Message</th>
+          <th>Submitted On</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for enquiry in enquiries %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ enquiry.name }}</td>
+          <td>{{ enquiry.email }}</td>
+          <td>{{ enquiry.phone }}</td>
+          <td>{{ enquiry.service_name }}</td>
+          <td>{{ enquiry.message|truncatechars:50 }}</td>
+          <td>{{ enquiry.created_at|date:"d M Y" }}</td>
+          <td>
+            <a href="{% url 'delete_service_enquiry' enquiry.id %}" 
+               class="btn btn-danger btn-sm">
+              Delete
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8" class="text-center">No enquiries found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

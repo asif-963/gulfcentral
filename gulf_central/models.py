@@ -5,16 +5,7 @@ from django.utils import timezone
 from django.urls import reverse
 
 
-# Create your models here.
-class ContactModel(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
 
-    def __str__(self):
-        return self.name if self.name else "Unnamed Contact"
-    
 
 # News
 class News(models.Model):
@@ -131,3 +122,97 @@ class ServiceFAQ(models.Model):
 
     def __str__(self):
         return f"FAQ for {self.service.name}: {self.question[:50]}..."
+    
+
+class PricingSection(models.Model):
+    title = models.CharField(
+        max_length=255,
+        default="Flexible Pricing Plans",
+        help_text="Main title for the pricing section"
+    )
+    description = models.TextField(
+        blank=True,
+        default="Choose from our tailored plans designed to meet your business needs.",
+        help_text="Short description under the title"
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class PricingPlan(models.Model):
+    section = models.ForeignKey(
+        PricingSection,
+        on_delete=models.CASCADE,
+        related_name="plans"
+    )
+    title = models.CharField(
+        max_length=100,
+        help_text="Plan name (e.g., Starter, Standard, Pro)"
+    )
+    description = models.TextField(
+        blank=True,
+        help_text="Short tagline for the plan"
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class PlanFeature(models.Model):
+    plan = models.ForeignKey(
+        PricingPlan,
+        on_delete=models.CASCADE,
+        related_name="features"
+    )
+    text = models.CharField(
+        max_length=255,
+        help_text="Feature description (Admin can add any number of features)"
+    )
+
+    def __str__(self):
+        return f"{self.plan.title} - {self.text}"
+
+
+
+
+# Cost Calculator 
+class CostCalculatorEnquiry(models.Model):
+    business_activity = models.CharField(max_length=255)
+    jurisdiction = models.CharField(max_length=100)
+    sponsorship = models.CharField(max_length=10, blank=True, null=True)
+    owners = models.CharField(max_length=50)
+    visas = models.CharField(max_length=10)
+    office_required = models.CharField(max_length=10)
+    company_name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    nationality = models.CharField(max_length=50)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.business_activity}"
+
+#Cotnact
+class Contact(models.Model):
+    name = models.CharField(max_length=200)
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"
+
+class ServiceEnquiry(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    service_name = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.service_name}"

@@ -18,7 +18,11 @@ urlpatterns = [
     path('blogs/<int:pk>/', views.blog_detail, name='blog_detail'), 
 
 
-    path('cost-calculator/', views.cost_calculator, name= 'cost_calculator'),
+     path('submit-enquiry/', views.submit_enquiry, name='submit_enquiry'),
+    path('cost-calculator/', views.cost_calculator, name='cost_calculator'),
+
+
+
     path('service/<slug:slug>/', views.service_details, name='service_details'),
 
     path('contact/', views.contact, name= 'contact'),
@@ -49,9 +53,7 @@ urlpatterns = [
     path('update_client_review/<int:id>/',views.update_client_review,name='update_client_review'),
     path('delete_client_review/<int:id>/',views.delete_client_review,name='delete_client_review'),
 
-    # Contact us
-    path('contact_view',views.contact_view,name='contact_view'),
-    path('delete_contact/<int:id>/',views.delete_contact,name='delete_contact'),
+   
 
      # MENUS
     path('menus/', views.view_menus, name='view_menus'),
@@ -82,6 +84,24 @@ urlpatterns = [
     path('blogs/view/', views.view_blogs, name='view_blogs'),
     path('blogs/update/<int:pk>/', views.update_blog, name='update_blog'),
     path('blogs/delete/<int:pk>/', views.delete_blog, name='delete_blog'),
+
+    path('add-pricing/', views.add_pricing_section, name='add_pricing'),
+    path('view-pricing/', views.view_pricing_sections, name='view_pricing'),  # updated view function name
+    path('update-pricing/<int:section_id>/', views.update_pricing_section, name='update_pricing'),
+    path('delete-pricing/<int:section_id>/', views.delete_pricing_section, name='delete_pricing'),
+
+
+   path('view-enquiries/', views.view_enquiries, name='view_enquiries'),
+   path('enquiries/delete/<int:enquiry_id>/', views.delete_enquiry, name='delete_enquiry'),
+
+     path('view-contacts/', views.view_contacts, name='view_contacts'),
+    path('contacts/delete/<int:pk>/', views.delete_contact, name='delete_contact'),
+
+    path('view-service-enquiries/', views.view_service_enquiries, name='view_service_enquiries'),
+    path('service-enquiries/delete/<int:id>/', views.delete_service_enquiry, name='delete_service_enquiry'),
+
+
+   
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # handler404 = 'gulf_central.views.page_404'

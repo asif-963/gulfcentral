@@ -5,8 +5,15 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 import random
 
-from .models import Menu, Category, Service, ContactModel, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog
-from .forms import ContactModelForm, NewsForm, MenuForm, CategoryForm, ServiceForm, ClientReviewForm, BlogCategoryForm, BlogForm
+from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature
+from .forms import NewsForm, MenuForm, CategoryForm, ServiceForm, ClientReviewForm, BlogCategoryForm, BlogForm
+from .forms import ContactForm, ServiceEnquiryForm
+from .models import Contact, ServiceEnquiry
+
+
+
+
+
 
 
 
@@ -17,25 +24,32 @@ from .forms import ContactModelForm, NewsForm, MenuForm, CategoryForm, ServiceFo
 def index(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     client_reviews = ClientReview.objects.all()
+    section = PricingSection.objects.prefetch_related("plans__features").first()
     latest_news = News.objects.order_by('-created_date')[:3]
-    services = Service.objects.values_list('name', flat=True)  
+    services = Service.objects.values_list('name', flat=True) 
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer))) 
     categories = list(Category.objects.prefetch_related('services').all())
     random.shuffle(categories)       # Shuffle all categories
     categories = categories[:6]   
-    return render(request, 'index.html', {'menus': menus, 'client_reviews':client_reviews, 'latest_news':latest_news, 'categories': categories,'services':list(services)})
+    return render(request, 'index.html', {'menus': menus, 'client_reviews':client_reviews, 'latest_news':latest_news, 'categories': categories,'service_footer':random_services,'services':list(services), 'section':section})
 
 
 def about(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     client_reviews = ClientReview.objects.all()
-    return render(request, 'about.html',{'menus': menus, 'client_reviews':client_reviews})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    return render(request, 'about.html',{'menus': menus, 'client_reviews':client_reviews,'service_footer':random_services})
 
 
 # News listing page
 def news(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     news_items = News.objects.order_by('-created_date')  # Latest news first
-    context = {'menus': menus, 'news_items': news_items}
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    context = {'menus': menus, 'news_items': news_items, 'service_footer':random_services}
     return render(request, 'news.html', context)
 
 # News details page
@@ -43,7 +57,9 @@ def news_detail(request, pk):
     menus = Menu.objects.prefetch_related('categories__services').all()
     news_item = get_object_or_404(News, pk=pk)
     latest_news = News.objects.exclude(pk=pk).order_by('-created_date')[:5]
-    context = {'news': news_item, 'menus': menus, 'latest_news':latest_news}
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    context = {'news': news_item, 'menus': menus, 'latest_news':latest_news, 'service_footer':random_services}
     return render(request, 'news-details.html', context)
 
 
@@ -64,51 +80,139 @@ def blogs(request):
         blogs = blogs.filter(category_id=category_id)
 
     categories = BlogCategory.objects.all()
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
 
     return render(request, "blogs.html", {
         "menus": menus,
         "blogs": blogs,
         "categories": categories,
         "query": query,
+        'service_footer':random_services
     })
 def blog_detail(request, pk):
     menus = Menu.objects.prefetch_related('categories__services').all()
     blog = get_object_or_404(Blog, pk=pk)
     latest_blogs = Blog.objects.exclude(pk=pk)[:3]  # 3 latest posts excluding current
     categories = BlogCategory.objects.all()
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
     
     return render(request, "blog-details.html", {
         "menus": menus,
         "blog": blog,
         "latest_blogs": latest_blogs,
         "categories": categories,
+        'service_footer':random_services
     })
 
 
 
+from .models import CostCalculatorEnquiry
+
 def cost_calculator(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    return render(request, 'cost-calculator.html',{'menus': menus})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    return render(request, "cost-calculator.html", {
+        "menus": menus,'service_footer':random_services })
+
+from django.contrib import messages
+
+def submit_enquiry(request):
+    if request.method == "POST":
+        print("POST DATA:", request.POST)  # 👈 Add this for debugging
+
+        CostCalculatorEnquiry.objects.create(
+            business_activity=request.POST.get('business_activity'),
+            jurisdiction=request.POST.get('jurisdiction'),
+            sponsorship=request.POST.get('sponsorship', ''),
+            owners=request.POST.get('owners'),
+            visas=request.POST.get('visas'),
+            office_required=request.POST.get('office_required'),
+            company_name=request.POST.get('company_name', ''),
+            name=request.POST.get('name'),
+            email=request.POST.get('email'),
+            phone=request.POST.get('phone'),
+            nationality=request.POST.get('nationality'),
+            message=request.POST.get('message'),
+        )
+        messages.success(request, "Enquiry submitted successfully!")
+        return redirect('cost_calculator')
+    return redirect('cost_calculator')
+
+
+
+
 
 def mainland(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    return render(request, 'mainland-details.html',{'menus': menus})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('mainland')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ContactForm()
+    return render(request, 'mainland-details.html',{'form': form, 'menus': menus,'service_footer':random_services})
 
 def freezone(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    return render(request, 'freezone-details.html',{'menus': menus})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('freezone')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ContactForm()
+    return render(request, 'freezone-details.html',{'form': form, 'menus': menus,'service_footer':random_services})
 
 def offshore(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    return render(request, 'offshore-details.html',{'menus': menus})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('offshore')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ContactForm()
+    return render(request, 'offshore-details.html',{'form': form, 'menus': menus,'service_footer':random_services})
 
 def service_details(request, slug):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    # Get the service object
     service = get_object_or_404(Service, slug=slug)
     related_services = Service.objects.filter(category=service.category).exclude(id=service.id)
     process_steps = ServiceProcessStep.objects.filter(service=service).order_by('step_number')
     faqs = ServiceFAQ.objects.filter(service=service)
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+
+    if request.method == 'POST':
+        form = ServiceEnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your enquiry has been submitted successfully!")
+            return redirect(request.path_info)  # reload the same page to show toast
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ServiceEnquiryForm(initial={'service_name': service.name})
+
 
     context = {
         'service': service,
@@ -116,21 +220,45 @@ def service_details(request, slug):
         'faqs': faqs,
         'related_services': related_services,
         'menus': menus,
+        'form': form,
+        'service_footer':random_services
     }
+
     return render(request, 'service-details.html', context)
+
+
+
 
 def terms_and_conditions(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    return render(request, 'terms_and_conditions.html',{'menus': menus})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    return render(request, 'terms_and_conditions.html',{'menus': menus,'service_footer':random_services})
 
 def privacy_and_policy(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    return render(request, 'privacy_and_policy.html',{'menus': menus})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    return render(request, 'privacy_and_policy.html',{'menus': menus,'service_footer':random_services})
 
 
 def contact(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
-    return render(request, 'contact.html',{'menus': menus})
+    service_footer = list(Service.objects.values('name', 'slug'))
+    random_services = random.sample(service_footer, min(4, len(service_footer)))
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('contact')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form, 'menus': menus,'service_footer':random_services})
+
+
 
 
 
@@ -176,18 +304,7 @@ def dashboard(request):
     return render(request,'admin_pages/dashboard.html')
 
 
-# Contact 
-@login_required(login_url='user_login')
-def contact_view(request):
-    contacts = ContactModel.objects.all().order_by('-id')
-    return render(request,'admin_pages/contact_view.html',{'contacts':contacts})
 
-
-@login_required(login_url='user_login')
-def delete_contact(request,id):
-    contact = ContactModel.objects.get(id=id)
-    contact.delete()
-    return redirect('contact_view')
 
 
 
@@ -624,3 +741,141 @@ def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     blog.delete()
     return redirect('view_blogs')
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import PricingSection, PricingPlan, PlanFeature
+
+# Add Pricing Section
+@login_required(login_url='user_login')
+def add_pricing_section(request):
+    if request.method == "POST":
+        # Create Section
+        title = request.POST.get('section_title', '').strip()
+        description = request.POST.get('section_description', '').strip()
+        if title:
+            section = PricingSection.objects.create(title=title, description=description)
+
+            # Handle dynamic plans
+            for key in request.POST:
+                if key.startswith('plans[') and key.endswith('][title]'):
+                    index = key.split('[')[1].split(']')[0]
+                    plan_title = request.POST.get(f'plans[{index}][title]', '').strip()
+                    plan_description = request.POST.get(f'plans[{index}][description]', '').strip()
+                    if plan_title:
+                        plan = PricingPlan.objects.create(section=section, title=plan_title, description=plan_description)
+
+                        # Features for the plan
+                        features = request.POST.getlist(f'plans[{index}][features][]')
+                        for feature_text in features:
+                            if feature_text.strip():
+                                PlanFeature.objects.create(plan=plan, text=feature_text.strip())
+
+            return redirect('view_pricing')
+
+    return render(request, 'admin_pages/add_card.html')
+
+# View all Pricing Sections
+@login_required(login_url='user_login')
+def view_pricing_sections(request):
+    sections = PricingSection.objects.all()
+    return render(request, 'admin_pages/view_card.html', {'sections': sections})
+
+@login_required(login_url='user_login')
+def update_pricing_section(request, section_id):
+    section = get_object_or_404(PricingSection, id=section_id)
+
+    if request.method == "POST":
+        # update section
+        section.title = request.POST.get("section_title")
+        section.description = request.POST.get("section_description")
+        section.save()
+
+        # handle existing plans
+        for plan in section.plans.all():
+            keep_plan = request.POST.get(f"keep_plan_{plan.id}", "1")
+            if keep_plan == "0":
+                plan.delete()
+                continue
+
+            # update plan fields
+            plan.title = request.POST.get(f"plan_title_{plan.id}", plan.title)
+            plan.description = request.POST.get(f"plan_desc_{plan.id}", plan.description)
+            plan.save()
+
+            # handle features
+            for feature in plan.features.all():
+                keep_feature = request.POST.get(f"keep_feature_{feature.id}", "1")
+                if keep_feature == "0":
+                    feature.delete()
+                    continue
+
+                feature.text = request.POST.get(f"feature_{feature.id}", feature.text)
+                feature.save()
+
+            # new features
+            for key, value in request.POST.items():
+                if key.startswith(f"new_feature_{plan.id}_") and value.strip():
+                    plan.features.create(text=value.strip())
+
+        # handle new plans
+        new_plan_titles = [k for k in request.POST if k.startswith("new_plan_title_")]
+        for key in new_plan_titles:
+            index = key.split("_")[-1]
+            title = request.POST.get(f"new_plan_title_{index}")
+            desc = request.POST.get(f"new_plan_desc_{index}")
+            if title.strip():
+                new_plan = section.plans.create(title=title.strip(), description=desc.strip())
+                # add features
+                for fk, fv in request.POST.items():
+                    if fk.startswith(f"new_feature_plan_{index}_") and fv.strip():
+                        new_plan.features.create(text=fv.strip())
+
+        return redirect("view_pricing")
+
+    return render(request, "admin_pages/update_card.html", {"section": section})
+
+
+@login_required(login_url='user_login')
+def delete_pricing_section(request, section_id):
+    section = get_object_or_404(PricingSection, id=section_id)
+    section.delete()
+    return redirect('view_pricing')
+
+@login_required(login_url='user_login')
+def view_enquiries(request):
+    enquiries = CostCalculatorEnquiry.objects.all().order_by('-created_at')
+    return render(request, 'admin_pages/view_cost_calculator_enquiries.html', {'enquiries': enquiries})
+
+@login_required(login_url='user_login')
+def delete_enquiry(request, enquiry_id):
+    enquiry = get_object_or_404(CostCalculatorEnquiry, id=enquiry_id)
+    enquiry.delete()
+    messages.success(request, "Enquiry deleted successfully!")
+    return redirect('view_enquiries')
+
+
+
+@login_required(login_url='user_login')
+def view_contacts(request):
+    contacts = Contact.objects.all().order_by('-created_at')
+    return render(request, 'admin_pages/view_contacts.html', {'contacts': contacts})
+
+@login_required(login_url='user_login')
+def delete_contact(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    contact.delete()
+    messages.success(request, "Contact deleted successfully!")
+    return redirect('view_contacts')
+
+
+@login_required(login_url='user_login')
+def view_service_enquiries(request):
+    enquiries = ServiceEnquiry.objects.all().order_by('-created_at')
+    return render(request, 'admin_pages/view_service_enquiries.html', {'enquiries': enquiries})
+
+@login_required(login_url='user_login')
+def delete_service_enquiry(request, id):
+    enquiry = get_object_or_404(ServiceEnquiry, id=id)
+    enquiry.delete()
+    messages.success(request, "Service enquiry deleted successfully.")
+    return redirect('view_service_enquiries')

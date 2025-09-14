@@ -1,0 +1,93 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* Scrollable table container */
+  .table-responsive-custom {
+    max-height: 70vh; /* Vertical scroll */
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  /* Optional: freeze header */
+  .table-responsive-custom thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: #fff;
+    z-index: 10;
+  }
+
+  /* Small padding adjustments */
+  .table td, .table th {
+    vertical-align: middle;
+  }
+
+  /* Wrapping long content */
+  td ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+  }
+
+  td ul li {
+    list-style-type: disc;
+    margin-left: 10px;
+  }
+
+  /* Responsive horizontal scroll for small screens */
+  @media (max-width: 768px) {
+    .table td, .table th {
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<div class="container mt-4">
+  <h3>Pricing Sections</h3>
+  <a href="{% url 'add_pricing' %}" class="btn btn-success mb-3">Add Section</a>
+
+  <div class="table-responsive-custom">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Section Title</th>
+          <th>Description</th>
+          <th>Plans & Features</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for section in sections %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ section.title }}</td>
+          <td>{{ section.description }}</td>
+          <td>
+            {% for plan in section.plans.all %}
+              <strong>{{ plan.title }}</strong>: {{ plan.description }} <br>
+              <ul>
+                {% for feature in plan.features.all %}
+                  <li>{{ feature.text }}</li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+          </td>
+          <td>
+            <a href="{% url 'update_pricing' section.id %}" class="btn btn-warning btn-sm mb-1">Update</a>
+            <a href="{% url 'delete_pricing' section.id %}" class="btn btn-danger btn-sm mb-1"
+               onclick="return confirm('Are you sure you want to delete this section?');">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-center">No pricing sections found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

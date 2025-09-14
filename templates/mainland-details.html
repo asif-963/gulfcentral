@@ -29,7 +29,6 @@
     <!-- Preloader -->
     <div class="preloader"></div>
 
-    <!-- Main Header-->
     <header class="main-header header-style-two">
 
       <!-- Header Top -->
@@ -42,10 +41,35 @@
               <li><i class="fa-solid fa-envelope" style="color: white;"></i> <a href=""><span class="__cf_email__" data-cfemail="">office@gulfcentral.ae</span></a>
               </li>
               <li>
-              <a href="{% url 'cost_calculator' %}" style="text-decoration:none; color:white; display:flex; align-items:center;">
-                <i class="fa-solid fa-calculator"  style="margin-right:8px; color: #fff;"></i>
-                Business Cost Calculator
-              </a>
+             <a href="{% url 'cost_calculator' %}" class="btn-cost-calculator">
+
+  <span style="color: #D3202A;">Business Cost Calculator</span>
+  
+</a>
+
+<style>
+.btn-cost-calculator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* space between icon and text */
+    padding: 3px 15px; /* button size */
+    background-color: #fff; /* button color */
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cost-calculator i {
+    font-size: 18px; /* icon size */
+}
+
+
+</style>
+
             </li>
             </ul>
           </div>
@@ -129,9 +153,7 @@
                   <li>
                  <a href="{% url 'contact' %}"> Contact Us</a>
                   </li> 
-                  <li>
-                 <a href="{% url 'contact' %}"> Contact Us</a>
-                  </li>                                        
+                                        
                                        
                  </ul>
         </li>
@@ -154,22 +176,22 @@
         <div class="mobile-menu">
           <div class="menu-backdrop" ></div>
           <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-          <nav class="menu-box" style="background-color: aliceblue;">
+          <nav class="menu-box" style="background-color: #D3202A;">
             <div class="upper-box">
               <div class="nav-logo">
                 <a href="{% url 'index' %}">
-                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                    <img src="{% static 'images/logo12.png' %}" alt="Logo">
                 </a>
             </div>
 
-              <div class="close-btn"><i class="icon fa fa-times" style="color: black;"></i></div>
+              <div class="close-btn"><i class="icon fa fa-times"></i></div>
             </div>
             <ul class="navigation clearfix d-block d-lg-none">
               <!--Keep This Empty / Menu will come through Javascript-->
             </ul>
             <div class="content-box d-none d-lg-block">
-              <h4 class="title" style="color: black;">About Us</h4>
-              <p class="text" style="color: black;">
+              <h4 class="title">About Us</h4>
+              <p class="text" style="color: #f8f5f2;">
               Gulf Central is the premier hub for entrepreneurs and businesses, offering expert business setup, PRO, visa, and company formation services across Dubai and the UAE.
               </p>
             </div>
@@ -177,24 +199,24 @@
               <li>
                 <!-- Contact Info Box -->
                 <div class="contact-info-box">
-                  <i class="icon lnr-icon-phone-handset" style="color: black;"></i>
-                  <span class="title" style="color: black;">Call Now</span>
-                  <a href="" style="color: black;">+971 56 804 7000</a>
+                  <i class="icon lnr-icon-phone-handset" ></i>
+                  <span class="title" style="color: #f8f5f2;">Call Now</span>
+                  <a href="" >+971 56 804 7000</a>
                 </div>
               </li>
               <li>
                 <!-- Contact Info Box -->
                 <div class="contact-info-box">
-                  <span class="icon lnr-icon-envelope1" style="color: black;"></span>
-                  <span class="title" style="color: black;">Send Email</span>
-                  <a href="" ><span class="__cf_email__" style="color: black;" data-cfemail=""> office@gulfcentral.ae</span></a>
+                  <span class="icon lnr-icon-envelope1"></span>
+                  <span class="title" style="color: #f8f5f2;">Send Email</span>
+                  <a href="" ><span class="__cf_email__"  data-cfemail=""> office@gulfcentral.ae</span></a>
                 </div>
               </li>
               <li>
                 <!-- Contact Info Box -->
-                <div class="contact-info-box" style="color: black;">
-                  <span class="icon lnr-icon-clock" style="color: black;"></span>
-                  <span class="title" style="color: black;">Send Email</span>
+                <div class="contact-info-box" >
+                  <span class="icon lnr-icon-clock" ></span>
+                  <span class="title" style="color: #f8f5f2;">Send Email</span>
                   Mon - Sat 8:00 - 6:30, Sunday - CLOSED
                 </div>
               </li>
@@ -208,6 +230,7 @@
           </nav>
         </div>
         <!-- End Mobile Menu -->
+    
         <!-- Header Search -->
         <div class="search-popup">
           <span class="search-back-drop"></span>
@@ -256,124 +279,402 @@
      
       /* Mobile menu link color fix */
 .mobile-menu .navigation li a {
-    color: #000 !important;   /* Black text */
+    color: #fff !important;   /* Black text */
 }
 
 /* Mobile menu dropdown arrow color if any */
 .mobile-menu .navigation li a::after {
-    color: #000 !important;
+    color: #fff !important;
 }
     </style>
 <!-- Banner area start here -->
 
-  <!-- Start main-content -->
-<section class="page-title" style="background-image: url({% static 'images/about/mainland.jpg' %});">
-  <div class="auto-container">
-    <div class="title-outer">
-      <ul class="page-breadcrumb">
-        <li><a href="{% url 'index' %}" style="color: aliceblue;">Home</a></li>
-        <li>Mainland Company Setup</li>
-      </ul>
-      <h1 class="title">Mainland Company Setup</h1>
-    </div>
-  </div>
-</section>
-<!-- end main-content -->
 
-	<!--Project Details Start-->
-<section class="project-details pt-120 pb-70">
-  <div class="container custom-container">
-    <div class="row justify-content-center">
-      <div class="col-xl-11 col-lg-11 mb-5 mb-lg-0">
-        <div class="sec-title mb-40">
-          <h2 class="title mb-30 wow splt-txt" data-splitting>
-            Gulf Central - Your Trusted Partner for Business Setup in Dubai Mainland
-          </h2>
-          <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-            Business setup in dubai, Businesssetup services, Business setup services in dubai, 
-            Company formation services, company formation services in dubai <br>
-            Are you looking to establish your business in Mainland, UAE? If so, you’ve arrived at the right place. 
-            At Gulf Central, we provide comprehensive and affordable mainland company formation services in Dubai, 
-            catering to the specific needs of our clients. Our expert team is well-versed in the UAE business 
-            landscape, offering tailored guidance and support throughout the entire process—from documentation 
-            to final setup. With us, you’re not just starting a business; you’re building a foundation for success.
-          </p>
-        </div>
-          <!-- Section Title -->
-        <div class="sec-title mb-40">
+<!-- Banner area start here -->
+<section class="banner-section-two paralax__animation" style=" padding: 100px 0; display: flex; align-items: center;">
+<div class="sec-shape">
+    <img data-depth="0.03" src="{% static 'images/banner/banner-two-shape.png' %}" alt="Shape">
+</div>
+
+  <div class="container">
+    <div class="row g-0 align-items-center justify-content-center">
+      <!-- Content Only -->
+      <div class="col-lg-10 content-column text-start">
+        <div class="inner-column">
+          <div class="content-box">
+            <h6 class="sub-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms"
+                style="background-color:#D3202A; color:#fff; padding:6px 12px; display:inline-block; border-radius:4px;">
+              Mainland Company Setup
+            </h6>
+         <!-- Start Google Reviews Section -->
+          <a href="https://share.google/nmkmZA2amHUiX8S5Z" target="_blank" style="text-decoration:none;">
+            <div style="display:flex; align-items:left; gap:10px; justify-content:left; margin-top:10px; cursor:pointer;">
+                <!-- Google Review Image -->
+                <img src="{% static 'images/icon/g-r.svg' %}" alt="Google Reviews" style="height:40px;">
+
+                <!-- 5-Star Rating Text -->
+                <h6 style="margin:0; font-weight:600; font-size:18px; color:#000;">
+                  <span style="color:#FFD700;">★★★★★</span>  5/5 (2K+ Reviews)
+                </h6>
+            </div>
+          </a>
+
+
+
+
           
-          <h3 class="subtitle">Why Choose Mainland Company Formation in Dubai?</h3>
-          <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-            Setting up a mainland company in Dubai comes with numerous benefits that make it a prime choice for entrepreneurs. 
-            Some of the key advantages include:
-          </p>
+
+            <h1 class="title wow fadeInUp mt-3" data-wow-delay="200ms" data-wow-duration="1500ms">
+              <span style="color:#D3202A;">Mainland </span>Company Setup
+            </h1>
+        
+
+  
+
+            <p class="text wow fadeInUp mt-3" data-wow-delay="500ms" data-wow-duration="1500ms">
+  Gulf Central helps entrepreneurs and companies establish and grow their businesses in Dubai and the UAE, offering expert guidance on Mainland company setup, PRO services, visa assistance, and company formation.
+</p>
+
+            <div class="btn-wrp mt-4">
+              <a class="btn-two-rounded wow fadeInLeft" data-wow-delay="500ms" data-wow-duration="1500ms" 
+                 href="{% url 'about' %}" style="background:#D3202A; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; margin-right:10px;">
+                free consultation
+ <i class="fa-regular fa-angle-right"></i>
+              </a>
+            
+            </div>
+          </div>
         </div>
-
-        <!-- Key Advantages -->
-        <ul class="list-unstyled advantages-list mb-50">
-          <li><strong>1. Constructive Government Policies:</strong> Business-friendly regulations simplify the process of establishing and growing your business.</li>
-          <li><strong>2. Straightforward Setup Process:</strong> Dubai offers a well-structured framework for company formation with minimal bureaucratic hurdles.</li>
-          <li><strong>3. Supportive Legal Environment:</strong> Laws in Dubai are designed to encourage entrepreneurship and business expansion.</li>
-          <li><strong>4. No Personal Tax:</strong> Business owners enjoy the benefits of zero personal income tax in the UAE.</li>
-          <li><strong>5. Advanced Infrastructure:</strong> Dubai boasts state-of-the-art infrastructure to support various industries, making it easier to scale operations.</li>
-          <li><strong>6. No Minimum Capital Requirement:</strong> You can establish your business without the need for significant upfront capital.</li>
-          <li><strong>7. 100% Foreign Ownership:</strong> Businesses in Dubai Mainland can enjoy full foreign ownership without the need for a local partner or Emirati sponsor, giving you complete control over your enterprise.</li>
-        </ul>
-
-        <!-- Gulf Central Support -->
-        <div class="sec-title mb-30">
-          <h3 class="subtitle">How Gulf Central Helps You with LLC Company Formation in Dubai</h3>
-          <p class="text">At Gulf Central we understand that setting up a business requires more than just paperwork. 
-            Our experienced professionals provide end-to-end support for company formation, including:
-          </p>
-        </div>
-
-        <ul class="list-unstyled support-list mb-50">
-          <li><strong>1. Trade License Assistance:</strong> We help you secure the appropriate trade license for your business type, ensuring compliance with UAE regulations.</li>
-          <li><strong>2. Visa & PRO Services:</strong> From processing investor and employee visas to handling government formalities, our PRO services cover all your needs.</li>
-          <li><strong>3. Corporate Sponsorship (if applicable):</strong> While 100% foreign ownership is possible, we offer optional corporate sponsorship for businesses looking to minimize local risks or comply with specific industry requirements.</li>
-          <li><strong>4. Tailored Licensing Options:</strong> We provide guidance on different types of licenses based on your business activities:
-            <ul class="inner-list">
-              <li>- <strong>Professional License:</strong> For service-based businesses, such as consultants, freelancers, and professionals.</li>
-              <li>- <strong>Commercial License:</strong> For businesses involved in buying and selling goods, including general trading, retail, and wholesale activities.</li>
-              <li>- <strong>Industrial License:</strong> For businesses engaged in manufacturing, industrial activities, or production.</li>
-            </ul>
-          </li>
-        </ul>
-
-        <!-- Required Documents -->
-        <div class="sec-title mb-30">
-          <h3 class="subtitle">What Documents Do You Need to Set Up a Company in Dubai?</h3>
-        </div>
-        <ul class="list-unstyled documents-list mb-50">
-          <li>- Passport copies of shareholders or partners</li>
-          <li>- Proposed names for your business (at least six options)</li>
-          <li>- Completed application form along with one passport-size color photograph</li>
-          <li>- If you are a UAE resident employee, a No Objection Certificate (NOC) from your current sponsor will be required.</li>
-        </ul>
-
-        <!-- Why Gulf Central -->
-        <div class="sec-title mb-30">
-          <h3 class="subtitle">Why Gulf Central for Mainland Company Formation in Dubai?</h3>
-        </div>
-        <ul class="list-unstyled why-us-list mb-40">
-          <li><strong>1. Comprehensive Support:</strong> From initial consultations to final licensing, we provide full-spectrum services to simplify your business setup.</li>
-          <li><strong>2. Expert Team:</strong> Our professionals are highly experienced in navigating Dubai’s business setup regulations, offering seamless support at every step.</li>
-          <li><strong>3. Transparent Process:</strong> We operate with full transparency, providing honest, upfront advice with no hidden fees.</li>
-          <li><strong>4. Confidentiality:</strong> Your privacy and business information are treated with utmost confidentiality, ensuring trust and reliability in our services.</li>
-        </ul>
-
-        <!-- Closing Note -->
-        <p class="closing-text wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
-          At Gulf Central, we are committed to making your business journey in Dubai effortless and successful. 
-          <strong>Contact our team today</strong> for more information on our mainland company formation services!
-        </p>
-
-      </div>
       </div>
     </div>
   </div>
+
+<!-- Decorative Stars -->
+<div class="star1" style="position:absolute; top:10%; left:5%;">
+    <img src="{% static 'images/banner/banner-two-star.png' %}" alt="Star">
+</div>
+<div class="star2" style="position:absolute; bottom:15%; right:10%;">
+    <img src="{% static 'images/banner/banner-two-star.png' %}" alt="Star">
+</div>
 </section>
+  
+
+ <!-- mainland area start here -->
+<section class="about-section-three pt-120 pb-120">
+  <div class="container">
+    <div class="row g-5 g-xxl-0">
+      <div class="col-xl-6 image-column">
+        <div class="inner-column">
+          <div class="shape"></div>
+          <figure class="image">
+            <img src="{% static 'images/about/mainland.jpg' %}" alt="Image">
+          </figure>
+          <p class="text mt-30 wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+            Gulf Central delivers innovative solutions and quality services across the GCC, helping businesses grow through reliable partnerships and expert support.
+          </p>
+
+          <div class="info mt-50 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
+            <a class="btn-one-rounded" style="background-color: #D3202A; color: #fff;" href="{% url 'contact' %}"> Free Consultation <i class="fa-regular fa-arrow-up-right"></i></a>
+            <div class="user">
+              <ul>
+                <li><img src="{% static 'images/about/about-two-user1.png' %}" alt="Image"></li>
+                <li><img src="{% static 'images/about/about-two-user2.png' %}" alt="Image"></li>
+                <li><img src="{% static 'images/about/about-two-user3.png' %}" alt="Image"></li>
+                <li><img src="{% static 'images/about/about-two-user4.png' %}" alt="Image"></li>
+              </ul>
+              <h6 class="title">10M+ Impact Across the World. <img src="{% static 'images/about/about-two-line.png' %}" alt="Image"></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-6 content-column">
+        <div class="inner-column">
+          <div class="sec-title">
+            <h6 class="sub-title wow fadeInUp" style="background-color: #D3202A; color: #fff;" data-wow-delay="00ms" data-wow-duration="1500ms">Mainland Company Setup</h6>
+            <h2 class="title mb-30 wow splt-txt" data-splitting>
+              Gulf Central - Your Trusted Partner for Business Setup in Dubai Mainland
+            </h2>
+            <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+              <!-- Business setup in dubai, Businesssetup services, Business setup services in dubai, 
+              Company formation services, company formation services in dubai <br><br> -->
+              Are you looking to establish your business in Mainland, UAE? If so, you’ve arrived at the right place. 
+              At Gulf Central, we provide comprehensive and affordable mainland company formation services in Dubai, 
+              catering to the specific needs of our clients. Our expert team is well-versed in the UAE business 
+              landscape, offering tailored guidance and support throughout the entire process—from documentation 
+              to final setup. With us, you’re not just starting a business; you’re building a foundation for success.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- About area end here -->
+
+<!-- Mainland Company Formation Section Start -->
+<section class="mainland-company-section py-120 bg-light">
+  <div class="container">
+    
+    <!-- Title -->
+    <div class="text-center mb-5"><br><br>
+      <h3 class="fw-bold mb-3">Why Choose Mainland Company Formation in Dubai?</h3>
+      <p class="text-muted lead">
+        Setting up a mainland company in Dubai offers numerous advantages for entrepreneurs 
+        who want growth, flexibility, and global opportunities.
+      </p>
+    </div>
+
+    <!-- Advantages -->
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-4">
+          <i class="fa-solid fa-landmark fa-2x mb-3 text-danger"></i>
+          <h6 class="fw-bold">Constructive Government Policies</h6>
+          <p class="small text-muted">Business-friendly regulations simplify company setup and growth.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-4">
+          <i class="fa-solid fa-file-circle-check fa-2x mb-3 text-danger"></i>
+          <h6 class="fw-bold">Straightforward Setup</h6>
+          <p class="small text-muted">Dubai’s structured framework reduces bureaucratic hurdles.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-4">
+          <i class="fa-solid fa-scale-balanced fa-2x mb-3 text-danger"></i>
+          <h6 class="fw-bold">Supportive Legal Environment</h6>
+          <p class="small text-muted">Laws encourage entrepreneurship and business expansion.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-4">
+          <i class="fa-solid fa-money-bill-wave fa-2x mb-3 text-danger"></i>
+          <h6 class="fw-bold">No Personal Tax</h6>
+          <p class="small text-muted">Zero personal income tax benefits business owners in the UAE.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-4">
+          <i class="fa-solid fa-building fa-2x mb-3 text-danger"></i>
+          <h6 class="fw-bold">Advanced Infrastructure</h6>
+          <p class="small text-muted">State-of-the-art infrastructure supports diverse industries.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-4">
+          <i class="fa-solid fa-hand-holding-dollar fa-2x mb-3 text-danger"></i>
+          <h6 class="fw-bold">No Minimum Capital</h6>
+          <p class="small text-muted">Start your business without heavy upfront investment.</p>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="card h-100 shadow-sm border-0 text-center p-4">
+          <i class="fa-solid fa-user-shield fa-2x mb-3 text-danger"></i>
+          <h6 class="fw-bold">100% Foreign Ownership</h6>
+          <p class="small text-muted">Full ownership with no local partner or Emirati sponsor required.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gulf Central Support -->
+    <div class="mt-5">
+      <h3 class="fw-bold mb-3">How Gulf Central Helps with LLC Company Formation</h3>
+      <p class="text-muted">We provide end-to-end support to make your company setup journey smooth and stress-free:</p> <br>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="p-4 text-center bg-white shadow-sm rounded h-100">
+            <i class="fa-solid fa-id-card-clip fa-2x mb-3 text-danger"></i>
+            <h6 class="fw-bold">Trade License Assistance</h6>
+            <p class="small text-muted">Secure the right trade license for your business type.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="p-4 text-center bg-white shadow-sm rounded h-100">
+            <i class="fa-solid fa-passport fa-2x mb-3 text-danger"></i>
+            <h6 class="fw-bold">Visa & PRO Services</h6>
+            <p class="small text-muted">Investor, employee visas & government formalities covered.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="p-4 text-center bg-white shadow-sm rounded h-100">
+            <i class="fa-solid fa-handshake fa-2x mb-3 text-danger"></i>
+            <h6 class="fw-bold">Corporate Sponsorship</h6>
+            <p class="small text-muted">Optional sponsorship for compliance & reduced risks.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="p-4 text-center bg-white shadow-sm rounded h-100">
+            <i class="fa-solid fa-clipboard-list fa-2x mb-3 text-danger"></i>
+            <h6 class="fw-bold">Tailored Licensing</h6>
+            <p class="small text-muted">Guidance on Professional, Commercial & Industrial licenses.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents Required -->
+    <div class="mt-5">
+      <h3 class="fw-bold mb-3">Documents Required for Company Setup</h3> <br>
+      <ul class="list-group list-group-flush shadow-sm">
+        <li class="list-group-item">✅ Passport copies of shareholders or partners</li>
+        <li class="list-group-item">✅ Proposed business names (minimum six options)</li>
+        <li class="list-group-item">✅ Completed application form & one passport-size photo</li>
+        <li class="list-group-item">✅ NOC from sponsor (if UAE resident employee)</li>
+      </ul>
+    </div>
+
+    <!-- Why Gulf Central -->
+    <div class="mt-5">
+      <h3 class="fw-bold mb-3">Why Gulf Central?</h3> <br>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="p-4 bg-white shadow-sm rounded h-100">
+            <h6 class="fw-bold text-danger">✔ Comprehensive Support</h6>
+            <p class="small text-muted">From consultation to licensing, we cover the entire process.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-4 bg-white shadow-sm rounded h-100">
+            <h6 class="fw-bold text-danger">✔ Expert Team</h6>
+            <p class="small text-muted">Experienced professionals who understand UAE business laws.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-4 bg-white shadow-sm rounded h-100">
+            <h6 class="fw-bold text-danger">✔ Transparent Process</h6>
+            <p class="small text-muted">Clear pricing and advice with no hidden fees.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-4 bg-white shadow-sm rounded h-100">
+            <h6 class="fw-bold text-danger">✔ Confidentiality</h6>
+            <p class="small text-muted">Your business information is secure and private at all times.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+  <br>
+  </div>
+</section>
+<!-- Mainland Company Formation Section End -->
+
+  <!-- Page Contact area start here -->
+    <section class="contact-details pt-120 pb-120">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-md-6 col-lg-4 wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+           
+        </div>
+        <div class="mt-100">
+          <div class="row g-5">
+            <div class="col-lg-6 content-column">
+              <div class="inner-column">
+                <div class="sec-title mb-30">
+                  <h2 class="title wow splt-txt" data-splitting>Get in touch</h2>
+                  <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">Lorem ipsum dolor sit
+                    amet consectetur adipiscing elit mattis
+                    faucibus <br> odio feugiat arc dolor.</p>
+                </div>
+                <div class="google-map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60838472.930255905!2d54.913433238070375!3d21.45730366517529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3663f18a24cbe857%3A0xa9416bfcd3a0f459!2sAsia!5e0!3m2!1sen!2sbd!4v1746550690065!5m2!1sen!2sbd" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+              </div>
+            </div>
+
+           
+
+            <div class="col-lg-6 content-column">
+  <div class="inner-column right-column">
+    <div class="sec-title mb-30">
+      <h2 class="title wow splt-txt" data-splitting>Fill Up The Form</h2>
+      <p class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+        Your email address will not be published. Required fields are marked *
+      </p>
+    </div>
+
+    <!-- 🚀 Toast Container (Top Right, above form) -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="toast align-items-center text-white 
+                      {% if message.tags == 'success' %} bg-success 
+                      {% elif message.tags == 'error' %} bg-danger 
+                      {% else %} bg-secondary {% endif %}
+                      border-0 mb-2 shadow" 
+               role="alert" aria-live="assertive" aria-atomic="true"
+               data-bs-autohide="true" data-bs-delay="4000">
+            <div class="d-flex">
+              <div class="toast-body">
+                {{ message }}
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" 
+                      data-bs-dismiss="toast"></button>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- 🚀 Contact Form -->
+    <form method="post" action="{% url 'mainland' %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="type-feild">
+        <i class="fa-light fa-user"></i>
+        {{ form.name }}
+      </div>
+
+      <div class="type-feild">
+        <i class="fa-light fa-phone"></i>
+        {{ form.phone }}
+      </div>
+
+      <div class="type-feild">
+        <i class="fa-light fa-envelope"></i>
+        {{ form.email }}
+      </div>
+
+      <div class="type-feild">
+        <i class="fa-light fa-pen-to-square"></i>
+        {{ form.message }}
+      </div>
+
+      <button type="submit" class="btn-two">
+        <i class="fa-light fa-paper-plane"></i> Get In Touch
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- 🚀 Script to auto-show toasts -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    toastElList.map(function (toastEl) {
+      return new bootstrap.Toast(toastEl).show()
+    });
+  });
+</script>
+
+        </div>
+      </div>
+    </section>
+    <!-- Page Contact area end here -->
+
+
+
 
 
 
@@ -426,41 +727,33 @@
           </div>
           <div class="col-lg-8">
             <div class="row g-4 g-xl-0">
-              <div class="col-sm-6 col-xl-3 footer-column">
-                <div class="footer-widget links-widget">
-                  <h4 class="widget-title">Resource</h4>
-                  <div class="widget-content">
-                    <ul class="user-links">
-                      <li><a href="#0">Product</a></li>
-                      <li><a href="#0">Services</a></li>
-                      <li><a href="#0">About Us</a></li>
-                      <li><a href="#0">Benefits</a></li>
-                    </ul>
-                  </div>
+              <div class="col-sm-6 col-xl-4 footer-column">
+              <div class="footer-widget links-widget">
+                <h4 class="widget-title">Resource</h4>
+                <div class="widget-content">
+                  <ul class="user-links">
+                  {% for service_footers in service_footer %}
+                    <li>
+                      <a href="{% url 'service_details' service_footers.slug %}">{{ service_footers.name }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
                 </div>
               </div>
-              <div class="col-sm-6 col-xl-3 footer-column">
+            </div>
+             <div class="col-sm-6 col-xl-4 footer-column">
                 <div class="footer-widget links-widget">
-                  <h4 class="widget-title">Quick Link</h4>
+                  <h4 class="widget-title">Quick Links </h4>
                   <div class="widget-content">
                     <ul class="user-links">
-                      <li><a href="#0">Features</a></li>
-                      <li><a href="#0">Pricing Plan</a></li>
-                      <li><a href="#0">Best Program</a></li>
-                      <li><a href="#0">Press Kit</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-xl-3 footer-column">
-                <div class="footer-widget links-widget">
-                  <h4 class="widget-title">Company</h4>
-                  <div class="widget-content">
-                    <ul class="user-links">
-                      <li><a href="#0">About</a></li>
-                      <li><a href="#0">Team Member</a></li>
-                      <li><a href="#0">Reviews</a></li>
-                      <li><a href="#0">Latest News</a></li>
+                      <!-- Quick Links -->
+                      <li><a href="{% url 'about' %}">About</a></li>
+                      <li><a href="{% url 'blogs'%}">Blogs</a></li>
+                      <li><a href="{% url 'news'%}">News</a></li>
+                      <li><a href="{% url 'cost_calculator'%}">Cost Calculator</a></li>
+                      
+                      <!-- Company Links -->
+                    
                     </ul>
                   </div>
                 </div>
@@ -491,7 +784,9 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="copyright-text">Copyright ©2025, <a href="#0">Vynzora</a> All Rights Reserved</p>
+     <p class="copyright-text">
+  Copyright ©2025, <a href="https://vynzora.com" target="_blank">Vynzora</a> All Rights Reserved
+</p>
         <ul class="footer-nav">
           <li><a href="{% url 'terms-and-conditions' %}">Terms & Conditions</a></li>
           
