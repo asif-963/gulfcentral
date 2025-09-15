@@ -2,104 +2,109 @@
 {% load static %}
 
 {% block content %}
-<style>
-  .plan-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-    background: #fff;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-  .feature-input-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .remove-plan-btn, .remove-feature-btn {
-    cursor: pointer;
-    color: red;
-    font-size: 18px;
-    font-weight: bold;
-  }
-</style>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Pricing Section</h4>
+          <form method="POST" id="updatePricingForm">
+            {% csrf_token %}
 
-<div class="container mt-4">
-  <h3>Update Pricing Section</h3>
-  <form method="POST" id="updatePricingForm">
-    {% csrf_token %}
+            <!-- Section Title -->
+            <div class="form-group mb-3">
+              <label for="sectionTitle">Section Title</label>
+              <input type="text" name="section_title" id="sectionTitle"
+                     class="form-control" value="{{ section.title }}" required>
+            </div>
 
-    <!-- Section Title -->
-    <div class="form-group mb-3">
-      <label>Section Title</label>
-      <input type="text" name="section_title" class="form-control" value="{{ section.title }}" required>
-    </div>
+            <!-- Section Description -->
+            <div class="form-group mb-4">
+              <label for="sectionDescription">Section Description</label>
+              <textarea name="section_description" id="sectionDescription"
+                        class="form-control" rows="3">{{ section.description }}</textarea>
+            </div>
 
-    <!-- Section Description -->
-    <div class="form-group mb-4">
-      <label>Section Description</label>
-      <textarea name="section_description" class="form-control" rows="3">{{ section.description }}</textarea>
-    </div>
+            <!-- Plans Container -->
+            <div id="plans-container">
+              {% for plan in section.plans.all %}
+              <div class="plan-card mb-3 p-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h5>{{ plan.title }}</h5>
+                  <span class="remove-plan-btn" onclick="markPlanRemoved(this, {{ plan.id }})">&times;</span>
+                </div>
 
-    <!-- Plans -->
-    <div id="plans-container">
-      {% for plan in section.plans.all %}
-      <div class="plan-card">
-        <div class="d-flex justify-content-between">
-          <h5>{{ plan.title }}</h5>
-          <span class="remove-plan-btn" onclick="markPlanRemoved(this, {{ plan.id }})">&times;</span>
-        </div>
+                <input type="hidden" name="keep_plan_{{ plan.id }}" value="1">
 
-        <!-- keep/remove tracking -->
-        <input type="hidden" name="keep_plan_{{ plan.id }}" value="1">
+                <div class="form-group mb-2">
+                  <label>Plan Title</label>
+                  <input type="text" name="plan_title_{{ plan.id }}" class="form-control" value="{{ plan.title }}">
+                </div>
 
-        <div class="form-group mb-2">
-          <label>Plan Title</label>
-          <input type="text" name="plan_title_{{ plan.id }}" class="form-control" value="{{ plan.title }}">
-        </div>
+                <div class="form-group mb-2">
+                  <label>Plan Description</label>
+                  <textarea name="plan_desc_{{ plan.id }}" class="form-control" rows="2">{{ plan.description }}</textarea>
+                </div>
 
-        <div class="form-group mb-2">
-          <label>Plan Description</label>
-          <textarea name="plan_desc_{{ plan.id }}" class="form-control" rows="2">{{ plan.description }}</textarea>
-        </div>
+                <!-- Features -->
+                <div class="features-container mt-2">
+                  <h6>Features</h6>
+                  {% for feature in plan.features.all %}
+                  <div class="feature-input-wrapper mb-2 d-flex align-items-center gap-2">
+                    <input type="text" name="feature_{{ feature.id }}" class="form-control" value="{{ feature.text }}">
+                    <span class="remove-feature-btn" onclick="markFeatureRemoved(this, {{ feature.id }})">&times;</span>
+                    <input type="hidden" name="keep_feature_{{ feature.id }}" value="1">
+                  </div>
+                  {% endfor %}
+                  <button type="button" class="btn btn-sm btn-secondary add-feature-btn" data-plan="{{ plan.id }}">Add Feature</button>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
 
-        <!-- Features -->
-        <div class="features-container mt-2">
-          <h6>Features</h6>
-          {% for feature in plan.features.all %}
-          <div class="feature-input-wrapper mb-2">
-            <input type="text" name="feature_{{ feature.id }}" class="form-control" value="{{ feature.text }}">
-            <span class="remove-feature-btn" onclick="markFeatureRemoved(this, {{ feature.id }})">&times;</span>
-            <input type="hidden" name="keep_feature_{{ feature.id }}" value="1">
-          </div>
-          {% endfor %}
-          <button type="button" class="btn btn-sm btn-secondary add-feature-btn" data-plan="{{ plan.id }}">Add Feature</button>
+            <!-- Add New Plan -->
+            <button type="button" class="btn btn-primary mb-3" id="add-plan-btn">Add New Plan</button>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-success">Update Section</button>
+          </form>
         </div>
       </div>
-      {% endfor %}
     </div>
-
-    <!-- Add New Plan -->
-    <button type="button" class="btn btn-primary mb-3" id="add-plan-btn">Add New Plan</button>
-    <br>
-
-    <!-- Submit -->
-    <button type="submit" class="btn btn-success">Update Section</button>
-  </form>
+  </div>
 </div>
+
+<style>
+.plan-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background: #fdfdfd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.remove-plan-btn, .remove-feature-btn {
+  cursor: pointer;
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 18px;
+}
+.feature-input-wrapper input {
+  flex: 1;
+}
+</style>
 
 <script>
 let newPlanCount = 0;
 
-// Add new plan
+// Add new plan dynamically
 document.getElementById('add-plan-btn').addEventListener('click', function() {
     const container = document.getElementById('plans-container');
     const index = newPlanCount++;
     const planDiv = document.createElement('div');
-    planDiv.classList.add('plan-card');
+    planDiv.classList.add('plan-card', 'mb-3', 'p-3');
 
     planDiv.innerHTML = `
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center mb-2">
             <h5>New Plan</h5>
             <span class="remove-plan-btn" onclick="this.closest('.plan-card').remove()">&times;</span>
         </div>
@@ -122,18 +127,14 @@ document.getElementById('add-plan-btn').addEventListener('click', function() {
 // Add/remove features dynamically
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('add-feature-btn')) {
-        const planId = e.target.dataset.plan; 
+        const planId = e.target.dataset.plan;
         const container = e.target.closest('.features-container');
         const wrapper = document.createElement('div');
-        wrapper.classList.add('feature-input-wrapper', 'mb-2');
+        wrapper.classList.add('feature-input-wrapper', 'mb-2', 'd-flex', 'align-items-center', 'gap-2');
 
-        let nameAttr = "";
-        if (planId.startsWith("new_")) {
-            const index = planId.split("_")[1];
-            nameAttr = `new_feature_plan_${index}_${Date.now()}`;
-        } else {
-            nameAttr = `new_feature_${planId}_${Date.now()}`;
-        }
+        let nameAttr = planId.startsWith("new_") 
+            ? `new_feature_plan_${planId.split("_")[1]}_${Date.now()}` 
+            : `new_feature_${planId}_${Date.now()}`;
 
         wrapper.innerHTML = `
             <input type="text" name="${nameAttr}" class="form-control" placeholder="Feature text">

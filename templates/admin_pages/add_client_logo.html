@@ -2,40 +2,31 @@
 {% load static %}
 
 {% block content %}
-<style>
-.scrollable-form {
-  height: 80vh;            
-  overflow-y: auto;         
-  -ms-overflow-style: none; 
-  scrollbar-width: none;    
-}
-.scrollable-form::-webkit-scrollbar {
-  display: none;            
-}
-.card-form {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-</style>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Client Logo</h4>
+          <form class="forms-sample" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+              <label for="clientName">Company Name</label>
+              <input type="text" class="form-control" id="clientName" name="name" placeholder="Enter Company Name" required>
+            </div>
 
-<div class="container scrollable-form">
-  <h3 class="mb-4">Add Client Logo</h3>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="card-form">
-      <div class="form-group mb-3">
-        <label>Company Name</label>
-        <input type="text" name="name" class="form-control" placeholder="Enter Company Name" required>
+            <div class="form-group">
+              <label for="clientLogo">Company Logo</label>
+              <input type="file" class="form-control" id="clientLogo" name="logo" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+            <a href="{% url 'view_client_logos' %}" class="btn btn-light">Cancel</a>
+          </form>
+        </div>
       </div>
-      <div class="form-group mb-3">
-        <label>Company Logo</label>
-        <input type="file" name="logo" class="form-control" accept="image/*" required>
-      </div>
-      <button type="submit" class="btn btn-success">Add Client Logo</button>
     </div>
-  </form>
+  </div>
 </div>
 {% endblock %}

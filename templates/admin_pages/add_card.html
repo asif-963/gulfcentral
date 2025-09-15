@@ -2,58 +2,70 @@
 {% load static %}
 
 {% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Pricing Section</h4>
+          <form method="POST" id="pricingForm">
+            {% csrf_token %}
+
+            <!-- Section Title -->
+            <div class="form-group mb-3">
+              <label for="sectionTitle">Section Title</label>
+              <input type="text" name="section_title" id="sectionTitle" 
+                     class="form-control" placeholder="Enter Section Title" required>
+            </div>
+
+            <!-- Section Description -->
+            <div class="form-group mb-4">
+              <label for="sectionDescription">Section Description</label>
+              <textarea name="section_description" id="sectionDescription" 
+                        class="form-control" rows="3" placeholder="Enter Section Description"></textarea>
+            </div>
+
+            <!-- Dynamic Plans Container -->
+            <div id="plans-container"></div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-3">
+              <button type="button" class="btn btn-primary" id="add-plan-btn">
+                Add Plan
+              </button>
+              <button type="submit" class="btn btn-success">Save Pricing Section</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
-.scrollable-form {
-  height: 80vh;            
-  overflow-y: auto;         
-  -ms-overflow-style: none; 
-  scrollbar-width: none;    
-}
-.scrollable-form::-webkit-scrollbar {
-  display: none;            
-}
 .plan-card {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #fff;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
   box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.plan-card h5 {
+  display: inline-block;
+}
+.remove-plan-btn {
+  cursor: pointer;
+  color: #dc3545;
+  font-weight: 500;
 }
 .feature-input {
   margin-bottom: 10px;
 }
-.remove-feature-btn, .remove-plan-btn {
-  cursor: pointer;
+.add-feature-btn {
+  margin-top: 5px;
 }
 </style>
-
-<div class="container scrollable-form">
-  <h3 class="mb-4">Add Pricing Section</h3>
-  <form method="POST" id="pricingForm">
-    {% csrf_token %}
-    
-    <!-- Section Title -->
-    <div class="form-group mb-3">
-      <label>Section Title</label>
-      <input type="text" name="section_title" class="form-control" placeholder="Enter Section Title" required>
-    </div>
-
-    <!-- Section Description -->
-    <div class="form-group mb-4">
-      <label>Section Description</label>
-      <textarea name="section_description" class="form-control" rows="3" placeholder="Enter Section Description"></textarea>
-    </div>
-
-    <!-- Container for dynamic plans -->
-    <div id="plans-container"></div>
-
-    <!-- Buttons -->
-    <button type="button" class="btn btn-primary mb-3" id="add-plan-btn">Add Plan</button>
-    <br>
-    <button type="submit" class="btn btn-success">Save Pricing Section</button>
-  </form>
-</div>
 
 <script>
 let planCount = 0;
@@ -65,17 +77,19 @@ document.getElementById('add-plan-btn').addEventListener('click', function() {
     planDiv.classList.add('plan-card');
     
     planDiv.innerHTML = `
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="mb-0">Plan ${planCount + 1}</h5>
-            <span class="text-danger remove-plan-btn">Remove Plan</span>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5>Plan ${planCount + 1}</h5>
+            <span class="remove-plan-btn">Remove Plan</span>
         </div>
         <div class="form-group mb-2">
             <label>Plan Title</label>
-            <input type="text" name="plans[${planCount}][title]" class="form-control" placeholder="Enter Plan Title" required>
+            <input type="text" name="plans[${planCount}][title]" 
+                   class="form-control" placeholder="Enter Plan Title" required>
         </div>
         <div class="form-group mb-2">
             <label>Plan Description</label>
-            <textarea name="plans[${planCount}][description]" class="form-control" rows="3" placeholder="Enter Plan Description"></textarea>
+            <textarea name="plans[${planCount}][description]" 
+                      class="form-control" rows="3" placeholder="Enter Plan Description"></textarea>
         </div>
         <div class="features-container border-top pt-2 mt-2">
             <h6>Features</h6>

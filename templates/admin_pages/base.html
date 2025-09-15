@@ -151,9 +151,9 @@
   </div>
 </div>
 
-      <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+
+   <!-- partial:partials/_sidebar.html -->
+<nav class="sidebar sidebar-offcanvas" id="sidebar" style="height: 90vh; width: 250px; overflow-y: auto; position: fixed;">
   <ul class="nav">
     <li class="nav-item">
       <a class="nav-link" href="{% url 'dashboard'%}">
@@ -162,40 +162,40 @@
       </a>
     </li>
 
-  
+    <!-- Team -->
     <li class="nav-item nav-category">Team</li>
-<li class="nav-item">
-  <a class="nav-link" data-bs-toggle="collapse" href="#teamMenu" aria-expanded="false" aria-controls="teamMenu">
-    <i class="menu-icon mdi mdi-account-multiple"></i>
-    <span class="menu-title">Team</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="teamMenu">
-    <ul class="nav flex-column sub-menu">
-      <li class="nav-item"> <a class="nav-link" href="{% url 'add_team' %}"> Add Team</a></li>
-      <li class="nav-item"> <a class="nav-link" href="{% url 'view_teams' %}"> View Team</a></li>
-    </ul>
-  </div>
-</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#teamMenu" aria-expanded="false" aria-controls="teamMenu">
+        <i class="menu-icon mdi mdi-account-multiple"></i>
+        <span class="menu-title">Team</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="teamMenu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_team' %}"> Add Team</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_teams' %}"> View Team</a></li>
+        </ul>
+      </div>
+    </li>
 
-<li class="nav-item nav-category">Client Logo</li>
-<li class="nav-item">
-  <a class="nav-link" data-bs-toggle="collapse" href="#clientLogoMenu" aria-expanded="false" aria-controls="clientLogoMenu">
-    <i class="menu-icon mdi mdi-image"></i>
-    <span class="menu-title">Client Logo</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="clientLogoMenu">
-    <ul class="nav flex-column sub-menu">
-      <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_logo' %}"> Add Client Logo</a></li>
-      <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_logos' %}"> View Client Logos</a></li>
-    </ul>
-  </div>
-</li>
+    <!-- Client Logo -->
+    <li class="nav-item nav-category">Client Logo</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#clientLogoMenu" aria-expanded="false" aria-controls="clientLogoMenu">
+        <i class="menu-icon mdi mdi-image"></i>
+        <span class="menu-title">Client Logo</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="clientLogoMenu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_logo' %}"> Add Client Logo</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_logos' %}"> View Client Logos</a></li>
+        </ul>
+      </div>
+    </li>
 
-
-
-   <li class="nav-item nav-category">Services</li>
+    <!-- Services -->
+    <li class="nav-item nav-category">Services</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#servicesMenu" aria-expanded="false" aria-controls="servicesMenu">
         <i class="menu-icon mdi mdi-briefcase"></i>
@@ -204,167 +204,122 @@
       </a>
       <div class="collapse" id="servicesMenu">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'add_menu' %}">Add Menu</a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'view_menus' %}">View Menus</a>
-          </li>
-
-          <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'view_categories' %}">View Categories</a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'add_service' %}">Add Service</a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'view_services' %}">View Services</a>
-          </li>
-           <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'view_service_enquiries' %}">View Service Enquiries</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'add_menu' %}">Add Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'view_menus' %}">View Menus</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'add_category' %}">Add Category</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'view_categories' %}">View Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'add_service' %}">Add Service</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'view_services' %}">View Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'view_service_enquiries' %}">View Service Enquiries</a></li>
         </ul>
       </div>
     </li>
 
+    <!-- Client Reviews -->
     <li class="nav-item nav-category">Client Reviews</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#blog" aria-expanded="false" aria-controls="blog">
+      <a class="nav-link" data-bs-toggle="collapse" href="#reviewsMenu" aria-expanded="false" aria-controls="reviewsMenu">
         <i class="menu-icon mdi mdi-card-text-outline"></i>
         <span class="menu-title">Client Reviews</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="blog">
+      <div class="collapse" id="reviewsMenu">
         <ul class="nav flex-column sub-menu">
-
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_review' %}"> Add Client Reviews</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_reviews' %}"> View Clients Reviews</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_review' %}">Add Client Reviews</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_reviews' %}">View Clients Reviews</a></li>
         </ul>
       </div>
     </li>
 
+    <!-- Blogs -->
+    <li class="nav-item nav-category">Blogs</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#blogsMenu" aria-expanded="false" aria-controls="blogsMenu">
+        <i class="menu-icon mdi mdi-book-open-page-variant"></i>
+        <span class="menu-title">Blogs</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="blogsMenu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog_category' %}">Add Blog Category</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_blog_categories' %}">View Blog Categories</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog' %}">Add Blog</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_blogs' %}">View Blogs</a></li>
+        </ul>
+      </div>
+    </li>
 
-   
-  <li class="nav-item nav-category">Blogs</li>
-<li class="nav-item">
-  <a class="nav-link" data-bs-toggle="collapse" href="#blogsMenu" aria-expanded="false" aria-controls="blogsMenu">
-    <i class="menu-icon mdi mdi-book-open-page-variant"></i>
-    <span class="menu-title">Blogs</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="blogsMenu">
-    <ul class="nav flex-column sub-menu">
-      <!-- Blog Categories -->
-      <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog_category' %}">Add Blog Category</a></li>
-      <li class="nav-item"> <a class="nav-link" href="{% url 'view_blog_categories' %}">View Blog Categories</a></li>
-
-      <!-- Blogs -->
-      <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog' %}">Add Blog</a></li>
-      <li class="nav-item"> <a class="nav-link" href="{% url 'view_blogs' %}">View Blogs</a></li>
-    </ul>
-  </div>
-</li>
-
-
-
-
-    
+    <!-- News -->
     <li class="nav-item nav-category">News</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#contact123" aria-expanded="false" aria-controls="contact">
-        <i class="menu-icon mdi mdi mdi-book-open"></i>
+      <a class="nav-link" data-bs-toggle="collapse" href="#newsMenu" aria-expanded="false" aria-controls="newsMenu">
+        <i class="menu-icon mdi mdi-book-open"></i>
         <span class="menu-title">News</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="contact123">
+      <div class="collapse" id="newsMenu">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add_news' %}"> Add News</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_news' %}"> View News</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_news' %}">Add News</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_news' %}">View News</a></li>
         </ul>
       </div>
-      
     </li>
 
-
+    <!-- Pricing -->
     <li class="nav-item nav-category">Pricing</li>
-<li class="nav-item">
-  <a class="nav-link" data-bs-toggle="collapse" href="#pricingMenu" aria-expanded="false" aria-controls="pricingMenu">
-    <i class="menu-icon mdi mdi-tag-multiple"></i>
-    <span class="menu-title">Pricing</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="pricingMenu">
-    <ul class="nav flex-column sub-menu">
-      <li class="nav-item"> 
-        <a class="nav-link" href="{% url 'add_pricing' %}">Add Pricing Section</a>
-      </li>
-      <li class="nav-item"> 
-        <a class="nav-link" href="{% url 'view_pricing' %}">View Pricing Sections</a>
-      </li>
-    </ul>
-  </div>
-</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#pricingMenu" aria-expanded="false" aria-controls="pricingMenu">
+        <i class="menu-icon mdi mdi-tag-multiple"></i>
+        <span class="menu-title">Pricing</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="pricingMenu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_pricing' %}">Add Pricing Section</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_pricing' %}">View Pricing Sections</a></li>
+        </ul>
+      </div>
+    </li>
 
+    <!-- Enquiries -->
+    <li class="nav-item nav-category">Enquiries</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#enquiriesMenu" aria-expanded="false" aria-controls="enquiriesMenu">
+        <i class="menu-icon mdi mdi-blur"></i>
+        <span class="menu-title">Enquiries</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="enquiriesMenu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="{% url 'view_enquiries' %}">View Enquiries</a></li>
+        </ul>
+      </div>
+    </li>
 
-
-   <li class="nav-item nav-category">Enquiries</li>
-<li class="nav-item">
-  <a class="nav-link" data-bs-toggle="collapse" href="#b1" aria-expanded="false" aria-controls="b1">
-    <i class="menu-icon mdi mdi-blur"></i>
-    <span class="menu-title">Enquiries</span>
-    <i class="menu-arrow"></i>
-  </a>
-  <div class="collapse" id="b1">
-    <ul class="nav flex-column sub-menu">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'view_enquiries' %}">View Enquiries</a>
-      </li>
-    </ul>
-  </div>
-</li>
-
-
-
-
-
-    
+    <!-- Contact -->
     <li class="nav-item nav-category">Contact US</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#contact" aria-expanded="false" aria-controls="contact">
+      <a class="nav-link" data-bs-toggle="collapse" href="#contactMenu" aria-expanded="false" aria-controls="contactMenu">
         <i class="menu-icon mdi mdi-phone-log"></i>
         <span class="menu-title">Contact US</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="contact">
+      <div class="collapse" id="contactMenu">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_contacts' %}">Contact US</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'view_contacts' %}">Contact US</a></li>
         </ul>
       </div>
     </li>
-  
 
+    <!-- Sign Out -->
     <li class="nav-item nav-category">Sign Out</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#chatbot1" aria-expanded="false" aria-controls="chatbot">
-        <i class="menu-icon mdi mdi-logout"></i> 
+      <a class="nav-link" href="{% url 'logout_user' %}">
+        <i class="menu-icon mdi mdi-logout"></i>
         <span class="menu-title">Sign Out</span>
-        <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="chatbot1">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'logout_user' %}">Sign Out</a></li>
-          <!-- <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/dropdowns.html">Dropdowns</a></li>
-          <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/typography.html">Typography</a></li> -->
-        </ul>
-      </div>
     </li>
-   
-    
   </ul>
-    <!-- {{ redirect_to_login_immediatly }} -->
 </nav>
 
 {% block content%}

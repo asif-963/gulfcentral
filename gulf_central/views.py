@@ -12,15 +12,6 @@ from .models import Contact, ServiceEnquiry, Team, ClientLogo
 
 
 
-
-
-
-
-
-
-
-
-
 def index(request):
     menus = Menu.objects.prefetch_related('categories__services').all()
     client_reviews = ClientReview.objects.all()
@@ -289,17 +280,19 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, f"Welcome back, Admin You have logged in successfully.")
             return redirect('dashboard')
+            
         else:   
             messages.error(request, "There was an error logging in, try again.")
-            return redirect('login')
+            return redirect('user_login')
     return render(request, 'authenticate/login.html')
 
 
 def logout_user(request):
     logout(request)
     messages.success(request, ("You Were Logged Out"))
-    return redirect('index')
+    return redirect('user_login')
 
 
 #  dashboard

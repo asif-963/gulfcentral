@@ -2,48 +2,83 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  .table-responsive-custom {
+    max-height: 70vh;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .table-responsive-custom thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: #fff;
+    z-index: 10;
+    text-align: center;
+  }
+  .table td, .table th {
+    vertical-align: middle;
+    text-align: center;
+  }
+  .btn-sm {
+    padding: 4px 8px;
+    font-size: 13px;
+  }
+  @media (max-width: 768px) {
+    .table td, .table th {
+      white-space: nowrap;
+    }
+  }
+</style>
 
-<div class="col-lg-12 stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Blog Categories</h4>
-            <a href="{% url 'add_blog_category' %}" class="btn btn-primary mb-2" style="background-color: rgb(4, 4, 83);border-color: rgb(4, 4, 83);;">Add Blog Category</a>
-            <div class="table-responsive">
-                <table class="table table-bordered" style="width: 1000px;">
-                    <thead class="thead-light">
-                        <tr>
-                            <th style="width: 400px;">Category Name</th>
-                            <th style="width: 200px;">Created Date</th>
-                            <th style="width: 100px;">Update</th>
-                            <th style="width: 100px;">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for category in categories %}
-                        <tr>
-                            <td style="word-wrap: break-word; white-space: normal;">{{ category.name }}</td>
-                            <td>{{ category.created_date|date:"d-m-Y H:i" }}</td>
-                            <td>
-                                <a href="{% url 'update_blog_category' category.id %}" class="btn btn-warning btn-sm">
-                                    <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Update
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'delete_blog_category' category.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
-                                    <i class="mdi mdi-delete" aria-hidden="true"></i> Delete
-                                </a>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="4" class="text-center">No Blog Categories available.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div class="container mt-4">
+  <h3>Blog Categories</h3> <br>
+  <a href="{% url 'add_blog_category' %}" 
+     class="btn btn-primary mb-3"
+     style="background-color: rgb(4, 4, 83); border-color: rgb(4, 4, 83);">
+     + Add Blog Category
+  </a>
+
+  <div class="table-responsive-custom">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th style="width:50px;">#</th>
+          <th style="width:400px;">Category Name</th>
+          <th style="width:200px;">Created Date</th>
+          <th style="width:100px;">Update</th>
+          <th style="width:100px;">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for category in categories %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td style="word-wrap: break-word; white-space: normal;">{{ category.name }}</td>
+          <td>{{ category.created_date|date:"d-m-Y H:i" }}</td>
+          <td>
+            <a href="{% url 'update_blog_category' category.id %}" 
+               class="btn btn-warning btn-sm">
+              Update
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'delete_blog_category' category.id %}" 
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('Are you sure?')">
+              Delete
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-center">No Blog Categories available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}

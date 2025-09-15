@@ -2,46 +2,42 @@
 {% load static %}
 
 {% block content %}
-<style>
-.scrollable-form {
-  height: 80vh;            
-  overflow-y: auto;         
-  -ms-overflow-style: none; 
-  scrollbar-width: none;    
-}
-.scrollable-form::-webkit-scrollbar {
-  display: none;            
-}
-.card-form {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-</style>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Client Logo</h4>
+          <form class="forms-sample" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
-<div class="container scrollable-form">
-  <h3 class="mb-4">Update Client Logo</h3>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="card-form">
-      <div class="form-group mb-3">
-        <label>Company Name</label>
-        <input type="text" name="name" class="form-control" value="{{ form.instance.name }}" required>
+            <div class="form-group">
+              <label for="clientName">Company Name</label>
+              <input type="text" class="form-control" id="clientName" name="name" 
+                     value="{{ form.instance.name }}" placeholder="Enter Company Name" required>
+            </div>
+
+            <div class="form-group">
+              <label>Current Logo</label><br>
+              {% if form.instance.logo %}
+                <img src="{{ form.instance.logo.url }}" alt="Current Logo" 
+                     style="height: 80px; width: auto; object-fit: contain; margin-bottom: 10px;">
+              {% else %}
+                <p>No logo available</p>
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="clientLogo">Update Logo</label>
+              <input type="file" class="form-control" id="clientLogo" name="logo" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary me-2">Update</button>
+            <a href="{% url 'view_client_logos' %}" class="btn btn-light">Cancel</a>
+          </form>
+        </div>
       </div>
-      <div class="form-group mb-3">
-        <label>Current Logo</label><br>
-        {% if form.instance.logo %}
-          <img src="{{ form.instance.logo.url }}" style="height:80px; object-fit:contain;" alt="Current Logo">
-        {% endif %}
-      </div>
-      <div class="form-group mb-3">
-        <label>Update Logo</label>
-        <input type="file" name="logo" class="form-control" accept="image/*">
-      </div>
-      <button type="submit" class="btn btn-primary">Update Client Logo</button>
     </div>
-  </form>
+  </div>
 </div>
 {% endblock %}

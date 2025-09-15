@@ -2,121 +2,230 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  .table-responsive-custom {
+    max-height: 75vh;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
 
-<div class="col-lg-12 stretch-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Services</h4>
-      <a href="{% url 'add_service' %}" class="btn btn-primary mb-3" style="background-color: rgb(13, 13, 85); border-color: black;">
-        <i class="fa fa-plus"></i> Add Service
-      </a>
+  .table-responsive-custom thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    color: #fff;
+    z-index: 10;
+    text-align: center;
+  }
 
-      <!-- Responsive scrollable table wrapper -->
-      <div class="table-responsive" style="max-height: 600px; overflow: auto; border: 1px solid #dee2e6;">
-        <table class="table table-bordered table-hover" style="width: 1500px;">
-          <thead class="thead-light">
-            <tr>
-              <th>Order</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Image</th>
-              <th>Description</th>
-              <th>Process Steps</th>
-              <th>FAQs</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for service in services %}
-            <tr><td style="width: 150px;">{{ service.order }}</td>
-              <td style="width: 150px;">{{ service.name }}</td>
-              <td style="width: 150px;">{{ service.category.menu.name }} → {{ service.category.name }}</td>
-              <td style="width: 100px;">
-                {% if service.image %}
-                  <img src="{{ service.image.url }}" alt="Service Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px;">
-                {% else %}
-                  <p>No image</p>
-                {% endif %}
-              </td>
-              <td style="max-width: 300px; white-space: normal; word-wrap: break-word; overflow-wrap: break-word; padding: 10px;">
-                {{ service.description|safe }}
-              </td>
-              <td style="max-width: 300px; white-space: normal; word-wrap: break-word; overflow-wrap: break-word; padding: 10px;">
-                {% if service.process_steps.exists %}
-                  {% for step in service.process_steps.all %}
-                    <strong>Step {{ step.step_number }}:</strong> {{ step.title }}<br>
-                    <em>{{ step.description }}</em><hr>
-                  {% endfor %}
-                {% else %}
-                  <em>No Steps</em>
-                {% endif %}
-              </td>
-              <td style="max-width: 300px; white-space: normal; word-wrap: break-word; overflow-wrap: break-word; padding: 10px;">
-                {% if service.faqs.exists %}
-                  {% for faq in service.faqs.all %}
-                    <strong>Q:</strong> {{ faq.question }}<br>
-                    <strong>A:</strong> {{ faq.answer }}<hr>
-                  {% endfor %}
-                {% else %}
-                  <em>No FAQs</em>
-                {% endif %}
-              </td>
-              <td class="text-center">
-                <a href="{% url 'update_service' service.id %}" class="btn btn-warning btn-sm">
-                  <i class="fa fa-edit"></i> Update
-                </a>
-              </td>
-              <td class="text-center">
-                <a href="{% url 'delete_service' service.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this service?');">
-                  <i class="fa fa-trash"></i> Delete
-                </a>
-              </td>
-            </tr>
-            {% empty %}
-            <tr>
-              <td colspan="8" class="text-center">No services available.</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      <!-- End scrollable table -->
+  .table td, .table th {
+    vertical-align: middle;
+    white-space: normal;
+    word-wrap: break-word;
+  }
 
-    </div>
+  .desc-preview, .steps-preview, .faq-preview {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .view-full-btn {
+    display: inline-block;
+    font-size: 0.85rem;
+    padding: 0;
+    margin-left: 5px;
+    color: #007bff;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  .view-full-btn:hover {
+    text-decoration: underline;
+  }
+
+  .table img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 992px) {
+    .desc-preview, .steps-preview, .faq-preview {
+      max-width: 150px;
+      font-size: 0.85rem;
+    }
+
+    .view-full-btn {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .desc-preview, .steps-preview, .faq-preview {
+      max-width: 100px;
+      font-size: 0.75rem;
+    }
+
+    .view-full-btn {
+      font-size: 0.7rem;
+    }
+  }
+</style>
+
+
+<div class="container mt-4">
+  <h3>Services</h3> <br>
+  <a href="{% url 'add_service' %}" 
+     class="btn btn-primary mb-3" 
+     style="background-color: rgb(13, 13, 85); border-color: black;">
+     <i class="fa fa-plus"></i> Add Service
+  </a>
+
+  <div class="table-responsive-custom">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Order</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Image</th>
+          <th>Description</th>
+          <th>Process Steps</th>
+          <th>FAQs</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for service in services %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ service.order }}</td>
+          <td>{{ service.name }}</td>
+          <td>{{ service.category.menu.name }} → {{ service.category.name }}</td>
+          <td>
+            {% if service.image %}
+              <img src="{{ service.image.url }}" alt="Service Image">
+            {% else %}
+              <p>No Image</p>
+            {% endif %}
+          </td>
+          <!-- Description Preview -->
+          <td>
+            <div class="desc-preview">{{ service.description|striptags }}</div>
+            <button class="btn btn-link p-0" data-toggle="modal" data-target="#descModal{{ service.id }}">
+              View Full
+            </button>
+
+            <div class="modal fade" id="descModal{{ service.id }}" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ service.name }} - Description</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    {{ service.description|safe }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <!-- Process Steps Preview -->
+          <td>
+            {% if service.process_steps.exists %}
+              <div class="steps-preview">
+                {% for step in service.process_steps.all %}
+                  Step {{ step.step_number }}: {{ step.title }}<br>
+                {% endfor %}
+              </div>
+              <button class="btn btn-link p-0" data-toggle="modal" data-target="#stepsModal{{ service.id }}">
+                View Full
+              </button>
+
+              <div class="modal fade" id="stepsModal{{ service.id }}" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">{{ service.name }} - Process Steps</h5>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      {% for step in service.process_steps.all %}
+                        <strong>Step {{ step.step_number }}:</strong> {{ step.title }}<br>
+                        <em>{{ step.description }}</em><hr>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <em>No Steps</em>
+            {% endif %}
+          </td>
+
+          <!-- FAQs Preview -->
+          <td>
+            {% if service.faqs.exists %}
+              <div class="faq-preview">
+                {% for faq in service.faqs.all %}
+                  Q: {{ faq.question }}<br>
+                {% endfor %}
+              </div>
+              <button class="btn btn-link p-0" data-toggle="modal" data-target="#faqModal{{ service.id }}">
+                View Full
+              </button>
+
+              <div class="modal fade" id="faqModal{{ service.id }}" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">{{ service.name }} - FAQs</h5>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      {% for faq in service.faqs.all %}
+                        <strong>Q:</strong> {{ faq.question }}<br>
+                        <strong>A:</strong> {{ faq.answer }}<hr>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <em>No FAQs</em>
+            {% endif %}
+          </td>
+
+          <td class="text-center">
+            <a href="{% url 'update_service' service.id %}" class="btn btn-warning btn-sm">Update</a>
+          </td>
+          <td class="text-center">
+            <a href="{% url 'delete_service' service.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="10" class="text-center">No services available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
-<!-- Sticky header styling -->
-<style>
-.table thead th {
-  position: sticky;
-  top: 0;
-  background: #f8f9fa;
-  z-index: 10;
-  text-align: center;
-}
-
-.table td {
-  vertical-align: middle;
-  white-space: normal;
-  word-wrap: break-word;
-}
-
-.table td img {
-  display: block;
-  margin: 0 auto;
-}
-
-/* Optional scrollbars */
-div[style*="overflow: auto"]::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-div[style*="overflow: auto"]::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.2);
-  border-radius: 4px;
-}
-</style>
+<!-- Bootstrap JS for modals -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
