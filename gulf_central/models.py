@@ -13,21 +13,10 @@ class News(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='news_images/', blank=True, null=True)
-    created_date = models.DateTimeField(auto_now_add=True)   # use auto_now_add for creation timestamp
-    updated_at = models.DateTimeField(auto_now=True)         # optional: last modified time
-
-    class Meta:
-        ordering = ['-created_date']
-        verbose_name = 'News'
-        verbose_name_plural = 'News'
+    created_date = models.DateTimeField(default=now, blank=True, null=True)
 
     def __str__(self):
         return self.name
-
-    def get_image_url(self):
-        if self.image:
-            return self.image.url
-        return '/static/images/blog/default.jpg'   
     
 
 # Blog Category Model
