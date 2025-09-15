@@ -365,10 +365,8 @@
                                     {% endif %}
                                 </div>
                                 <div class="sidebar__post-content">
-                                    <h3>
-                                        <span class="sidebar__post-content-meta">
-                                            <i class="fas fa-user-circle"></i> Admin
-                                        </span>
+                                    <h3>  <li><i class="fas fa-calendar"></i> {{ latest.created_date|date:"d M, Y" }}</li>
+                                       
                                         <a href="{% url 'blog_detail' latest.id %}">{{ latest.title|truncatechars:50 }}</a>
                                     </h3>
                                 </div>

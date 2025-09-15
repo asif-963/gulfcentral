@@ -342,10 +342,10 @@
                             </div>
                             <div class="content-box">
                                 <h5 class="title">{{ blog.title }}</h5>
-                                <p>{{ blog.description|truncatechars:100|safe }}</p>
+                              
                           
-                                <a class="btn-one-rounded mt-30" style="background-color: #D3202A; color: #fff;" href="{% url 'blog_detail' blog.id %}">
-                                Read More <i class="fa-solid fa-arrow-right"></i>
+                                  <a class="btn-read" href="{% url 'blog_detail' blog.id %}">Read More →</a>
+                               
                             </a>
                             </div>
                         </div>
@@ -371,7 +371,7 @@
                             </div>
                             <div class="content-box">
                                 <h5 class="title">{{ blog.title }}</h5>
-                                <p>{{ blog.description|truncatechars:100|safe }}</p>
+                             
                                 <a class="btn-read" href="{% url 'blog_detail' blog.id %}">Read More →</a>
                             </div>
                         </div>

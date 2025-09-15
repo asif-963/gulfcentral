@@ -1053,6 +1053,7 @@ typePlaceholder();
 </div>
 <!-- FAQ Section End -->
 
+{% if teams %}
 <!-- Team area start here -->
 <section class="team-section-three bg-white pt-120 pb-120">
   <div class="team-three-text">
@@ -1086,13 +1087,13 @@ typePlaceholder();
           </div>
         </div>
       </div>
-      {% empty %}
-      <p class="text-center">No team members found. <a href="{% url 'add_team' %}">Add a team member</a>.</p>
       {% endfor %}
     </div>
   </div>
 </section>
 <!-- Team area end here -->
+{% endif %}
+
 
 <!-- Client Logo Section Start -->
 <section class="client-logo-section bg-white pt-120 pb-120">
