@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature, Contact, ServiceEnquiry, Team, ClientLogo
+from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature, Contact, ServiceEnquiry, Team, ClientLogo, Enquiry
 from ckeditor.widgets import CKEditorWidget  
 
 
@@ -121,3 +121,9 @@ class ClientLogoForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Company Name'}),
             'logo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
+
+# Consult Enquiry
+class EnquiryForm(forms.ModelForm):
+    class Meta:
+        model = Enquiry
+        fields = ['name', 'email', 'phone', 'setup_type', 'message']

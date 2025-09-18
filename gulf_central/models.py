@@ -236,3 +236,24 @@ class ClientLogo(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+# Enquiry
+
+class Enquiry(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    setup_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('mainland', 'Mainland Company Setup'),
+            ('freezone', 'Freezone Company Setup'),
+            ('offshore', 'Offshore Company Setup'),
+        ]
+    )
+    message = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"

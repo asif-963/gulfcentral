@@ -7,8 +7,8 @@ import random
 
 from .models import Menu, Category, Service, News, ClientReview, ServiceProcessStep, ServiceFAQ, BlogCategory, Blog, PricingSection, PricingPlan, PlanFeature
 from .forms import NewsForm, MenuForm, CategoryForm, ServiceForm, ClientReviewForm, BlogCategoryForm, BlogForm
-from .forms import ContactForm, ServiceEnquiryForm, TeamForm, ClientLogoForm
-from .models import Contact, ServiceEnquiry, Team, ClientLogo
+from .forms import ContactForm, ServiceEnquiryForm, TeamForm, ClientLogoForm, EnquiryForm
+from .models import Contact, ServiceEnquiry, Team, ClientLogo, Enquiry
 
 
 
@@ -37,6 +37,30 @@ def about(request):
     random_services = random.sample(service_footer, min(4, len(service_footer)))
     return render(request, 'about.html',{'menus': menus, 'client_reviews':client_reviews, 'clients': clients, 'teams':teams, 'service_footer':random_services})
 
+
+# Consultancy Expert Form Page
+def consultancy_expert_form(request):
+    if request.method == "POST":
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your enquiry has been submitted successfully!")
+            return redirect(request.META.get("HTTP_REFERER", "index"))
+    else:
+        form = EnquiryForm()
+
+    return render(request, "index.html", {"form": form})
+
+
+# Consultancy Expert Enquiries List Page
+def consultancy_expert_list(request):
+    enquiries = Enquiry.objects.all().order_by("-created_at")
+    return render(request, "admin_pages/view_enquiries.html", {"enquiries": enquiries})
+
+def delete_enquiries(request, enquiry_id):
+    enquiry = get_object_or_404(Enquiry, id=enquiry_id)
+    enquiry.delete()
+    return redirect("consultancy_expert_list") 
 
 # News listing page
 def news(request):
@@ -877,11 +901,12 @@ def delete_service_enquiry(request, id):
     messages.success(request, "Service enquiry deleted successfully.")
     return redirect('view_service_enquiries')
 
-
+@login_required(login_url='user_login')
 def view_teams(request):
     teams = Team.objects.all()
     return render(request, 'admin_pages/view_teams.html', {'teams': teams})
 
+@login_required(login_url='user_login')
 def add_team(request):
     if request.method == 'POST':
         form = TeamForm(request.POST, request.FILES)
@@ -892,6 +917,7 @@ def add_team(request):
         form = TeamForm()
     return render(request, 'admin_pages/add_team.html', {'form': form})
 
+@login_required(login_url='user_login')
 def update_team(request, pk):
     team = get_object_or_404(Team, pk=pk)
     if request.method == 'POST':
@@ -904,6 +930,7 @@ def update_team(request, pk):
     return render(request, 'admin_pages/update_team.html', {'form': form, 'team': team})
 
 # Delete team member
+@login_required(login_url='user_login')
 def delete_team(request, pk):
     member = get_object_or_404(Team, pk=pk)
     member.delete()
@@ -912,6 +939,7 @@ def delete_team(request, pk):
 
 # Client Logo
 # Add Client Logo
+@login_required(login_url='user_login')
 def add_client_logo(request):
     if request.method == 'POST':
         form = ClientLogoForm(request.POST, request.FILES)
@@ -923,11 +951,13 @@ def add_client_logo(request):
     return render(request, 'admin_pages/add_client_logo.html', {'form': form})
 
 # View All Client Logos
+@login_required(login_url='user_login')
 def view_client_logos(request):
     clients = ClientLogo.objects.all()
     return render(request, 'admin_pages/view_client_logos.html', {'clients': clients})
 
 # Update Client Logo
+@login_required(login_url='user_login')
 def update_client_logo(request, pk):
     client = get_object_or_404(ClientLogo, pk=pk)
     if request.method == 'POST':
@@ -940,7 +970,10 @@ def update_client_logo(request, pk):
     return render(request, 'admin_pages/update_client_logo.html', {'form': form})
 
 # Delete Client Logo
+@login_required(login_url='user_login')
 def delete_client_logo(request, pk):
     client = get_object_or_404(ClientLogo, pk=pk)
     client.delete()
     return redirect('view_client_logos')
+
+

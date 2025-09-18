@@ -14,6 +14,12 @@ urlpatterns = [
     path('freezone-details/', views.freezone, name= 'freezone'),
     path('offshore-details/', views.offshore, name= 'offshore'),
 
+    # Consultancy expert
+    path("consultancy-expert/", views.consultancy_expert_form, name="consultancy_expert_form"),
+    path("consultancy-expert/enquiries/", views.consultancy_expert_list, name="consultancy_expert_list"),
+    path("enquiries/delete/<int:enquiry_id>/", views.delete_enquiries, name="delete_enquiry"),
+
+
     path('blogs/', views.blogs, name= 'blogs'),
     path('blogs/<int:pk>/', views.blog_detail, name='blog_detail'), 
 

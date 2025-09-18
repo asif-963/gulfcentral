@@ -203,7 +203,234 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
         <div class="outer-box">
           <div class="info-box">
-            <a class="btn-one-light" style="color: black;" href="{% url 'contact' %}">Consult an Expert</a>
+            
+<!-- Trigger -->
+<a id="openPopup" class="btn-one-light" href="#" role="button" aria-haspopup="dialog" style="color:black; cursor:pointer;">
+  Consult an Expert
+</a>
+
+<!-- Modal -->
+<div id="popupModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-content" role="document">
+    <!-- Close button -->
+    <button type="button" class="close-btn" aria-label="Close dialog">&times;</button>
+
+    <div class="modal-body">
+      <!-- Left: Image -->
+      <div class="modal-left">
+        <img src="{% static 'images/about/dubaii.jpg' %}" alt="Dubai skyline">
+      </div>
+
+      <!-- Right: Form -->
+      <div class="modal-right">
+        <h2 class="form-title">Consult an Expert</h2>
+        <form method="post" action="{% url 'consultancy_expert_form' %}" class="popup-form">
+          {% csrf_token %}
+
+          <input type="text" name="name" placeholder="Full Name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="tel" name="phone" placeholder="Phone" required>
+
+          <select name="setup_type" required>
+            <option value="">-- Select Company Setup --</option>
+            <option value="mainland">Mainland Company Setup</option>
+            <option value="freezone">Freezone Company Setup</option>
+            <option value="offshore">Offshore Company Setup</option>
+          </select>
+
+          <textarea name="message" placeholder="Your Message" rows="4"></textarea>
+
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================
+  Styles (inline so copy/paste works)
+  ========================= -->
+<style>
+/* overlay hidden by default; transition for fade */
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms ease, visibility 200ms;
+  padding: 20px;
+}
+
+/* `.open` class toggles visibility */
+.modal-overlay.open{
+  visibility: visible;
+  opacity: 1;
+}
+
+/* modal box */
+.modal-content{
+  width: 90%;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transform-origin: center;
+  transform: translateY(0);
+  transition: transform 200ms ease;
+}
+
+/* close button (large tappable area) */
+.close-btn{
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 1010;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 8px;
+  color: #333;
+  border-radius: 6px;
+}
+.close-btn:hover{ color: #d33; }
+
+/* layout */
+.modal-body{
+  display: flex;
+  gap: 0;
+  min-height: 320px;
+  align-items: stretch;
+}
+
+/* left image */
+.modal-left{
+  flex: 1 1 45%;
+  min-width: 200px;
+  max-width: 50%;
+  overflow: hidden;
+}
+.modal-left img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* right form */
+.modal-right{
+  flex: 1 1 55%;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form-title{ font-size: 20px; margin-bottom: 12px; font-weight: 700; }
+.popup-form{ display: flex; flex-direction: column; gap: 12px; }
+.popup-form input,
+.popup-form select,
+.popup-form textarea{
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.submit-btn{
+  background: #D3202A;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+.submit-btn:hover{ background: #D3202A; }
+
+/* responsive: stack */
+@media (max-width: 768px){
+  .modal-body{ flex-direction: column; min-height: 0; }
+  .modal-left{ max-width: 100%; height: 180px; }
+  .modal-left img{ height: 100%; }
+  .modal-right{ padding: 18px; }
+  .close-btn{ top: 6px; right: 8px; }
+}
+</style>
+
+<!-- =========================
+  JS — robust handlers
+  ========================= -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const openBtn = document.getElementById('openPopup');
+  const modal = document.getElementById('popupModal');
+  if (!openBtn || !modal) {
+    // Elements not present — nothing to do
+    console.warn('Modal elements not found (openPopup or popupModal).');
+    return;
+  }
+
+  // helper functions
+  function openModal() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    // prevent background scroll
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    // focus first focusable element inside modal for accessibility
+    const firstFocusable = modal.querySelector('input, select, textarea, button, [tabindex]:not([tabindex="-1"])');
+    if (firstFocusable) firstFocusable.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    // return focus to the trigger
+    openBtn.focus();
+  }
+
+  // Open click — prevent default if it's an <a href="#">
+  openBtn.addEventListener('click', function (ev) {
+    ev.preventDefault();
+    openModal();
+  });
+
+  // Use event delegation: clicking overlay background or any element with .close-btn will close
+  modal.addEventListener('click', function (ev) {
+    // if clicked directly on overlay (outside modal-content)
+    if (ev.target === modal) {
+      closeModal();
+      return;
+    }
+    // if clicked a close button (or inside it)
+    if (ev.target.closest && ev.target.closest('.close-btn')) {
+      closeModal();
+      return;
+    }
+  });
+
+  // ESC key closes when modal is open
+  window.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' || ev.key === 'Esc') {
+      if (modal.classList.contains('open')) closeModal();
+    }
+  });
+
+  // Defensive: if someone programmatically sets display none on .close-btn or z-index issues exist,
+  // the delegation above still works when clicking overlay; clicking the visible X should also trigger.
+});
+</script>
           </div>
           <div class="mobile-nav-toggler" style="background-color: #D3202A; color: #fff;" ><i class="fa-light fa-bars-staggered" ></i></div>
           <!-- Mobile Nav toggler -->
@@ -765,7 +992,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </div><!-- End Page Wrapper -->
 
 <!-- Cloudflare script stays the same -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/email-decode/1.0.0/email-decode.min.js"></script>
+
 
 <!-- jQuery script from static folder -->
 <script src="{% static 'js/jquery.js' %}"></script>
