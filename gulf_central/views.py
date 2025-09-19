@@ -112,8 +112,10 @@ def blogs(request):
 def blog_detail(request, pk):
     menus = Menu.objects.prefetch_related('categories__services').all()
     blog = get_object_or_404(Blog, pk=pk)
-    latest_blogs = Blog.objects.exclude(pk=pk)[:3]  # 3 latest posts excluding current
-    categories = BlogCategory.objects.all()
+    latest_blogs = Blog.objects.exclude(pk=pk)[:6]  # 3 latest posts excluding current
+    categories = list(BlogCategory.objects.all())
+    random.shuffle(categories)
+    categories = categories[:6] 
     service_footer = list(Service.objects.values('name', 'slug'))
     random_services = random.sample(service_footer, min(4, len(service_footer)))
     
