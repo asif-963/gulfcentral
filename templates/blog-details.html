@@ -84,10 +84,10 @@
             
             </div>
             <ul class="top-social-icon">
-              <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-              <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-              <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-              <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+              <li><a href="https://www.facebook.com/gulfcentraluae"><i class="fa-brands fa-facebook-f"></i></a></li>
+              <li><a href="https://www.instagram.com/gulfcentraluae/"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="https://twitter.com/gulf_centraluae"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li><a href="https://www.linkedin.com/company/gulf-central/"><i class="fa-brands fa-linkedin-in"></i></a></li>
             </ul>
           </div>
         </div>
@@ -452,11 +452,27 @@ document.addEventListener('DOMContentLoaded', function () {
               </li>
             </ul>
             <ul class="social-links">
-              <li><a href="#"><i class="fab fa-x-twitter" ></i></a></li>
-              <li><a href="#"><i class="fab fa-facebook-f" ></i></a></li>
-              <li><a href="#"><i class="fab fa-pinterest" ></i></a></li>
-              <li><a href="#"><i class="fab fa-instagram" ></i></a></li>
-            </ul>
+  <li>
+    <a href="https://twitter.com/gulf_centraluae" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-x-twitter"></i>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.facebook.com/gulfcentraluae" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.linkedin.com/company/gulf-central/" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.instagram.com/gulfcentraluae/" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </li>
+</ul>
           </nav>
         </div>
         <!-- End Mobile Menu -->
@@ -520,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- Banner area start here -->
 
 	<!-- Start main-content -->
-	<section class="page-title" style="background-image: url({% static 'images/bg/page-title-bg.png' %});">
+<section class="page-title" style="background-image: url({% static 'images/bg/page-title-bg.png' %});">
   <div class="auto-container">
     <div class="title-outer">
       <ul class="page-breadcrumb">
@@ -533,101 +549,97 @@ document.addEventListener('DOMContentLoaded', function () {
 </section>
 <!-- end main-content -->
 
-<!--Blog Details Start-->
+<!-- Blog Details Start -->
 <section class="blog-details pt-120 pb-120">
-    <div class="container">
-        <div class="row">
-            <!-- Blog Details Left -->
-            <div class="col-xl-8 col-lg-7">
-                <div class="blog-details__left">
-                    
-                    <!-- Blog Image -->
-                    <div class="blog-details__img">
-                        {% if blog.image %}
-                            <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
-                        {% else %}
-                            <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog">
-                        {% endif %}
-
-                        <div class="blog-details__date">
-                            <span class="day">{{ blog.created_date|date:"d" }}</span>
-                            <span class="month">{{ blog.created_date|date:"M" }}</span>
-                        </div>
-                    </div>
-
-                    <!-- Blog Content -->
-                    <div class="blog-details__content">
-                        <ul class="list-unstyled blog-details__meta">
-                  
-                            <li><i class="fas fa-folder"></i> {{ blog.category.name }}</li>
-                            <li><i class="fas fa-calendar"></i> {{ blog.created_date|date:"d M, Y" }}</li>
-                        </ul>
-
-                        <h3 class="blog-details__title">{{ blog.title }}</h3>
-                        <p class="blog-details__text-2">{{ blog.description|safe }}</p>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <!-- Blog Details Left -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="blog-details__left">
+          <!-- Blog Image -->
+          <div class="blog-details__img">
+            {% if blog.image %}
+              <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+            {% else %}
+              <img src="{% static 'images/blogs/default.jpg' %}" alt="Default Blog">
+            {% endif %}
+            <div class="blog-details__date">
+              <span class="day">{{ blog.created_date|date:"d" }}</span>
+              <span class="month">{{ blog.created_date|date:"M" }}</span>
             </div>
+          </div>
 
-            <!-- Blog Sidebar -->
-            <div class="col-xl-4 col-lg-5">
-                <div class="sidebar">
-                    
-                    <!-- Search -->
-                    <div class="sidebar__single sidebar__search">
-                        <form method="GET" action="{% url 'blogs' %}" class="sidebar__search-form">
-                            <input type="search" name="q" placeholder="Search here..." value="{{ request.GET.q }}">
-                            <button type="submit"><i class="far fa-search"></i></button>
-                        </form>
-                    </div>
-
-                    <!-- Latest Posts -->
-                    <div class="sidebar__single sidebar__post" style="background-color:#fff;">
-                        <h3 class="sidebar__title">Latest Posts</h3>
-                        <ul class="sidebar__post-list list-unstyled">
-                            {% for latest in latest_blogs %}
-                            <li>
-                                <div class="sidebar__post-image">
-                                    {% if latest.image %}
-                                        <img src="{{ latest.image.url }}" alt="{{ latest.title }}">
-                                    {% else %}
-                                        <img src="{% static 'images/blogs/default-thumb.jpg' %}" alt="Default Blog">
-                                    {% endif %}
-                                </div>
-                                <div class="sidebar__post-content">
-                                    <h3>  <li><i class="fas fa-calendar"></i> {{ latest.created_date|date:"d M, Y" }}</li>
-                                       
-                                        <a href="{% url 'blog_detail' latest.id %}">{{ latest.title|truncatechars:50 }}</a>
-                                    </h3>
-                                </div>
-                            </li>
-                            {% empty %}
-                                <p>No recent posts found.</p>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <!-- Categories -->
-                    <div class="sidebar__single sidebar__category" style="background-color:#fff;">
-                        <h3 class="sidebar__title">Categories</h3>
-                        <ul class="sidebar__category-list list-unstyled">
-                           {% for category in categories|dictsort:"id"|slice:":6" %}
-                              <li {% if category.id == blog.category.id %}class="active"{% endif %}>
-                                  <a href="{% url 'blogs' %}?category={{ category.id }}">
-                                      {{ category.name }}
-                                      <span class="icon-right-arrow"></span>
-                                  </a>
-                              </li>
-                          {% endfor %}
-
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
+          <!-- Blog Content -->
+          <div class="blog-details__content">
+            <ul class="list-unstyled blog-details__meta">
+              <li><i class="fas fa-folder"></i> {{ blog.category.name }}</li>
+              <li><i class="fas fa-calendar"></i> {{ blog.created_date|date:"d M, Y" }}</li>
+            </ul>
+            <h3 class="blog-details__title">{{ blog.title }}</h3>
+            <p class="blog-details__text-2">{{ blog.description|safe }}</p>
+          </div>
         </div>
+      </div>
+
+      <!-- Blog Sidebar -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="sidebar">
+          <!-- Search -->
+          <div class="sidebar__single sidebar__search">
+            <form method="GET" action="{% url 'blogs' %}" class="sidebar__search-form">
+              <input type="search" name="q" placeholder="Search here..." value="{{ request.GET.q }}">
+              <button type="submit"><i class="far fa-search"></i></button>
+            </form>
+          </div>
+
+          <!-- Latest Posts -->
+          <div class="sidebar__single sidebar__post" style="background-color:#fff;">
+            <h3 class="sidebar__title">Latest Posts</h3>
+            <ul class="sidebar__post-list list-unstyled">
+              {% for latest in latest_blogs %}
+              <li>
+                <div class="sidebar__post-image">
+                  {% if latest.image %}
+                    <img src="{{ latest.image.url }}" alt="{{ latest.title }}">
+                  {% else %}
+                    <img src="{% static 'images/blogs/default-thumb.jpg' %}" alt="Default Blog">
+                  {% endif %}
+                </div>
+                <div class="sidebar__post-content">
+                  <h3>
+                    <li><i class="fas fa-calendar"></i> {{ latest.created_date|date:"d M, Y" }}</li>
+                    <a href="{% url 'blog_detail' latest.id %}">{{ latest.title|truncatechars:50 }}</a>
+                  </h3>
+                </div>
+              </li>
+              {% empty %}
+                <p>No recent posts found.</p>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar__single sidebar__category" style="background-color:#fff;">
+            <h3 class="sidebar__title">Categories</h3>
+            <ul class="sidebar__category-list list-unstyled">
+              {% for category in categories|dictsort:"id"|slice:":6" %}
+              <li {% if category.id == blog.category.id %}class="active"{% endif %}>
+                <a href="{% url 'blogs' %}?category={{ category.id }}">
+                  {{ category.name }}
+                  <span class="icon-right-arrow"></span>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
-<!--Blog Details End-->
+<!-- Blog Details End -->
+
+
 
 
   <!-- Main Footer -->
