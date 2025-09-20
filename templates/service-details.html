@@ -177,27 +177,17 @@ document.addEventListener("DOMContentLoaded", function () {
         </li>
         {% endfor %}
         <li class="dropdown">
-           <a href="#">Pages</a>
-            <ul>
-                <li>
-                   <a href="{% url 'about' %}">About</a>
-                </li>
-                <li>
-                    <a href="{% url 'blogs' %}">Blogs</a>
-                </li>
-                 <li>
-                 <a href="{% url 'news' %}">News</a>
-                  </li>
-                    <li>
-                 <a href="{% url 'cost_calculator' %}"> Cost Calculator</a>
-                  </li>
-                  <li>
-                 <a href="{% url 'contact' %}"> Contact Us</a>
-                  </li> 
-                                        
-                                       
-                 </ul>
-        </li>
+        <a href="#">
+          <i class="fas fa-bars"></i><!-- Font Awesome menu icon -->
+        </a>
+        <ul>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          <li><a href="{% url 'news' %}">News</a></li>
+          <li><a href="{% url 'cost_calculator' %}">Cost Calculator</a></li>
+          <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        </ul>
+      </li>
                                    
     </ul>
 </nav>
@@ -235,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <input type="tel" name="phone" placeholder="Phone" required>
 
           <select name="setup_type" required>
-            <option value="">-- Select Company Setup --</option>
+            <option value="">-- Select Package --</option>
             <option value="mainland">Mainland Company Setup</option>
             <option value="freezone">Freezone Company Setup</option>
             <option value="offshore">Offshore Company Setup</option>
